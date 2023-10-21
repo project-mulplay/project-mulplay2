@@ -12,13 +12,15 @@ pull & request에 올리고 머지하지마세요
 
 ```
 git PR 네이밍 참고
-[PR Name](https://flank.github.io/flank/pr_titles/)
 ```
+[PR Name](https://flank.github.io/flank/pr_titles/)
+
 ```
 git 충돌 해결 참고
+```
 [참고1](https://wonyong-jang.github.io/git/2021/02/05/Github-Rebase.html)
 [참고2](https://velog.io/@x_sunyoung/rebase)
-```
+
 
 ### 추가할 정책은 밑에 추가해주세요
 
