@@ -1,20 +1,52 @@
 /* .Main {
   width: 1720px;
 } */
-   
+.main_Main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+ .main_slide {
+  position: relative;
+}
+
+.banner_prev{
+  position: absolute;
+  top: 56%;
+  left: 330px; 
+  width: 36px;
+  height: 36px;
+  background: none;
+  outline: none;
+  border: none;
+}
+.banner_next {
+  position: absolute;
+  top: 56%;
+  left: 395px; 
+  width: 36px;
+  height: 36px;
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.main_container {
+  width: 1720px;
+  margin: 0 auto;
+}
 .main_mainTitle {
   font-size: 33px;
   color: #333333;
-  margin: 50px 20px 20px 90px;
+  margin: 50px 0 20px;
 }
 /* .bannerSilde {
   height: 560px;
   background-color: lightgray;
 } */
 
-.main_banner {
-  width: 1720px;
-  height: 272px;
+.sub_banner {
+  width: 100%;
   background-color: #ee833e;
   margin: 0 auto;
   margin-top: 50px;
@@ -22,7 +54,7 @@
 }
 
 .main_line {
-  width: 1720px;
+  width: 100%;
   border: 1px solid #e2e2e2;
   margin: 0 auto;
   margin-top: 50px;
@@ -30,7 +62,7 @@
 }
 
 .main_AppCard {
-  width: 1720px;
+  width: 100%;
   display: grid;
   flex-flow: row wrap;
   margin-bottom: 20px;
@@ -52,6 +84,7 @@
   margin-bottom: 20px;
   margin-right: 20px;
   display: inline-block;
+  position: relative;
   /* padding: 20px; */
 }
 .main_dday {
@@ -151,7 +184,7 @@
 }
 
 .main_openCard {
-  width: 1720px;
+  width: 100%;
   height: 478px;
   border: solid 1px #c8c8c8;
   border-radius: 20px;
@@ -159,6 +192,7 @@
   overflow: hidden;
   margin: 0 auto;
   margin-bottom: 50px;
+  position: relative;
 }
 
 .main_openImg {
@@ -207,43 +241,50 @@
   cursor: pointer;
 }
 
-.main_AppCardPick {
-  width: 1720px;
-  display: grid;
-  flex-flow: row wrap;
-  margin-bottom: 100px;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 0 auto;
-  /* display:block; */
+/* 에디터 픽 카드 */
+
+.main_pick {
+  width: 100%;
+  display:flex;
+  margin: 0 auto 100px;
+
+}
+
+.main_pickCard:first-child {
+  margin-right: 106px;
+}
+
+.main_pickCard:not(:first-child) {
+  margin-right: 0;
 }
 
 .main_pickCard {
-  width: 845px;
-  height: 600px;
+  width: 800px;
+  height: 530px;
   border: solid 1px #c8c8c8;
   border-radius: 20px;
   box-sizing: border-box;
   overflow: hidden;
   margin-bottom: 100px;
-  margin-right: 20px;
   display: block;
+
 }
 
-.main_pickCard:first-child {
-  margin-right: 20px;
-}
 
 .main_openImg {
   display: inline-block;
+}
+.main_pickImg {
+  width: 845px;
+  height: 400px;
 }
 
 .main_pickImg > img {
   margin: 0;
   padding: 0;
-  height: 478px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   background-color: #888888;
   display: block;
 }
