@@ -37,7 +37,12 @@ function ColorTabs() {
           onClick={() => navigate("myinfoedit")}
         />
 
-        <Tab value="two" label="비밀번호 변경" sx={{ fontSize: 16 }} />
+        <Tab
+          value="two"
+          label="비밀번호 변경"
+          sx={{ fontSize: 16 }}
+          onClick={() => navigate("mypwedit")}
+        />
         <Tab
           value="three"
           label="나의 프로젝트"

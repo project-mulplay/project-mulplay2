@@ -1,17 +1,17 @@
 import * as React from "react";
+import { useState } from "react";
+import user from "../../data/userData.json";
+
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import "./MyInfoEdit.css";
 import profile from "../../assets/image/profile.png";
 import profile1 from "../../assets/image/profile1.png";
 import profile2 from "../../assets/image/profile2.png";
 import profile3 from "../../assets/image/profile3.png";
 import profile4 from "../../assets/image/profile4.png";
-
-import user from "../../data/userData.json";
-
 import InputMedium from "../../components/elements/InputMedium";
+import "./MyInfoEdit.css";
 
 const images = [profile1, profile2, profile3, profile4];
 
