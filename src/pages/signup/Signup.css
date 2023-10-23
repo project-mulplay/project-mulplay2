@@ -1,18 +1,3 @@
-/* fonts */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
-/* reset */
-li {
-  list-style: none;
-}
-
-label {
-  display: block;
-  text-align: left;
-  font-size: 1rem;
-  color: #333;
-}
-
 /* container */
 #container_signup {
   width: 445px;
@@ -53,6 +38,7 @@ label {
 /* 이메일,주소 공통 */
 #container_signup .form_signup .input_box .column {
   display: flex;
+  align-items: center;
 }
 
 #container_signup .input_box input:focus {
@@ -60,6 +46,9 @@ label {
 }
 
 /* 이메일 */
+#container_signup .form_signup .email_golbang {
+  margin: 0 4px;
+}
 #container_signup .form_signup .select_box {
   width: 100%;
   height: 55px;
@@ -94,10 +83,11 @@ label {
   border: 1px solid rgb(238, 131, 62);
   background-color: #fff;
   cursor: pointer;
+  margin-left: 8px;
 }
 
 /* 체크박스 스타일 */
-a {
+.agreement__each a {
   text-decoration: underline;
   text-underline-offset: 2px;
   color: #888;

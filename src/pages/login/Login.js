@@ -5,6 +5,24 @@ import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
 import AppleIcon from "./../../assets/image/icon_apple.svg";
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+
+  const onchangeId = (e) => {
+    setId(e.target.value);
+  };
+  const onchangePw = (e) => {
+    setPw(e.target.value);
+  };
+
+  useEffect(() => {
+    let all = {
+      id,
+      pw,
+    };
+    console.log(all);
+  }, [id, pw]);
+
   return (
     <section id="container_login">
       <h1>로그인</h1>
@@ -12,19 +30,27 @@ const Login = () => {
         <div className="input_box id">
           <label>아이디</label>
           <input
+            value={id}
             className="input_text"
             type="text"
             placeholder="아이디를 입력해 주세요"
             required
+            onChange={(e) => {
+              onchangeId(e);
+            }}
           />
         </div>
         <div className="input_box pw">
           <label>비밀번호</label>
           <input
+            value={pw}
             className="input_text"
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해 주세요"
             required
+            onChange={(e) => {
+              onchangePw(e);
+            }}
           />
         </div>
         <div className="container_savefind">
