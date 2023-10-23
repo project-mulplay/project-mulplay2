@@ -13,6 +13,7 @@ pull & request에 올리고 머지하지마세요
 
 ```
 git PR 네이밍 참고
+ex) 
 ```
 [PR Name](https://flank.github.io/flank/pr_titles/)
 
