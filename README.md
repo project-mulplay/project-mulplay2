@@ -20,11 +20,11 @@ ex) feat/#3-projectEdit
 
 ## 커밋명
 
-feat     새로운기능추가 
-refactor 코드 리팩토링
-fix      버그수정
-design   기능에 지장가지않는 스타일변경
-init     빌드수행, 패키지설치, 환경설정수정등 
+feat     새로운기능추가 <br/>
+refactor 코드 리팩토링<br/>
+fix      버그수정<br/>
+design   기능에 지장가지않는 스타일변경<br/>
+init     빌드수행, 패키지설치, 환경설정수정등 <br/>
 etc      주석추가삭제, readme 작성
 
 ex) [etc]readme수정
