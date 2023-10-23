@@ -4,7 +4,8 @@ mulplay -> mulplay2로 변경되었습니다.
 
 ## 브랜치는 기능별로 생성해주세요
 
-브랜치 생성 전에 issue로 요청하거나 언급이 있으면 좋을 것 같습니다.
+feat/#이슈번호-기능이름
+ex) feat/#3-projectEdit
 
 ### 푸쉬 전에는 항상 pull & request 해주세요
 
