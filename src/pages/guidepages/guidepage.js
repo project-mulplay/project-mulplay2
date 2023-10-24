@@ -1,5 +1,5 @@
 import React from "react";
-import "./guidepage.css";
+import "./Guidepage.css";
 import img1 from "../../assets/image/guide1.png";
 import img2 from "../../assets/image/guide2.png";
 import img3 from "../../assets/image/guide3.png";

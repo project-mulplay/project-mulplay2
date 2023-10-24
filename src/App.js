@@ -20,7 +20,7 @@ import MyFundingProject from "./pages/mypages/MyFundingProject";
 import MyLikeProject from "./pages/mypages/MyLikeProject";
 import MyProceeds from "./pages/mypages/MyProceeds";
 import MyPwEdit from "./pages/mypages/MyPwEdit";
-import Guidepage from "./pages/guidepages/guidepage";
+import Guidepage from "./pages/guidepages/Guidepage";
 
 function App() {
   const [isLoggedIn] = useState(false);
