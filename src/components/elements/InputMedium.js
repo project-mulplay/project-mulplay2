@@ -2,7 +2,7 @@ import * as React from "react";
 import Input from "@mui/joy/Input";
 import Stack from "@mui/joy/Stack";
 
-export default function InputMedium({ placeholder, value, onChange }) {
+export default function InputMedium({ placeholder, value, onChange, type }) {
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event) => {
@@ -12,6 +12,7 @@ export default function InputMedium({ placeholder, value, onChange }) {
   return (
     <Stack spacing={2}>
       <Input
+        type={type}
         size="md"
         placeholder={placeholder}
         value={value}

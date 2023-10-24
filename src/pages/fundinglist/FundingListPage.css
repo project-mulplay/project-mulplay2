@@ -19,6 +19,7 @@
 .fundinglist_Imagetab {
     background-color: #fff;
     border: #fff;
+    
 }
 
 .fundinglist_tabs .Imagetab_img {
@@ -26,7 +27,8 @@
     width: 100px;
     margin-bottom: 15px;
     background: #fff;
-    box-shadow: 0.5px 2px 10px rgb(168, 168, 168);
+    border-radius: 10px;
+    box-shadow: 0.5px 2px 5px rgb(168, 168, 168);
 }
 
 .fundinglist_tabs li {
