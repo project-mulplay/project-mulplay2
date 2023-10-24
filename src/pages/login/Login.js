@@ -7,13 +7,15 @@ import AppleIcon from "./../../assets/image/icon_apple.svg";
 const Login = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [saveId, setSaveId] = useState(false);
 
-  const onchangeId = (e) => {
-    setId(e.target.value);
-  };
-  const onchangePw = (e) => {
-    setPw(e.target.value);
-  };
+  useEffect(() => {
+    const savedId = window.localStorage.getItem("id");
+    if (savedId) {
+      setId(savedId);
+      setSaveId(true);
+    }
+  }, []);
 
   useEffect(() => {
     let all = {
@@ -22,6 +24,23 @@ const Login = () => {
     };
     console.log(all);
   }, [id, pw]);
+
+  const onchangeId = (e) => {
+    setId(e.target.value);
+  };
+  const onchangePw = (e) => {
+    setPw(e.target.value);
+  };
+  const submitLogin = () => {
+    if (saveId) {
+      window.localStorage.setItem("id", id);
+    } else {
+      window.localStorage.removeItem("id");
+    }
+
+    // 백엔드 통신 하고
+    // / 으로 이동
+  };
 
   return (
     <section id="container_login">
@@ -55,7 +74,13 @@ const Login = () => {
         </div>
         <div className="container_savefind">
           <div class="save_box">
-            <input type="checkbox" class="chk_btn" id="chk_save" />
+            <input
+              type="checkbox"
+              class="chk_btn"
+              id="chk_save"
+              checked={saveId}
+              onChange={() => setSaveId(!saveId)}
+            />
             <label class="title" for="chk_save">
               아이디 저장
             </label>
@@ -67,7 +92,9 @@ const Login = () => {
             </a>
           </div>
         </div>
-        <button className="btn_login">로그인</button>
+        <button className="btn_login" onClick={() => submitLogin()}>
+          로그인
+        </button>
         {/* sns 로그인 */}
         <div className="sns_container">
           <div className="sns_login google">

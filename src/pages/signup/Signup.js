@@ -90,7 +90,7 @@ const Signup = () => {
             value={id}
             className="input_text"
             type="text"
-            placeholder="아이디를 입력해 주세요"
+            placeholder="아이디(이메일)를 입력해 주세요"
             required
             onChange={(e) => {
               onChangeId(e);
@@ -136,7 +136,7 @@ const Signup = () => {
             }}
           />
         </div>
-        <div className="input_box email">
+        {/* <div className="input_box email">
           <label>이메일</label>
           <div className="column">
             <input
@@ -166,7 +166,7 @@ const Signup = () => {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="input_box adr">
           <label>주소</label>
           <div className="column">
