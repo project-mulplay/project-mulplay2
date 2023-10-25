@@ -21,11 +21,10 @@
     margin: 0 auto; /* 가로 중앙 정렬을 위한 margin 설정 */
     list-style: none;
     padding-top: 40px;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
     
 
 }
-
 
 .editForm > li {
     padding-left: 30%;
@@ -35,8 +34,23 @@
 
 
 .editForm > li > .editHeader {
+    padding-top: 50px;
     text-align: left;
     padding-bottom: 30px;
+}
+
+.editForm > li > .pw_editHeader {
+    text-align: left;
+    padding-bottom: 10px;
+    padding-top: 50px;
+}
+
+
+.editForm > li > .editContent {
+    text-align: left;
+    font-size: 14px;
+    padding-bottom: 30px;
+    color: #888888;
 }
 
 .editForm > li > span {
@@ -62,6 +76,7 @@
     height:auto; 
     cursor:pointer;
 }
+
 .editForm > .imgEdit > div > button {
     background-color: #EE833E;
     color: white;
@@ -78,7 +93,7 @@
 
 
 .editForm > .buttonSection {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
     justify-content: space-around;
 }
@@ -88,16 +103,18 @@
 }
 
 .buttonSection button{
-    width: 190px;
     height: 40px;
     border-radius: 10px;
     margin: 7px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    position: relative;
+    right: 5px;
 }
 
 .buttonSection .editButton{
+    width: 190px;
     background-color: #EE833E;
     color: white;
     border: none;
@@ -108,6 +125,7 @@
 }
 
 .buttonSection .deleteButton{
+    width: 190px;
     background-color: white;
     color: #333333;
     border: 1px solid #dedcdc;
@@ -118,3 +136,14 @@
     border-color:#666666; /* 원하는 hover 색상으로 변경 */
  }
 
+.buttonSection .pwEditButton {
+    background-color: #EE833E;
+    color: white;
+    border: none;
+    width: 400px;
+
+}
+
+.buttonSection .pwEditButton:hover {
+    background-color: #d7651e;
+}

@@ -37,7 +37,7 @@ const LoggedOutHeader = ({ onLoginClick }) => {
           <button onClick={onLoginClick}>회원가입</button>
           </Link>
         </div>
-        <Link to='/project'>
+        <Link to='/guide'>
         <button className="btn">프로젝트 만들기</button>
         </Link>
       </div>
