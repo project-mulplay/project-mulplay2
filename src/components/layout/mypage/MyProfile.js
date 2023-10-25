@@ -1,9 +1,15 @@
 import "./MyProfile.css";
 import profile from "../../../assets/image/profile.png";
+import axios from "axios";
 
 const MyProfile = ({ user_name, user_sns, user_no }) => {
   console.log(user_name);
 
+  axios.get("http://localhost:3000/user/profile", {
+    data: {
+      user_no: 1,
+    },
+  });
   return (
     <div className="myprofile" key={user_no}>
       <img className="profileImg" src={profile} alt="profile_img"></img>
