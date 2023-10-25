@@ -3,13 +3,22 @@ import profile from "../../../assets/image/profile.png";
 import axios from "axios";
 
 const MyProfile = ({ user_name, user_sns, user_no }) => {
-  console.log(user_name);
+  axios
+    .get("http://localhost:3000", {
+      params: {
+        user_no: 1,
+      },
+    })
+    .then((response) => {
+      // 요청 성공 시 실행할 코드
 
-  axios.get("http://localhost:3000/user/profile", {
-    data: {
-      user_no: 1,
-    },
-  });
+      console.log("요청 성공:", response);
+    })
+    .catch((error) => {
+      // 에러 처리
+      console.error("요청 실패:", error);
+    });
+
   return (
     <div className="myprofile" key={user_no}>
       <img className="profileImg" src={profile} alt="profile_img"></img>

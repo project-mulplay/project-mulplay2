@@ -1,11 +1,21 @@
 import * as userRepository from "../repository/UserRepository.js";
 
-export const getUserProfile = async (user_no) => {
+/**
+ * 서비스는 비즈니스 로직을 담당한다.
+ * 여기서 비즈니스 로직이란, 데이터를 가공하는 등의 역할을 한다.
+ */
+
+// controller에서 요청을 받고, repository 로 요청을 전달하는 역할을 한다.
+export const getUserProfile =  (req, res) => {
+  // 요청 request 에 있는 쿼리 파라미터(url)를 받는다.
+  const user_no = req.query.user_no;
   try {
-    const result = await userRepository.findByUserProfile(user_no);
-    // 다른 userRepository 함수들을 사용할 수도 있음
-    // const something = await userRepository.function1(param);
-    return result;
+    // repository에 요청을 전달한다.
+      userRepository.findByUserProfile(user_no)
+        .then((result) => {
+      // repository에서 반환된 결과를 controller에 반환한다.
+        res.status(200).json(result)
+    });
   } catch (error) {
     throw error;
   }
