@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./RewardInfo.css";
-//import { Nextbtn } from "../../components/button/Button_funding";
+
 import plusbtn from "../../assets/image/plusbtn.png";
+//import { NextBtn, SubmitBtn } from "./NextBtn";
 
 function RewardInfo() {
   const [formData, setFormData] = useState({
@@ -100,7 +101,7 @@ function RewardInfo() {
         </div>
       </form>
 
-      {/* <Nextbtn /> */}
+      {/* <NextBtn /> */}
     </div>
   );
 }

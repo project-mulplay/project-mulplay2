@@ -19,6 +19,7 @@
   background: none;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 .banner_next {
   position: absolute;
@@ -29,6 +30,7 @@
   background: none;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 
 .main_container {

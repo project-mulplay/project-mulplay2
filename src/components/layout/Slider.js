@@ -27,7 +27,7 @@ export default class SimpleSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true, // autoplay 속성 추가
-      autoplaySpeed: 5000, // 5초(5000 밀리초)마다 전환
+      autoplaySpeed: 3000, // 5초(5000 밀리초)마다 전환
     };
 
     return (

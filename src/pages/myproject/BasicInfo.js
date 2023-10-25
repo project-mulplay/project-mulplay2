@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 //import { Link } from "react-scroll";
 import "./BasicInfo.css";
 //import { Nextbtn } from "../../components/button/Button_funding";
@@ -8,7 +9,7 @@ import MyDatePicker from "./DatePicker";
 import CheckboxExample from "./Checkbox";
 import CheckboxList from "./SkillCheckbox";
 import ImageUploader from "./InputFile";
-import NextBtn from "./NextBtn";
+//import { NextBtn, SubmitBtn } from "./NextBtn";
 
 function BasicInfo() {
   const [formData, setFormData] = useState({
@@ -166,7 +167,7 @@ function BasicInfo() {
 
       {/* <Nextbtn /> */}
       {/* <button type="submit">다음 단계</button> */}
-      <NextBtn />
+      {/* <NextBtn navi="rewardinfo" /> */}
     </form>
   );
 }

@@ -1,0 +1,46 @@
+/* 테이블 스타일 */
+.admin_container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.admin_list {
+
+  color:#333;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 100px 0 50px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 200px;
+}
+
+/* 테이블 헤더 스타일 */
+.table_top {
+  background-color: #ededed;
+  color: #333;
+  border-top: 2px solid #333;
+}
+
+.table_top th {
+  padding: 10px;
+}
+
+/* 테이블 셀 스타일 */
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table td {
+  padding: 10px;
+}
+
+/* 관리 열 스타일 (버튼 또는 아이콘을 추가할 수 있음) */
+/* table td:last-child { */
+  /* 추가 스타일링을 원하는 대로 설정하세요. */
+
+

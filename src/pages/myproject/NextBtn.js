@@ -2,7 +2,6 @@
 import React from "react";
 //import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
-import RewardInfo from "./RewardInfo";
 
 //  버튼 스타일
 const btnstyle = {
@@ -55,15 +54,25 @@ const btnstyle = {
 //   );
 // }
 
-function NextBtn() {
+function NextBtn({ navi }) {
   return (
     <div>
-      {/* Link 컴포넌트를 사용하여 버튼을 클릭하면 "project" 요소로 스크롤합니다. */}
-      <Link to="rewardInfo" spy={true} smooth={true} duration={500}>
-        <button style={btnstyle}>다음 단계</button>
-      </Link>
+      {/* <Link to="rewardInfo" spy={true} smooth={true} duration={500}> */}
+      <button style={btnstyle}>다음 단계</button>
+      {/* </Link> */}
     </div>
   );
 }
+
+// function SubmitBtn() {
+//   return (
+//     <div>
+//       {/* Link 컴포넌트를 사용하여 버튼을 클릭하면 "project" 요소로 스크롤합니다. */}
+//       <Link to="/" spy={true} smooth={true} duration={500}>
+//         <button style={btnstyle}>제출하기</button>
+//       </Link>
+//     </div>
+//   );
+// }
 
 export default NextBtn;
