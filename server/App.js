@@ -14,7 +14,7 @@ app.use("/user", userController);
 const start = async () => {
   try {
     // db.connect() 함수를 호출하지 않고 바로 쿼리를 실행
-    app.listen(3000, () => {
+    app.listen(3300, () => {
       console.log(`서버가 실행되었습니다.`);
     });
   } catch (e) {
