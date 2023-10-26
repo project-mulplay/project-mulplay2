@@ -15,7 +15,7 @@ const Prodadmin = () => {
 
   //고유값으로 사용될 id
   //ref 를 사용하여 변수 담기
-  const nextId = useRef(11);
+  //const nextId = useRef(11);
 
   // 수락하기
   //const accept = (data) => {};
@@ -27,7 +27,7 @@ const Prodadmin = () => {
   return (
     <div className="admin_container">
       <div className="admin_list">프로젝트 관리</div>
-      <table>
+      <table className="admin_table">
         <thead className="table_top">
           <tr>
             <th>No</th>
