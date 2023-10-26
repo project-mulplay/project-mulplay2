@@ -8,8 +8,26 @@ const router = express.Router();
  */
 
 //요청 url 확인
-router.get("/profile",
-  userService.getUserProfile
-);
+router.get("/profile", userService.getUserProfile);
+
+router.get("/info", userService.getUserInfo);
+
+router.patch("/info", userService.patchUserInfo);
+
+router.delete("/info", userService.deleteUserInfo);
+
+router.get("/pw", userService.getUserPw);
+
+router.patch("/pw", userService.patchUserPw);
+
+router.get("/myproject", userService.getUserMyProd);
+
+router.delete("/myproject", userService.deleteUserMyProd);
+
+router.get("/myproceeds", userService.getUserMyProceed);
+
+router.get("/funding-project", userService.getUserMyFundProd);
+
+router.get("/like-project", userService.getUserMyLikeProd);
 
 export default router;
