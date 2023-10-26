@@ -1,4 +1,3 @@
-import { orange } from "@mui/material/colors";
 import React, { useState, useEffect } from "react";
 
 function CheckboxList() {

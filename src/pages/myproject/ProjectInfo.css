@@ -2,6 +2,7 @@
 .pro_editor{
   max-width: 600px;
   margin: 40px auto 0;
+  position: relative;
 }
 .pro_editor p {
   margin-bottom: 10px;
