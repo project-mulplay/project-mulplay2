@@ -12,13 +12,15 @@ const filterOptionListCreated = [
   { value: "1", name: "심사완료" },
   { value: "2", name: "심사반려" },
   { value: "3", name: "펀딩중" },
-  { value: "4", name: "펀딩완료" },
+  { value: "4", name: "펀딩성공" },
+  { value: "5", name: "펀딩실패" },
 ];
 
 const filterOptionListLiked = [
   { value: "all", name: "전체" },
   { value: "3", name: "펀딩중" },
-  { value: "4", name: "펀딩완료" },
+  { value: "4", name: "펀딩성공" },
+  { value: "4", name: "펀딩실패" },
 ];
 
 const ProjectManager = ({ type }) => {
@@ -50,7 +52,11 @@ const ProjectManager = ({ type }) => {
     if (selectedTab === "all") {
       if (isLikedOrFunded) {
         // 'liked'나 'funded' 타입에서는 '전체' 탭이 선택되었을 때 prod_stat이 3 또는 4인 프로젝트만 표시
-        return project.prod_stat === 3 || project.prod_stat === 4;
+        return (
+          project.prod_stat === 3 ||
+          project.prod_stat === 4 ||
+          project.prod_stat === 5
+        );
       } else {
         // 'created' 타입에서는 '전체' 탭이 선택되었을 때 모든 프로젝트를 표시
         return true;
@@ -71,7 +77,9 @@ const ProjectManager = ({ type }) => {
       case 3:
         return "펀딩중";
       case 4:
-        return "펀딩완료";
+        return "펀딩성공";
+      case 5:
+        return "펀딩실패";
       default:
         return "정보없음";
     }
@@ -79,12 +87,12 @@ const ProjectManager = ({ type }) => {
 
   // 프로젝트 상태에 따라 CSS 클래스를 반환
   const getStateType = (prod_stat) => {
-    if (prod_stat === 0) {
+    if (prod_stat === 1 || prod_stat === 4) {
       return "neutral";
     }
-    if (prod_stat === 1 || prod_stat === 3) {
+    if (prod_stat === 0 || prod_stat === 3) {
       return "positive";
-    } else if (prod_stat === 2 || prod_stat === 4) {
+    } else if (prod_stat === 2 || prod_stat === 5) {
       return "negative";
     } else {
       return "neutral";
