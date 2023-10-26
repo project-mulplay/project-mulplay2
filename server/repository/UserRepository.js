@@ -92,7 +92,10 @@ export const findByUserMyProd = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select prod_no, prod_stat, prod_title, prod_intro, prod_regdate, prod_opendate, prod_enddate, img_no from mulplay.project where user_no = ? ",
+    `SELECT p.prod_no, p.prod_stat, p.prod_title, p.prod_intro, p.prod_regdate, p.prod_opendate, p.prod_enddate, p.img_no, m.pay_price, prod_goal, prod_current
+    FROM project p
+    INNER JOIN payment m ON p.prod_no = m.prod_no
+    WHERE p.user_no = ?`,
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.

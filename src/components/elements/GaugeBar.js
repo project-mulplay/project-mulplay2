@@ -38,10 +38,14 @@ const CurrentNum = styled.span`
 `;
 
 const GaugeBar = ({ goal, current }) => {
-  const percent = Math.floor((current / goal) * 100);
+  const formattedCurrent =
+    current !== undefined ? current.toLocaleString() : "N/A";
+  const percent = goal > 0 ? Math.floor((current / goal) * 100) : 0;
+
+  // const percent = Math.floor((current / goal) * 100);
   return (
     <GaugeContainer>
-      <CurrentNum>{`${current.toLocaleString()}원 펀딩`}</CurrentNum>{" "}
+      <CurrentNum>{`${formattedCurrent}원 펀딩`}</CurrentNum>{" "}
       <MyGauge>
         <Filler percent={percent} goal={goal}>
           <GaugeLabel>{`달성률 ${percent}%`}</GaugeLabel>

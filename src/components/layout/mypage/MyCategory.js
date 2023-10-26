@@ -32,7 +32,7 @@ function ColorTabs() {
       >
         <Tab
           value="one"
-          label="회원 정보 수정"
+          label="회원 정보"
           sx={{ fontSize: 16 }}
           onClick={() => navigate("myinfoedit")}
         />
@@ -67,7 +67,7 @@ function ColorTabs() {
           sx={{ fontSize: 16 }}
           onClick={() => navigate("mylikeproject")}
         />
-        <Tab value="seven" label="문의" sx={{ fontSize: 16 }} />
+        {/* <Tab value="seven" label="문의" sx={{ fontSize: 16 }} /> */}
       </Tabs>
     </Box>
   );
