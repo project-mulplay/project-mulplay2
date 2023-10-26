@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-//import { Link } from "react-scroll";
+
 import "./BasicInfo.css";
-//import { Nextbtn } from "../../components/button/Button_funding";
-//import photo from "../../assets/image/photo.png";
 import search from "../../assets/image/search.png";
 import MyDatePicker from "./DatePicker";
 import CheckboxExample from "./Checkbox";
 import CheckboxList from "./SkillCheckbox";
 import ImageUploader from "./InputFile";
-import NextBtn from "./NextBtn";
 
 function BasicInfo() {
   const [formData, setFormData] = useState({
@@ -115,6 +112,7 @@ function BasicInfo() {
       <div className="pro_hashTag">
         <label htmlFor="prohashTag">주제 해시태그</label>
         <p>주제와 관련된 해시태그를 최소 1개 ~ 4개 미만으로 설정해 주세요. </p>
+
         <input
           type="text"
           id="prohashTag"
@@ -149,6 +147,7 @@ function BasicInfo() {
           프로젝트에 참여하는 포지션을 작성해 주세요.(예: Front-end개발자,
           디자이너)
         </p>
+
         <input
           type="text"
           id="prostaff"
@@ -166,7 +165,7 @@ function BasicInfo() {
 
       {/* <Nextbtn /> */}
       {/* <button type="submit">다음 단계</button> */}
-      <NextBtn />
+      {/* <NextBtn navi="rewardinfo" /> */}
     </form>
   );
 }

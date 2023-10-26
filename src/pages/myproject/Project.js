@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 //import { Routes, Route, useParams } from "react-router-dom";
 
-//import NextBtn from "./NextBtn";
+import NextBtn from "./NextBtn";
 import "./Project.css";
 import BasicInfo from "./BasicInfo";
 import RewardInfo from "./RewardInfo";
@@ -21,24 +22,40 @@ const ProjectTitle = () => {
 // 메뉴 탭 //
 
 export function CenteredTabs() {
-  // const { tabnum } = useParams();
+  //  버튼 스타일
+  const btnstyle = {
+    margin: "50px 0",
+    position: "absolute",
+    right: "660px",
+    backgroundColor: "#EE833E",
+    color: "#fff",
+    fontSize: "18px",
+    fontWeight: "500",
+    width: "184px",
+    height: "50px",
+    borderRadius: "15px",
+    border: "none",
+    cursor: "pointer",
+  };
 
-  // const dumptest = tabnum === undefined ? 0 : Number(tabnum);
-
-  // console.log("tabnum >> ", typeof tabnum, " ", tabnum);
-
-  // const [value, setValue] = useState(tabnum === undefined ? 0 : Number(tabnum));
-
-  // useEffect(() => {
-  //   setValue(tabnum === undefined ? 0 : Number(tabnum));
-  //   console.log("호출한다아~");
-  // }, [tabnum]);
-
-  // console.log("value >> ", typeof value, " ", value);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const clickbtn = () => {
+    console.log("clickbtn");
+    if (value === 0) {
+      setValue(1);
+    }
+    if (value === 1) {
+      setValue(2);
+    }
+    if (value === 2) {
+      // 페이지를 홈페이지 메인으로 이동
+      window.location.href = "/"; // 또는 원하는 경로로 설정
+    }
   };
 
   return (
@@ -60,18 +77,27 @@ export function CenteredTabs() {
       {value === 0 && (
         <Typography sx={{ p: 2 }}>
           <BasicInfo />
+          <button style={btnstyle} value={value} onClick={clickbtn}>
+            다음 단계
+          </button>
         </Typography>
       )}
 
       {value === 1 && (
         <Typography sx={{ p: 2 }}>
           <RewardInfo />
+          <button style={btnstyle} value={value} onClick={clickbtn}>
+            다음 단계
+          </button>
         </Typography>
       )}
 
       {value === 2 && (
         <Typography sx={{ p: 2 }}>
           <ProjectInfo />
+          <button style={btnstyle} value={value} onClick={clickbtn}>
+            제출하기
+          </button>
         </Typography>
       )}
     </Box>
@@ -126,6 +152,7 @@ function Project() {
       <ThemeProvider theme={theme}>
         <CenteredTabs />
       </ThemeProvider>
+      <NextBtn />
     </div>
   );
 }

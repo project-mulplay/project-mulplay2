@@ -97,7 +97,7 @@ label {
 }
 
 /* 체크박스 스타일 */
-a {
+ a {
   text-decoration: underline;
   text-underline-offset: 2px;
   color: #888;
