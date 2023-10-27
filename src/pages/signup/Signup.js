@@ -1,30 +1,59 @@
 import "./Signup.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import GoogleIcon from "./../../assets/image/icon_google.svg";
 import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
 import AppleIcon from "./../../assets/image/icon_apple.svg";
 
 const Signup = () => {
+  // 시간
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+
+  const [data, setData] = useState({
+    user_id: '', 
+    user_pw: '', 
+    user_name: '', 
+    user_phone: '', 
+    user_address: '', 
+    user_regdate: formattedDate,
+    user_sns: 0,
+    user_role: 1,
+    img_no: 1
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:3300/register/signup', data);
+      console.log('요청 성공:', response);
+    } catch (error) {
+      console.log(data);
+      console.error('요청 실패:', error);
+    }
+  };
+
   return (
     <section id="container_signup">
       <h1>회원가입</h1>
       <form action="#" className="form_signup">
-        <div className="input_box name">
-          <label>이름</label>
-          <input
-            className="input_text"
-            type="text"
-            placeholder="이름을 입력해 주세요"
-            required
-          />
-        </div>
         <div className="input_box id">
           <label>아이디</label>
           <input
             className="input_text"
             type="text"
-            placeholder="아이디를 입력해 주세요"
+            placeholder="이메일 형식으로 입력해 주세요"
             required
+            name="user_id"
+            onChange={handleChange}
           />
         </div>
         <div className="input_box pw">
@@ -34,6 +63,19 @@ const Signup = () => {
             type="text"
             placeholder="비밀번호를 입력해 주세요"
             required
+            name="user_pw"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="input_box name">
+          <label>이름</label>
+          <input
+            name="user_name"
+            className="input_text"
+            type="text"
+            placeholder="이름을 입력해 주세요"
+            required
+            onChange={handleChange}
           />
         </div>
         <div className="input_box tel">
@@ -43,27 +85,9 @@ const Signup = () => {
             type="text"
             placeholder="전화번호를 입력해 주세요"
             required
+            name="user_phone"
+            onChange={handleChange}
           />
-        </div>
-        <div className="input_box email">
-          <label>이메일</label>
-          <div className="column">
-            <input
-              className="input_text"
-              type="text"
-              placeholder="이메일을 입력해 주세요"
-              required
-            />
-            <div className="select_box">
-              <select className="input_select">
-                <option hidden>직접입력</option>
-                <option>naver.com</option>
-                <option>google.com</option>
-                <option>hanmail.net</option>
-                <option>hatmail.com</option>
-              </select>
-            </div>
-          </div>
         </div>
         <div className="input_box adr">
           <label>주소</label>
@@ -73,6 +97,8 @@ const Signup = () => {
               className="input_text"
               placeholder="우편번호"
               required
+              name="user_address"
+              onChange={handleChange}
             />
 
             <button className="btn_search">검색</button>
@@ -87,17 +113,17 @@ const Signup = () => {
           />
         </div>
 
-        <div class="agreement__container">
-          <ul class="agreement__all">
-            <li class="check_all">
+        <div className="agreement__container">
+          <ul className="agreement__all">
+            <li className="check_all">
               <input type="checkbox" class="chk_btn" id="chk_all" />
-              <label class="title" for="chk_all">
+              <label className="title" for="chk_all">
                 전체 동의
               </label>
               <i></i>
             </li>
             <li>
-              <ul class="agreement__each">
+              <ul className="agreement__each">
                 <li>
                   <input type="checkbox" class="chk_btn" id="chk_01" />
                   <label for="chk_01">선택 동의 01</label>
@@ -106,21 +132,21 @@ const Signup = () => {
                   </a>
                 </li>
                 <li>
-                  <input type="checkbox" class="chk_btn" id="chk_02" />
+                  <input type="checkbox" className="chk_btn" id="chk_02" />
                   <label for="chk_02">선택 동의 02</label>
                   <a href="#" class="more_btn">
                     전문 보기
                   </a>
                 </li>
                 <li>
-                  <input type="checkbox" class="chk_btn" id="chk_03" />
+                  <input type="checkbox" className="chk_btn" id="chk_03" />
                   <label for="chk_03">선택 동의 03</label>
                   <a href="#" class="more_btn">
                     전문 보기
                   </a>
                 </li>
                 <li>
-                  <input type="checkbox" class="chk_btn" id="chk_04" />
+                  <input type="checkbox" className="chk_btn" id="chk_04" />
                   <label for="chk_04">선택 동의 04</label>
                   <a href="#" class="more_btn">
                     전문 보기
@@ -131,7 +157,7 @@ const Signup = () => {
           </ul>
         </div>
 
-        <button className="btn_signup">완료</button>
+        <button type="submit" className="btn_signup" onClick={handleSubmit}>완료</button>
       </form>
     </section>
   );
