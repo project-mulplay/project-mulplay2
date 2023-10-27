@@ -2,7 +2,7 @@
   padding-bottom: 384px;
   display: flex;
   justify-content: center; /* 수평 중앙 정렬 */
-  height: 260vh; /* 화면 높이 전체에 대한 컨테이너 높이 설정 */
+  height: 230vh; /* 화면 높이 전체에 대한 컨테이너 높이 설정 */
 }
 
 .projectitle {

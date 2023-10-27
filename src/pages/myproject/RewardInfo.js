@@ -6,11 +6,10 @@ import plusbtn from "../../assets/image/plusbtn.png";
 
 function RewardInfo() {
   const [formData, setFormData] = useState({
-    retype: "",
-    retitle: "",
-    remoney: "",
-    reamount: "",
-    redescription: "",
+    reward_categori: "",
+    reward_name: "",
+    reward_price: "",
+    reward_info: "",
   });
 
   // +버튼 클릭시 컴포넌트 추가
@@ -57,9 +56,9 @@ function RewardInfo() {
         <div className="rewardType">
           <label htmlFor="retype">리워드 종류</label>
           <select
-            name="retype"
-            id="retype"
-            value={formData.retype}
+            name="reward_categori"
+            id="reward_categori"
+            value={formData.reward_categori}
             onChange={handleChange}
           >
             <option value="select">리워드 선택</option>
@@ -72,9 +71,9 @@ function RewardInfo() {
           <label htmlFor="remoney">금액</label>
           <input
             type="text"
-            id="remoney"
-            name="remoney"
-            value={formData.remoney}
+            id="reward_price"
+            name="reward_price"
+            value={formData.reward_price}
             onChange={handleChange}
           />
         </div>
@@ -82,9 +81,9 @@ function RewardInfo() {
           <label htmlFor="retitle">제목</label>
           <input
             type="text"
-            id="retitle"
-            name="retitle"
-            value={formData.retitle}
+            id="reward_name"
+            name="reward_name"
+            value={formData.reward_name}
             onChange={handleChange}
             placeholder="제목을 입력해주세요."
           />
@@ -93,9 +92,9 @@ function RewardInfo() {
           <label htmlFor="redescription">설명</label>
           <textarea
             type="text"
-            id="retitleredescription"
-            name="redescription"
-            value={formData.redescription}
+            id="reward_info"
+            name="reward_info"
+            value={formData.reward_info}
             onChange={handleChange}
           />
         </div>
@@ -110,11 +109,10 @@ function RewardInfo() {
 // 새로 추가되는 컴포넌트//
 function NewComponent() {
   const [formData, setFormData] = useState({
-    retype: "",
-    retitle: "",
-    remoney: "",
-    reamount: "",
-    redescription: "",
+    reward_categori: "",
+    reward_name: "",
+    reward_price: "",
+    reward_info: "",
   });
 
   const handleChange = (e) => {
@@ -135,9 +133,9 @@ function NewComponent() {
       <div className="rewardType">
         <label htmlFor="retype">리워드 종류</label>
         <select
-          name="retype"
-          id="retype"
-          value={formData.retype}
+          name="reward_categori"
+          id="reward_categori"
+          value={formData.reward_categori}
           onChange={handleChange}
         >
           <option value="select">리워드 선택</option>
@@ -150,9 +148,9 @@ function NewComponent() {
         <label htmlFor="remoney">금액</label>
         <input
           type="text"
-          id="remoney"
-          name="remoney"
-          value={formData.remoney}
+          id="reward_price"
+          name="reward_price"
+          value={formData.reward_price}
           onChange={handleChange}
         />
       </div>
@@ -160,9 +158,9 @@ function NewComponent() {
         <label htmlFor="retitle">제목</label>
         <input
           type="text"
-          id="retitle"
-          name="retitle"
-          value={formData.retitle}
+          id="reward_name"
+          name="reward_name"
+          value={formData.reward_name}
           onChange={handleChange}
           placeholder="제목을 입력해주세요."
         />
@@ -171,9 +169,9 @@ function NewComponent() {
         <label htmlFor="redescription">설명</label>
         <textarea
           type="text"
-          id="retitleredescription"
-          name="redescription"
-          value={formData.redescription}
+          id="reward_info"
+          name="reward_info"
+          value={formData.reward_info}
           onChange={handleChange}
         />
       </div>
