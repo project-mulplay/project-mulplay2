@@ -1,31 +1,45 @@
 import * as React from "react";
-import { useState } from "react";
-import user from "../../data/userData.json";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Stack from "@mui/joy/Stack";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import InputMedium from "../../components/elements/InputMedium";
 import "./MyInfoEdit.css";
 
 export default function MyPwEdit() {
-  const loggedInUserId = 1;
+  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+  const [userPw, setUserPw] = useState("");
+  const [currentPw, setCurrentPw] = React.useState(""); //
 
-  const loggedInUser = user.find((user) => user.user_no === loggedInUserId);
-
-  const [currentPw, setCurrentPw] = React.useState("");
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
   const [isCurrentPwValid, setIsCurrentPwValid] = useState(false);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3300/user/pw", {
+        params: {
+          user_no: loggedInUserId,
+        },
+      })
+      .then((response) => {
+        // 요청 성공 시 실행할 코드
+        setUserPw(response.data.user_pw || "");
+
+        console.log("pwedit 요청 성공:", response);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("요청 실패:", error);
+      });
+  }, [loggedInUserId]);
+
   // Check current password
   const handleSubmitCheckPassword = (event) => {
     event.preventDefault();
-    if (currentPw === "1234") {
-      // Assuming '1234' is the correct password
+    if (currentPw === userPw) {
       setIsCurrentPwValid(true);
     } else {
-      alert("현재 비밀번호가 일치하지 않습니다");
+      alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
     }
   };
 
@@ -36,7 +50,7 @@ export default function MyPwEdit() {
       alert("입력한 비밀번호가 일치하지 않습니다");
       return;
     }
-    loggedInUser.user_pw = newPw;
+    loggedInUserId.user_pw = newPw;
     alert("비밀번호가 수정되었습니다");
   };
 

@@ -44,7 +44,7 @@ export const patchUserInfo = (req, res) => {
 };
 
 export const deleteUserInfo = (req, res) => {
-  const user_no = req.query.user_no;
+  const user_no = req.body.user_no;
   try {
     userRepository.deleteByUserInfo(user_no).then((result) => {
       res.status(200).json(result);
@@ -56,9 +56,8 @@ export const deleteUserInfo = (req, res) => {
 
 export const getUserPw = (req, res) => {
   const user_no = req.query.user_no;
-  const user_pw = req.query.user_pw;
   try {
-    userRepository.findByUserPw(user_no, user_pw).then((result) => {
+    userRepository.findByUserPw(user_no).then((result) => {
       res.status(200).json(result);
     });
   } catch (error) {
@@ -68,9 +67,9 @@ export const getUserPw = (req, res) => {
 
 export const patchUserPw = (req, res) => {
   const user_no = req.body.user_no;
-
+  const user_pw = req.body.user_pw;
   try {
-    userRepository.updateByUserPw(user_no).then((result) => {
+    userRepository.updateByUserPw(user_no, user_pw).then((result) => {
       res.status(200).json(result);
     });
   } catch (error) {

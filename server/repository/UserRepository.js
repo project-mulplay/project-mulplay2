@@ -22,7 +22,7 @@ export const findByUserInfo = async (user_no) => {
   const conn = await db;
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select user_id, user_name, user_phone, user_address from user where user_no = ?",
+    "select user_id, user_name, user_phone, user_address from user where user_no = ? and user_stat = 1",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -35,7 +35,7 @@ export const updateByUserInfo = async (userData) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "update user set user_name = ? , user_phone = ? , user_address = ? where user_no = ?",
+    "update `user` set user_name = ? , user_phone = ? , user_address = ? where user_no = ?",
     [
       userData.user_name,
       userData.user_phone,
@@ -53,7 +53,7 @@ export const deleteByUserInfo = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "delete from user where user_no = ?",
+    "update user set user_stat= 0 where user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -66,7 +66,7 @@ export const findByUserPw = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select user_pw from user where user_no = ? ",
+    "select user_pw from `user` where user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.

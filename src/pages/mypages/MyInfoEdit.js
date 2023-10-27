@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
@@ -17,7 +17,7 @@ import "./MyInfoEdit.css";
 const images = [profile1, profile2, profile3, profile4];
 
 export default function MyInfoEdit({ user_no }) {
-  const [data, setData] = useState({});
+  const navigate = useNavigate();
   const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
 
   const [userId, setUserId] = React.useState("");
@@ -50,32 +50,24 @@ export default function MyInfoEdit({ user_no }) {
       });
   }, [loggedInUserId]);
 
-  // useEffect(() => {
-  // setUserName(data.user_name || "");
-  //   setUserPhone(data.user_phone || "");
-  //   setUserAddress(data.user_address || "");
-  // }, [data]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
     console.log(event.target);
-    if (window.confirm("게시글을 수정하시겠습니까?")) {
+    if (window.confirm("회원정보를 수정하시겠습니까?")) {
       axios
         .patch("http://localhost:3300/user/info", {
-          body: {
-            user_name: userName,
-            user_phone: userPhone,
-            user_address: userAddress,
-            user_no: loggedInUserId,
-          },
+          user_name: userName,
+          user_phone: userPhone,
+          user_address: userAddress,
+          user_no: loggedInUserId,
         })
         .then((response) => {
           // setUserName(response.data.user_name);
           // setUserPhone(response.data.user_phone);
           // setUserAddress(response.data.user_address);
-          setData(response.data);
-          console.log("요청 성공:", response);
+          // setData(response.data);
+          console.log("update 요청 성공:", response);
 
           alert("회원정보가 수정되었습니다.");
         })
@@ -88,16 +80,15 @@ export default function MyInfoEdit({ user_no }) {
     if (window.confirm("정말 탈퇴하시겠습니까?")) {
       axios
         .delete("http://localhost:3300/user/info", {
-          body: {
+          params: {
             user_no: loggedInUserId,
           },
         })
         .then((response) => {
-          setData(response.data);
           console.log("요청 성공:", response);
 
           alert("회원탈퇴가 완료되었습니다.");
-          // Navigate("/");
+          navigate("/");
         })
         .catch((error) => {
           console.error("요청 실패:", error);
