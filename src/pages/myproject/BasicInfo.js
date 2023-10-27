@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 
 import "./BasicInfo.css";
-import search from "../../assets/image/search.png";
 import MyDatePicker from "./DatePicker";
 import CheckboxExample from "./Checkbox";
-import CheckboxList from "./SkillCheckbox";
+import SkillCheckbox from "./SkillCheckbox";
+import StaffCheckbox from "./StaffCheckbox";
+import TagCheckbox from "./TagCheckbox";
 import ImageUploader from "./InputFile";
 
 function BasicInfo() {
   const [formData, setFormData] = useState({
-    field: "",
-    title: "",
+    prod_genre: "",
+    prod_title: "",
     description: "",
-    money: "",
-    hashTag: "",
-    forecast: "",
-    staff: "",
+    prod_opendate: "",
+    prod_enddate: "",
+    prod_mainimg: "",
+    prod_goal: "",
+    tdata_name: "",
+    tdata_type: "",
+    prod_time: "",
   });
 
   const handleChange = (e) => {
@@ -37,9 +41,9 @@ function BasicInfo() {
       <div>
         <label htmlFor="field">프로젝트 분야</label>
         <select
-          name="field"
+          name="prod_genre"
           id="profield"
-          value={formData.field}
+          value={formData.prod_genre}
           onChange={handleChange}
         >
           <option value="select">프로젝트 선택</option>
@@ -57,8 +61,8 @@ function BasicInfo() {
         <input
           type="text"
           id="protitle"
-          name="title"
-          value={formData.title}
+          name="prod_title"
+          value={formData.prod_title}
           onChange={handleChange}
           placeholder="제목을 입력해주세요."
         />
@@ -80,16 +84,11 @@ function BasicInfo() {
           프로젝트 썸네일 이미지를 한 개만 등록해주세요. <br />
           (10MB 이하의 JPG, JPEG, PNG 파일)
         </p>
-        <ImageUploader />
-        {/* <input
-          type="file"
-          accept="image/jpeg, image/png"
-          id="fileInput"
-          name="file"
-          value={formData.file}
+        <ImageUploader
+          name="prod_mainimg"
+          value={formData.prod_mainimg}
           onChange={handleChange}
         />
-        <img className="photo" src={photo} alt="사진" /> */}
       </div>
       <div class="project-period">
         <label htmlFor="properiod">프로젝트 기한</label>
@@ -104,29 +103,29 @@ function BasicInfo() {
         <input
           type="text"
           id="promoney"
-          name="money"
-          value={formData.money}
+          name="prod_goal"
+          value={formData.prod_goal}
           onChange={handleChange}
         />
       </div>
       <div className="pro_hashTag">
         <label htmlFor="prohashTag">주제 해시태그</label>
         <p>주제와 관련된 해시태그를 최소 1개 ~ 4개 미만으로 설정해 주세요. </p>
-
-        <input
-          type="text"
-          id="prohashTag"
-          name="hashTag"
-          value={formData.hashTag}
+        <TagCheckbox
+          name="tdata_name"
+          value={formData.tdata_name}
           onChange={handleChange}
         />
-        <img className="tag-search" src={search} alt="검색" />
       </div>
 
       <div>
         <label htmlFor="progress">진행 분류</label>
         <p>신규와 리뉴얼 중 하나를 선택해 주세요. </p>
-        <CheckboxExample />
+        <CheckboxExample
+          name="tdata_type"
+          value={formData.tdata_type}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="forecast">
@@ -135,8 +134,8 @@ function BasicInfo() {
         <input
           type="text"
           id="forecast"
-          name="forecast"
-          value={formData.forecast}
+          name="prod_time"
+          value={formData.prod_time}
           onChange={handleChange}
         />
       </div>
@@ -147,12 +146,9 @@ function BasicInfo() {
           프로젝트에 참여하는 포지션을 작성해 주세요.(예: Front-end개발자,
           디자이너)
         </p>
-
-        <input
-          type="text"
-          id="prostaff"
-          name="staff"
-          value={formData.staff}
+        <StaffCheckbox
+          name="tdata_name"
+          value={formData.tdata_name}
           onChange={handleChange}
         />
       </div>
@@ -160,12 +156,12 @@ function BasicInfo() {
       <div className="proskill">
         <label htmlFor="skill">관련 기술</label>
         <p>프로젝트에 사용되는 기술을 선택해 주세요. </p>
-        <CheckboxList />
+        <SkillCheckbox
+          name="tdata_name"
+          value={formData.tdata_name}
+          onChange={handleChange}
+        />
       </div>
-
-      {/* <Nextbtn /> */}
-      {/* <button type="submit">다음 단계</button> */}
-      {/* <NextBtn navi="rewardinfo" /> */}
     </form>
   );
 }

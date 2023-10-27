@@ -21,7 +21,7 @@ import MyLikeProject from "./pages/mypages/MyLikeProject";
 import MyProceeds from "./pages/mypages/MyProceeds";
 import Prodadmin from "./pages/admin/Prodadmin";
 import MyPwEdit from "./pages/mypages/MyPwEdit";
-import Guidepage from "./pages/guidepages/guidepage";
+import Guidepage from "./pages/guidepages/Guidepage";
 
 function App() {
   const [isLoggedIn] = useState(false);
