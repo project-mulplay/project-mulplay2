@@ -2,11 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* reset */
-li {
+.agreement__all li {
   list-style: none;
 }
 
-label {
+.form_signup label {
   display: block;
   text-align: left;
   font-size: 1rem;
@@ -97,7 +97,7 @@ label {
 }
 
 /* 체크박스 스타일 */
- a {
+.agreement__container a {
   text-decoration: underline;
   text-underline-offset: 2px;
   color: #888;
