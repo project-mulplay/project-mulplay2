@@ -80,7 +80,7 @@ export const updateByUserPw = async (user_no, user_pw) => {
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
     "update user set user_pw = ? where user_no = ? ",
-    [user_no, user_pw]
+    [user_pw, user_no]
   );
   // 쿼리 실행 결과를 반환한다.
   return "success";
@@ -121,7 +121,7 @@ export const findByUserMyProceed = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select p.prod_title , u.user_id ,m.pay_price ,p.prod_stat from user u inner join project p on u.user_no = p.user_no inner join payment m ON p.prod_no = m.prod_no  where u.user_no = ? ",
+    "select m.pay_no,p.prod_title , u.user_id ,m.pay_price ,p.prod_stat, m.pay_regdate from user u inner join project p on u.user_no = p.user_no inner join payment m ON p.prod_no = m.prod_no  where u.user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.

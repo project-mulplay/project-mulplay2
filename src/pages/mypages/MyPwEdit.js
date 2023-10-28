@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+
 import axios from "axios";
+
 import Stack from "@mui/joy/Stack";
 import InputMedium from "../../components/elements/InputMedium";
 import "./MyInfoEdit.css";
@@ -11,7 +13,8 @@ export default function MyPwEdit() {
   const [currentPw, setCurrentPw] = React.useState(""); //
 
   const [newPw, setNewPw] = useState("");
-  const [confirmPw, setConfirmPw] = useState("");
+  const [doublecheckPw, setdoublecheckPw] = useState("");
+
   const [isCurrentPwValid, setIsCurrentPwValid] = useState(false);
 
   useEffect(() => {
@@ -46,12 +49,25 @@ export default function MyPwEdit() {
   // Update new password
   const handleSubmitChangePassword = (event) => {
     event.preventDefault();
-    if (newPw !== confirmPw) {
+    if (newPw !== doublecheckPw) {
       alert("입력한 비밀번호가 일치하지 않습니다");
       return;
     }
-    loggedInUserId.user_pw = newPw;
-    alert("비밀번호가 수정되었습니다");
+    if (window.confirm("비밀번호를를 수정하시겠습니까?")) {
+      axios
+        .patch("http://localhost:3300/user/pw", {
+          user_no: loggedInUserId,
+          user_pw: doublecheckPw,
+        })
+        .then((response) => {
+          console.log("pwupdate 요청 성공:", response);
+
+          alert("비밀번호가 수정되었습니다.");
+        })
+        .catch((error) => {
+          console.error("요청 실패:", error);
+        });
+    }
   };
 
   return (
@@ -115,10 +131,10 @@ export default function MyPwEdit() {
                 <span>비밀번호 확인</span>
                 <InputMedium
                   type="password"
-                  name="confirm_pw"
+                  name="doublecheck_pw"
                   placeholder={"비밀번호를 입력해주세요"}
-                  value={confirmPw}
-                  onChange={(e) => setConfirmPw(e.target.value)}
+                  value={doublecheckPw}
+                  onChange={(e) => setdoublecheckPw(e.target.value)}
                   required
                 />
               </li>
