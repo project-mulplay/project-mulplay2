@@ -36,6 +36,30 @@ function BasicInfo() {
     console.log(formData);
   };
 
+  // 태그 데이터 선택 -> tagdconnect에 저장 -> project에서 join을 통해 가져오기
+  // const handleChange = (e) => {
+  //   setData({
+  //     ...data,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+  
+  // const [data, setData] = useState(
+  //   [1, 2, 3, 4]
+  // )
+
+  //  const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post('http://localhost:3300/make/infotag', {prod_no:1, tdata_no:data});
+  //     console.log('요청 성공:', response);
+  //   } catch (error) {
+  //     console.log(data);
+  //     console.error('요청 실패:', error);
+  //   }
+  // };
+
   return (
     <form onSubmit={handleSubmit} className="basicForm">
       <div>
