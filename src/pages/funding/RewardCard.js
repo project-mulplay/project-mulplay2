@@ -4,6 +4,7 @@ import "./Funding.css";
 import rewardData from "../../data/rewardData.json";
 import InputNumber from "./InputNumber";
 import PropTypes from 'prop-types';
+import axios from "axios";
 // 오른쪽 장바구니
 
 // 리워드 박스
@@ -93,6 +94,25 @@ const bull = (
   
   
   function OutlinedCard({ fcard }) {
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+      axios
+        .get("http://localhost:3300/project/fundreward", {
+          params: {
+            reward_no: 1,
+          },
+        })
+        .then((response) => {
+          // 요청 성공 시 실행할 코드
+          setData(response.data);
+          console.log("요청 성공:", response);
+        })
+        .catch((error) => {
+          // 에러 처리
+          console.error("요청 실패:", error);
+        });
+    }, []);
 
 
     OutlinedCard.prototypes = {

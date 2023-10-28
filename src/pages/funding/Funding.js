@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect} from "react";
 import "./Funding.css";
 import Button_funding from "../../components/elements/Button_funding";
 import { useNavigate } from "react-router-dom";
@@ -10,11 +11,33 @@ import OnHeart from "../../assets/image/on_heart.png";
 import OffHeart from "../../assets/image/off_heart.png";
 import Share from "../../assets/image/share.png";
 import Fundingtab from "../../components/elements/Tab";
+import axios from "axios";
 
 // 리워드 박스
 import OutlinedCard from "./RewardCard";
 
 const Funding = () => {
+    // API
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+      axios
+        .get("http://localhost:3300/project/funding", {
+          params: {
+            prod_no: 1,
+          },
+        })
+        .then((response) => {
+          // 요청 성공 시 실행할 코드
+          setData(response.data);
+          console.log("요청 성공:", response);
+        })
+        .catch((error) => {
+          // 에러 처리
+          console.error("요청 실패:", error);
+        });
+    }, []);
+
   // 결제 페이지 이동 네비게이션
   const navigate = useNavigate();
 

@@ -4,18 +4,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
 function MyDatePicker() {
-  const [startDate, setStartDate] = useState(null);
+  const [openDate, setOpenDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   return (
     <div>
       <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        selected={openDate}
+        onChange={(date) => setOpenDate(date)}
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
         selectsStart
-        startDate={startDate}
+        startDate={openDate}
         endDate={endDate}
         showYearDropdown
       />{" "}
@@ -26,9 +26,9 @@ function MyDatePicker() {
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
         selectsEnd
-        startDate={startDate}
+        startDate={openDate}
         endDate={endDate}
-        minDate={startDate}
+        minDate={openDate}
         showYearDropdown
       />
     </div>

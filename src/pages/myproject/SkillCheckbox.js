@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function CheckboxList() {
+function SkillCheckbox() {
   const [checkboxes, setCheckboxes] = useState({
     checkbox1: false,
     checkbox2: false,
@@ -124,7 +124,7 @@ function CheckboxList() {
     margin: "0 auto",
     color: "#555",
     fontSize: "16px",
-    fontWeight: "500",
+    fontWeight: "400",
   };
 
   const checkboxStyle = {
@@ -237,4 +237,4 @@ function CheckboxList() {
   );
 }
 
-export default CheckboxList;
+export default SkillCheckbox;
