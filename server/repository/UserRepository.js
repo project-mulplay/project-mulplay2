@@ -22,7 +22,7 @@ export const findByUserInfo = async (user_no) => {
   const conn = await db;
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select user_id, user_name, user_phone, user_address from user where user_no = ?",
+    "select user_id, user_name, user_phone, user_address from user where user_no = ? and user_stat = 1",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -35,7 +35,7 @@ export const updateByUserInfo = async (userData) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "update user set user_name = ? , user_phone = ? , user_address = ? where user_no = ?",
+    "update `user` set user_name = ? , user_phone = ? , user_address = ? where user_no = ?",
     [
       userData.user_name,
       userData.user_phone,
@@ -53,7 +53,7 @@ export const deleteByUserInfo = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "delete from user where user_no = ?",
+    "update user set user_stat= 0 where user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -66,7 +66,7 @@ export const findByUserPw = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select user_pw from user where user_no = ? ",
+    "select user_pw from `user` where user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -80,7 +80,7 @@ export const updateByUserPw = async (user_no, user_pw) => {
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
     "update user set user_pw = ? where user_no = ? ",
-    [user_no, user_pw]
+    [user_pw, user_no]
   );
   // 쿼리 실행 결과를 반환한다.
   return "success";
@@ -92,7 +92,10 @@ export const findByUserMyProd = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select prod_no, prod_stat, prod_title, prod_intro, prod_regdate, prod_opendate, prod_enddate, img_no from mulplay.project where user_no = ? ",
+    `SELECT p.prod_no, p.prod_stat, p.prod_title, p.prod_intro, p.prod_regdate, p.prod_opendate, p.prod_enddate, p.img_no, m.pay_price, prod_goal, prod_current
+    FROM project p
+    INNER JOIN payment m ON p.prod_no = m.prod_no
+    WHERE p.user_no = ?`,
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.
@@ -118,7 +121,7 @@ export const findByUserMyProceed = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    "select p.prod_title , u.user_id ,m.pay_price ,p.prod_stat from user u inner join project p on u.user_no = p.user_no inner join payment m ON p.prod_no = m.prod_no  where u.user_no = ? ",
+    "select m.pay_no,p.prod_title , u.user_id ,m.pay_price ,p.prod_stat, m.pay_regdate from user u inner join project p on u.user_no = p.user_no inner join payment m ON p.prod_no = m.prod_no  where u.user_no = ? ",
     [user_no]
   );
   // 쿼리 실행 결과를 반환한다.

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import projectCreatedData from "../data/projectCreatedData.json";
-import projectLikeData from "../data/projectLikeData.json";
-import projectFundData from "../data/projectFundData.json";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import MyCard from "../components/layout/mypage/MyCard";
 import "../pages/mypages/MyProjectManage.css";
@@ -20,26 +18,43 @@ const filterOptionListLiked = [
   { value: "all", name: "전체" },
   { value: "3", name: "펀딩중" },
   { value: "4", name: "펀딩성공" },
-  { value: "4", name: "펀딩실패" },
+  { value: "5", name: "펀딩실패" },
 ];
 
 const ProjectManager = ({ type }) => {
   const [selectedTab, setSelectedTab] = useState("all"); // 기본 탭 선택
 
-  let projects;
+  const [data, setData] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3300/user/myproject", {
+        params: {
+          user_no: loggedInUserId,
+        },
+      })
+      .then((response) => {
+        // 요청 성공 시 실행할 코드
+        setData(response.data);
+        console.log("요청 성공:", response);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("요청 실패:", error);
+      });
+  }, [loggedInUserId]);
+
   let filterOptions;
 
   switch (type) {
     case "created":
-      projects = projectCreatedData;
       filterOptions = filterOptionListCreated;
       break;
     case "liked":
-      projects = projectLikeData;
       filterOptions = filterOptionListLiked;
       break;
     case "funded":
-      projects = projectFundData;
       filterOptions = filterOptionListLiked; // Funded and Liked share the same options
       break;
     default:
@@ -48,7 +63,7 @@ const ProjectManager = ({ type }) => {
 
   const isLikedOrFunded = type === "liked" || type === "funded";
   // 프로젝트 상태에 따라 필터링된 프로젝트 목록을 생성
-  const filteredProjects = projects.filter((project) => {
+  const filteredProjects = data.filter((project) => {
     if (selectedTab === "all") {
       if (isLikedOrFunded) {
         // 'liked'나 'funded' 타입에서는 '전체' 탭이 선택되었을 때 prod_stat이 3 또는 4인 프로젝트만 표시
@@ -119,9 +134,12 @@ const ProjectManager = ({ type }) => {
           <MyCard
             key={project.prod_no}
             project={project}
+            type={type}
             stateText={getStateText(project.prod_stat)}
             stateType={getStateType(project.prod_stat)}
-            fundPrice={isLikedOrFunded ? project.fund_price : null}
+            fundPrice={
+              type === "liked" || type === "funded" ? project.pay_price : null
+            }
           />
         ))}
       </div>

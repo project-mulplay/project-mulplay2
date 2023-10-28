@@ -16,7 +16,7 @@ const MyProfile = ({ user_no }) => {
       .then((response) => {
         // 요청 성공 시 실행할 코드
         setData(response.data);
-        console.log("요청 성공:", response);
+        console.log("profile 요청 성공:", response);
       })
       .catch((error) => {
         // 에러 처리

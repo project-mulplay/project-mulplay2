@@ -44,7 +44,7 @@ export const patchUserInfo = (req, res) => {
 };
 
 export const deleteUserInfo = (req, res) => {
-  const user_no = req.body.user_no;
+  const user_no = req.query.user_no;
   try {
     userRepository.deleteByUserInfo(user_no).then((result) => {
       res.status(200).json(result);
@@ -56,6 +56,7 @@ export const deleteUserInfo = (req, res) => {
 
 export const getUserPw = (req, res) => {
   const user_no = req.query.user_no;
+
   try {
     userRepository.findByUserPw(user_no).then((result) => {
       res.status(200).json(result);
