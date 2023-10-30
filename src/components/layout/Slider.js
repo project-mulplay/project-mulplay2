@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../assets/image/banner1.png";
 import banner2 from "../../assets/image/banner2.png";
 import banner3 from "../../assets/image/banner3.png";
+import open1 from "../../assets/image/opening1.png";
+import open2 from "../../assets/image/opening2.png";
 import prev from "../../assets/image/prev.png";
 import next from "../../assets/image/next.png";
 
@@ -63,10 +65,10 @@ export default class SimpleSlider extends Component {
           // open 슬라이드
           <Slider ref={(c) => (this.slider = c)} {...settings}>
             <div>
-              <img src={banner2} alt="Banner 2" />
+              <img src={open1} alt="open1" />
             </div>
             <div>
-              <img src={banner3} alt="Banner 3" />
+              <img src={open2} alt="open2" />
             </div>
           </Slider>
         )}
