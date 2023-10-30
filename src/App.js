@@ -1,10 +1,10 @@
 import "./App.css";
 
 import React, { useState } from "react";
-import { LoggedOutHeader, LoggedInHeader } from "./components/head/Header";
-import Footer from "./components/footer/Footer";
 import { Routes, Route } from "react-router-dom";
 
+import { LoggedOutHeader, LoggedInHeader } from "./components/head/Header";
+import Footer from "./components/footer/Footer";
 import MyInfoEdit from "./pages/mypages/MyInfoEdit";
 import MyProjectManage from "./pages/mypages/MyProjectManage";
 import Project from "./pages/myproject/Project";

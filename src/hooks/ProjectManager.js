@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 import MyCard from "../components/layout/mypage/MyCard";
@@ -25,25 +26,23 @@ const ProjectManager = ({ type }) => {
   const [selectedTab, setSelectedTab] = useState("all"); // 기본 탭 선택
 
   const [data, setData] = useState([]);
-  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+  const [cookies, setCookie] = useCookies();
 
   useEffect(() => {
     axios
       .get("http://localhost:3300/user/myproject", {
         params: {
-          user_no: loggedInUserId,
+          user_no: cookies.token,
         },
       })
       .then((response) => {
-        // 요청 성공 시 실행할 코드
         setData(response.data);
         console.log("요청 성공:", response);
       })
       .catch((error) => {
-        // 에러 처리
         console.error("요청 실패:", error);
       });
-  }, [loggedInUserId]);
+  }, []);
 
   let filterOptions;
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
@@ -18,7 +19,7 @@ const images = [profile1, profile2, profile3, profile4];
 
 export default function MyInfoEdit({ user_no }) {
   const navigate = useNavigate();
-  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const [userId, setUserId] = React.useState("");
   const [userName, setUserName] = React.useState("");
@@ -28,16 +29,14 @@ export default function MyInfoEdit({ user_no }) {
   const [selectedImage, setSelectedImage] = React.useState(profile);
   const [modalOpen, setModalOpen] = React.useState(false);
 
-  useEffect(() => {
+  const authCheck = () => {
     axios
       .get("http://localhost:3300/user/info", {
         params: {
-          user_no: loggedInUserId,
+          user_no: cookies.token,
         },
       })
       .then((response) => {
-        // 요청 성공 시 실행할 코드
-        // setData(response.data);
         setUserId(response.data.user_id || "");
         setUserName(response.data.user_name || "");
         setUserPhone(response.data.user_phone || "");
@@ -45,10 +44,12 @@ export default function MyInfoEdit({ user_no }) {
         console.log("infoedit 요청 성공:", response);
       })
       .catch((error) => {
-        // 에러 처리
         console.error("요청 실패:", error);
       });
-  }, [loggedInUserId]);
+  };
+  useEffect(() => {
+    authCheck();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,7 +61,7 @@ export default function MyInfoEdit({ user_no }) {
           user_name: userName,
           user_phone: userPhone,
           user_address: userAddress,
-          user_no: loggedInUserId,
+          user_no: cookies.token,
         })
         .then((response) => {
           // setUserName(response.data.user_name);
@@ -81,7 +82,7 @@ export default function MyInfoEdit({ user_no }) {
       axios
         .delete("http://localhost:3300/user/info", {
           params: {
-            user_no: loggedInUserId,
+            user_no: cookies.token,
           },
         })
         .then((response) => {
