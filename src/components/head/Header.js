@@ -15,13 +15,13 @@ const LoggedOutHeader = ({ onLoginClick }) => {
         <nav className="navigation">
           <ul>
             <li>
-              <a href="/fundinglist">오픈예정 </a>
+              <Link to="/openfundinglist">오픈예정 </Link>
             </li>
             <li>
-              <a href="/fundinglist">인기펀딩</a>
+              <Link to="/fundinglist">인기펀딩 </Link>
             </li>
             <li>
-              <a href="/fundinglist">신규펀딩 </a>
+              <Link to="/fundinglist">신규펀딩 </Link>
             </li>
           </ul>
         </nav>
@@ -30,15 +30,15 @@ const LoggedOutHeader = ({ onLoginClick }) => {
           <img className="search" src={search} alt="검색" />
         </div>
         <div className="login">
-          <Link to='/login'>
-          <button onClick={onLoginClick}>로그인</button>
+          <Link to="/login">
+            <button onClick={onLoginClick}>로그인</button>
           </Link>
-          <Link to='/signup'>
-          <button onClick={onLoginClick}>회원가입</button>
+          <Link to="/signup">
+            <button onClick={onLoginClick}>회원가입</button>
           </Link>
         </div>
-        <Link to='/guide'>
-        <button className="btn">프로젝트 만들기</button>
+        <Link to="/guide">
+          <button className="btn">프로젝트 만들기</button>
         </Link>
       </div>
     </header>

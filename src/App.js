@@ -22,6 +22,7 @@ import MyProceeds from "./pages/mypages/MyProceeds";
 import Prodadmin from "./pages/admin/Prodadmin";
 import MyPwEdit from "./pages/mypages/MyPwEdit";
 import Guidepage from "./pages/guidepages/guidepage";
+import OpenFundingList from "./pages/fundinglist/OpenFundingList";
 
 function App() {
   const [isLoggedIn] = useState(false);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/funding" element={<Funding />}></Route>
           <Route path="/fundinglist" element={<FundingListPage />}></Route>
+          <Route path="/openfundinglist" element={<OpenFundingList />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/mypages" element={<MyPages />}>
