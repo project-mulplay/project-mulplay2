@@ -1,16 +1,18 @@
 import "./Login.css";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import GoogleIcon from "./../../assets/image/icon_google.svg";
 import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
 import AppleIcon from "./../../assets/image/icon_apple.svg";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const [data, setData] = useState({});
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); 
+  const [cookies, setCookie] = useCookies();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,18 +24,25 @@ const Login = () => {
           user_pw: password,
         },
       });
+
       setData(response.data);
+      setCookie("token", ""); // 쿠키에 토큰 저장
+      setCookie("token", response.data.user_no); // 쿠키에 토큰 저장
+
       console.log(response.data.user_id, response.data.user_pw);
       console.log("요청 성공:", response);
-
+      console.log("쿠키:", cookies.token);
 
       // 아이디와 비밀번호 비교
-    if (response.data.user_id === username && response.data.user_pw === password) {
-      alert('로그인되었습니다.');
-      navigate('/')
-    } else {
-      alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-    }
+      if (
+        response.data.user_id === username &&
+        response.data.user_pw === password
+      ) {
+        alert("로그인되었습니다.");
+        navigate("/");
+      } else {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      }
     } catch (error) {
       console.error("요청 실패:", error);
     }
@@ -66,11 +75,9 @@ const Login = () => {
           />
         </div>
         <div className="container_savefind">
-          <div class="save_box">
+          <div className="save_box">
             <input type="checkbox" className="chk_btn" id="chk_save" />
-            <label class="title" for="chk_save">
-              아이디 저장
-            </label>
+            <label className="title">아이디 저장</label>
           </div>
 
           <div className="find_box">
@@ -79,7 +86,9 @@ const Login = () => {
             </a>
           </div>
         </div>
-        <button type="submit" className="btn_login">로그인</button>
+        <button type="submit" className="btn_login">
+          로그인
+        </button>
         {/* sns 로그인 */}
         <div className="sns_container">
           <div className="sns_login google">

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 import MyTable from "../../components/layout/mypage/MyTable";
 import "./MyProceeds.css";
-import paymentData from "../../data/paymentData.json";
 
 const MyProceeds = () => {
   const [data, setData] = useState([]);
-  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+  const [cookies, setCookie] = useCookies();
 
   useEffect(() => {
     axios
       .get("http://localhost:3300/user/myproceeds", {
         params: {
-          user_no: loggedInUserId,
+          user_no: cookies.token,
         },
       })
       .then((response) => {
@@ -26,7 +26,7 @@ const MyProceeds = () => {
         // 에러 처리
         console.error("요청 실패:", error);
       });
-  }, [loggedInUserId]);
+  }, []);
 
   return (
     <div className="myProceeds">
