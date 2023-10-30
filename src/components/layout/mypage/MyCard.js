@@ -5,8 +5,9 @@ import GaugeBar from "../../elements/GaugeBar";
 import "./MyCard.css";
 
 //조건식으로 user_id 에 따라 Gaugebar Or cardDate 보여주기
-const MyCard = ({ project, stateText, stateType, fundPrice }) => {
+const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
   const pundingOpen = project.prod_stat === 3 || project.prod_stat === 4;
+  console.log(project.goal);
 
   return (
     <div className="myCard" key={project.prod_no}>
@@ -33,17 +34,19 @@ const MyCard = ({ project, stateText, stateType, fundPrice }) => {
               </div>
             )
           ) : (
-            <div className="otherProject">
-              <div
-                className="cardFundPrice"
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  color: "#333333",
-                }}
-              >{`내가 후원한 금액 : ${
-                fundPrice.toLocaleString() || 0
-              } 원`}</div>
+            <div className="otherproject">
+              {fundPrice !== undefined && (
+                <div
+                  className="cardFundPrice"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "#333333",
+                  }}
+                >{`내가 후원한 금액 : ${
+                  fundPrice.toLocaleString() || 0
+                } 원`}</div>
+              )}
               <GaugeBar
                 goal={project.prod_goal}
                 current={project.prod_current}
@@ -52,7 +55,7 @@ const MyCard = ({ project, stateText, stateType, fundPrice }) => {
           )}
         </div>
       </div>
-      <MyDropdown stat={project.prod_stat} />
+      {type === "created" && <MyDropdown stat={project.prod_stat} />}
     </div>
   );
 };

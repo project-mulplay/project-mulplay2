@@ -9,6 +9,7 @@ import Edit from "@mui/icons-material/Edit";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import MenuButton from "@mui/joy/MenuButton";
 import Dropdown from "@mui/joy/Dropdown";
+import { Link } from "react-router-dom";
 
 const MyDropdown = ({ stat }) => {
   const pundingOpen = stat === 3 || stat === 4;
@@ -22,13 +23,16 @@ const MyDropdown = ({ stat }) => {
       >
         <MoreVert />
       </MenuButton>
+
       <Menu placement="right-end">
         {pundingOpen ? (
           <MenuItem>
-            <ListItemDecorator>
-              <Edit />
-            </ListItemDecorator>
-            수익관리
+            <Link to="/mypages/myproceeds">
+              <ListItemDecorator>
+                <Edit />
+              </ListItemDecorator>
+              수익관리
+            </Link>
           </MenuItem>
         ) : (
           <>

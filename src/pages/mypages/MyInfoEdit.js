@@ -1,6 +1,7 @@
 import * as React from "react";
-import { useState } from "react";
-import user from "../../data/userData.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
@@ -15,61 +16,92 @@ import "./MyInfoEdit.css";
 
 const images = [profile1, profile2, profile3, profile4];
 
-export default function MyInfoEdit() {
-  const loggedInUserId = 1;
+export default function MyInfoEdit({ user_no }) {
+  const navigate = useNavigate();
+  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
 
-  const loggedInUser = user.find((user) => user.user_no === loggedInUserId);
+  const [userId, setUserId] = React.useState("");
+  const [userName, setUserName] = React.useState("");
+  const [userPhone, setUserPhone] = React.useState("");
+  const [userAddress, setUserAddress] = React.useState("");
 
-  // 기본값을 "null"로 설정하여 초기값이 undefined인 경우를 방지
-  const [userName, setUserName] = React.useState(
-    loggedInUser ? loggedInUser.user_name : "null"
-  );
-  const [userPhone, setUserPhone] = React.useState(
-    loggedInUser ? loggedInUser.user_phone : "null"
-  );
-  const [userAddress, setUserAddress] = React.useState(
-    loggedInUser ? loggedInUser.user_address : "null"
-  );
   const [selectedImage, setSelectedImage] = React.useState(profile);
   const [modalOpen, setModalOpen] = React.useState(false);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3300/user/info", {
+        params: {
+          user_no: loggedInUserId,
+        },
+      })
+      .then((response) => {
+        // 요청 성공 시 실행할 코드
+        // setData(response.data);
+        setUserId(response.data.user_id || "");
+        setUserName(response.data.user_name || "");
+        setUserPhone(response.data.user_phone || "");
+        setUserAddress(response.data.user_address || "");
+        console.log("infoedit 요청 성공:", response);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("요청 실패:", error);
+      });
+  }, [loggedInUserId]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(formData.entries());
 
-    setUserName(loggedInUser.user_name);
-    setUserPhone(loggedInUser.user_phone);
-    setUserAddress(loggedInUser.user_address);
+    console.log(event.target);
+    if (window.confirm("회원정보를 수정하시겠습니까?")) {
+      axios
+        .patch("http://localhost:3300/user/info", {
+          user_name: userName,
+          user_phone: userPhone,
+          user_address: userAddress,
+          user_no: loggedInUserId,
+        })
+        .then((response) => {
+          // setUserName(response.data.user_name);
+          // setUserPhone(response.data.user_phone);
+          // setUserAddress(response.data.user_address);
+          // setData(response.data);
+          console.log("update 요청 성공:", response);
 
-    alert("회원정보가 수정되었습니다.");
+          alert("회원정보가 수정되었습니다.");
+        })
+        .catch((error) => {
+          console.error("요청 실패:", error);
+        });
+    }
   };
-
   const handleDelete = () => {
-    const userIndex = user.findIndex((user) => user.user_no === loggedInUserId);
+    if (window.confirm("정말 탈퇴하시겠습니까?")) {
+      axios
+        .delete("http://localhost:3300/user/info", {
+          params: {
+            user_no: loggedInUserId,
+          },
+        })
+        .then((response) => {
+          console.log("요청 성공:", response);
 
-    if (userIndex !== -1) {
-      user.splice(userIndex, 1);
-      alert("회원탈퇴가 완료되었습니다.");
+          alert("회원탈퇴가 완료되었습니다.");
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error("요청 실패:", error);
+        });
     }
   };
 
-  // const handleImageUpload = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     let imgFile = event.target.files[0];
-  //     let reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setSelectedImage(reader.result);
-  //     };
-  //     reader.readAsDataURL(imgFile);
-  //   }
-  // };
   return (
     <form className="myInfoEdit" onSubmit={handleSubmit}>
       <Stack spacing={1}>
         <ul className="editForm">
           <li>
-            <h1 className="editHeader">회원정보수정</h1>
+            <h1 className="editHeader">회원정보</h1>
           </li>
 
           <li className="imgEdit">
@@ -114,7 +146,7 @@ export default function MyInfoEdit() {
           </Modal>
           <li>
             <span>아이디</span>
-            <InputMedium placeholder={loggedInUser.user_id} disabled />
+            <InputMedium placeholder={userId} disabled />
           </li>
           <li>
             <span>이름</span>
@@ -147,7 +179,7 @@ export default function MyInfoEdit() {
             />
           </li>
           <li className="buttonSection">
-            <button type="submit" className="editButton">
+            <button type="submit" className="editButton" onClick={handleSubmit}>
               회원정보수정
             </button>
 
