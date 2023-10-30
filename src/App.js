@@ -1,7 +1,8 @@
 import "./App.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 import { LoggedOutHeader, LoggedInHeader } from "./components/head/Header";
 import Footer from "./components/footer/Footer";
@@ -25,11 +26,23 @@ import Guidepage from "./pages/guidepages/guidepage";
 import OpenFundingList from "./pages/fundinglist/OpenFundingList";
 
 function App() {
-  const [isLoggedIn] = useState(false);
+
+  const [cookies] = useCookies(['token']);
+
+  useEffect(() => {
+    if (cookies.token) {
+      // 토큰이 존재하면, 로그인 상태라고 간주
+      console.log('사용자는 로그인 상태입니다.');
+      console.log(cookies.token);
+      // 여기에서 다른 로그인 관련 동작 수행 가능
+    } else {
+      console.log('사용자는 로그아웃 상태입니다.');
+    }
+  }, [cookies.token]);
 
   return (
     <div className="App">
-      {isLoggedIn ? <LoggedInHeader /> : <LoggedOutHeader />}
+      {cookies.token ? <LoggedInHeader /> : <LoggedOutHeader />}
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
