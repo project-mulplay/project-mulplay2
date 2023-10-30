@@ -22,6 +22,7 @@ import MyProceeds from "./pages/mypages/MyProceeds";
 import MyPwEdit from "./pages/mypages/MyPwEdit";
 import AdminPage from "./pages/admin/AdminPage";
 import Guidepage from "./pages/guidepages/guidepage";
+import OpenFundingList from "./pages/fundinglist/OpenFundingList";
 
 function App() {
   const [isLoggedIn] = useState(false);
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/funding" element={<Funding />}></Route>
+        <Route path="/openfundinglist" element={<OpenFundingList />}></Route>
         <Route path="/fundinglist" element={<FundingListPage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
@@ -53,47 +55,5 @@ function App() {
     </div>
   );
 }
-
-// class Serv extends Component {
-//   state = {
-//     testbody: "",
-//   };
-
-//   handleChange = (e) => {
-//     this.setState({
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   submitId = () => {
-//     const post = {
-//       test: this.state.testbody,
-//     };
-
-//     fetch("http://localhost:3001/idplz", {
-//       method: "post", // 통신방법
-//       headers: {
-//         "content-type": "application/json",
-//       },
-//       body: JSON.stringify(post),
-//     })
-//       .then((res) => res.json())
-//       .then((json) => {
-//         this.setState({
-//           testbody: json.text,
-//         });
-//       });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <input onChange={this.handleChange} name="testbody" />
-//         <button onClick={this.submitId}>Submit</button>
-//         <h1>{this.state.testbody}</h1>
-//       </div>
-//     );
-//   }
-// }
 
 export default App;
