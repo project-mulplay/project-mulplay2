@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function SkillCheckbox() {
+function SkillCheckbox({ onChange }) {
   const [checkboxes, setCheckboxes] = useState({
     checkbox1: false,
     checkbox2: false,
@@ -13,96 +13,25 @@ function SkillCheckbox() {
     checkbox9: false,
     checkbox10: false,
   });
-  const [checkbox1, setCheckbox1] = useState(false);
-  const [checkbox2, setCheckbox2] = useState(false);
-  const [checkbox3, setCheckbox3] = useState(false);
-  const [checkbox4, setCheckbox4] = useState(false);
-  const [checkbox5, setCheckbox5] = useState(false);
-  const [checkbox6, setCheckbox6] = useState(false);
-  const [checkbox7, setCheckbox7] = useState(false);
-  const [checkbox8, setCheckbox8] = useState(false);
-  const [checkbox9, setCheckbox9] = useState(false);
-  const [checkbox10, setCheckbox10] = useState(false);
 
-  const handleCheckboxChange = (name) => {
-    setCheckboxes({
-      ...checkboxes,
-      [name]: !checkboxes[name],
-    });
-  };
+  // 체크박스 상태 변경 함수
+ const handleCheckboxChange = (name, value) => {
+  setCheckboxes((prevCheckboxes) => {
+    // 체크박스 상태를 변경
+    const newCheckboxes = { ...prevCheckboxes };
+    newCheckboxes[name] = !newCheckboxes[name]; // 상태를 반전 혹은 토글
 
-  useEffect(() => {
-    if (checkbox1) {
-      document.getElementById("lbl1").style.backgroundColor = "#EE833E";
+    // 해당 체크박스가 체크되었을 때 value를 전달, 아니라면 value 삭제
+    if (newCheckboxes[name]) {
+      onChange(name, value); // value를 부모 컴포넌트로 전달
     } else {
-      document.getElementById("lbl1").style.backgroundColor = "white";
+      onChange(name, null); // value를 삭제
     }
 
-    if (checkbox2) {
-      document.getElementById("lbl2").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl2").style.backgroundColor = "white";
-    }
+    return newCheckboxes; // 변경된 상태 반환
+  });
+};
 
-    if (checkbox3) {
-      document.getElementById("lbl3").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl3").style.backgroundColor = "white";
-    }
-
-    if (checkbox4) {
-      document.getElementById("lbl4").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl4").style.backgroundColor = "white";
-    }
-
-    if (checkbox5) {
-      document.getElementById("lbl5").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl5").style.backgroundColor = "white";
-    }
-
-    if (checkbox6) {
-      document.getElementById("lbl6").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl6").style.backgroundColor = "white";
-    }
-
-    if (checkbox7) {
-      document.getElementById("lbl7").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl7").style.backgroundColor = "white";
-    }
-
-    if (checkbox8) {
-      document.getElementById("lbl8").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl8").style.backgroundColor = "white";
-    }
-
-    if (checkbox9) {
-      document.getElementById("lbl9").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl9").style.backgroundColor = "white";
-    }
-
-    if (checkbox10) {
-      document.getElementById("lbl10").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("lbl10").style.backgroundColor = "white";
-    }
-  }, [
-    checkbox1,
-    checkbox2,
-    checkbox3,
-    checkbox4,
-    checkbox5,
-    checkbox6,
-    checkbox7,
-    checkbox8,
-    checkbox9,
-    checkbox10,
-  ]);
   // 전체 스타일
   const checkboxContainer = {
     marginTop: "10px",
@@ -131,105 +60,123 @@ function SkillCheckbox() {
     display: "none",
   };
 
+ // 여기서 해당 체크박스의 상태에 따라 스타일을 변경합니다.
+ const getLabelStyle = (name) => {
+  return {
+    ...labelStyle,
+    backgroundColor: checkboxes[name] ? "#EE833E" : "white",
+  };
+};
+
   return (
     <div style={checkboxContainer}>
-      <label style={labelStyle} id="lbl1">
+      <label style={getLabelStyle("checkbox1")} id="lbl1">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox1}
-          onChange={() => setCheckbox1(!checkbox1)}
+          onChange={() => handleCheckboxChange('checkbox1', 21)}
           id="checkbox1"
+          value={21}
         />
         <p style={pStyle}>Java </p>
       </label>
-      <label style={labelStyle} id="lbl2">
+      <label style={getLabelStyle("checkbox2")} id="lbl2">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox2}
-          onChange={() => setCheckbox2(!checkbox2)}
+          onChange={() => handleCheckboxChange('checkbox2', 22)}
           id="checkbox2"
+          value={22}
         />
         <p style={pStyle}>Linux</p>
       </label>
-      <label style={labelStyle} id="lbl3">
+      <label style={getLabelStyle("checkbox3")} id="lbl3">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox3}
-          onChange={() => setCheckbox3(!checkbox3)}
+          onChange={() => handleCheckboxChange('checkbox3', 23)}
           id="checkbox3"
+          value={23}
         />
         <p style={pStyle}>Android</p>
       </label>
-      <label style={labelStyle} id="lbl4">
+      <label style={getLabelStyle("checkbox4")} id="lbl4">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox4}
-          onChange={() => setCheckbox4(!checkbox4)}
+          onChange={() => handleCheckboxChange('checkbox4', 24)}
           id="checkbox4"
+          value={24}
         />
         <p style={pStyle}>IOS</p>
       </label>
-      <label style={labelStyle} id="lbl5">
+      <label style={getLabelStyle("checkbox5")} id="lbl5">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox5}
-          onChange={() => setCheckbox5(!checkbox5)}
+          onChange={() => handleCheckboxChange('checkbox5', 25)}
           id="checkbox5"
+          value={25}
         />
         <p style={pStyle}>PHP</p>
       </label>
-      <label style={labelStyle} id="lbl6">
+      <label style={getLabelStyle("checkbox6")} id="lbl6">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox6}
-          onChange={() => setCheckbox6(!checkbox6)}
+          onChange={() => handleCheckboxChange('checkbox6', 26)}
           id="checkbox6"
+          value={26}
         />
         <p style={pStyle}>Spring</p>
       </label>
-      <label style={labelStyle} id="lbl7">
+      <label style={getLabelStyle("checkbox7")} id="lbl7">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox7}
-          onChange={() => setCheckbox7(!checkbox7)}
+          onChange={() => handleCheckboxChange('checkbox7', 27)}
           id="checkbox7"
+          value={27}
         />
         <p style={pStyle}>mariadb</p>
       </label>
-      <label style={labelStyle} id="lbl8">
+      <label style={getLabelStyle("checkbox8")} id="lbl8">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox8}
-          onChange={() => setCheckbox8(!checkbox8)}
+          onChange={() => handleCheckboxChange('checkbox8', 28)}
           id="checkbox8"
+          value={28}
         />
         <p style={pStyle}>react.js</p>
       </label>
-      <label style={labelStyle} id="lbl9">
+      <label style={getLabelStyle("checkbox9")} id="lbl9">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox9}
-          onChange={() => setCheckbox9(!checkbox9)}
+          onChange={() => handleCheckboxChange('checkbox9', 29)}
           id="checkbox9"
+          value={29}
         />
         <p style={pStyle}>next.js</p>
       </label>
-      <label style={labelStyle} id="lbl10">
+      <label style={getLabelStyle("checkbox10")} id="lbl10">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={checkboxes.checkbox10}
-          onChange={() => setCheckbox10(!checkbox10)}
+          onChange={() => handleCheckboxChange('checkbox10', 30)}
           id="checkbox10"
+          value={30}
         />
         <p style={pStyle}>typescript</p>
       </label>

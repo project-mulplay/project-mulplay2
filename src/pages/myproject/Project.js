@@ -1,5 +1,6 @@
 // import React, { useState } from "react";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 import NextBtn from "./NextBtn";
 import "./Project.css";
 import BasicInfo from "./BasicInfo";
+import TagInfo from "./TagInfo";
 import RewardInfo from "./RewardInfo";
 import ProjectInfo from "./ProjectInfo";
 
@@ -22,6 +24,30 @@ const ProjectTitle = () => {
 // 메뉴 탭 //
 
 export function CenteredTabs() {
+
+  const [data, setData] = useState({});
+  console.log(data);
+  console.log(data.prod_no);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3300/make/infoproject", {
+        params: {
+          user_no: 1,
+        },
+      })
+      .then((response) => {
+        // 요청 성공 시 실행할 코드
+        setData(response.data);
+        console.log("요청 성공:", response);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("요청 실패:", error);
+      });
+  }, []);
+
   //  버튼 스타일
   const btnstyle = {
     margin: "50px 0",
@@ -53,6 +79,9 @@ export function CenteredTabs() {
       setValue(2);
     }
     if (value === 2) {
+      setValue(3);
+    }
+    if (value === 3) {
       // 페이지를 홈페이지 메인으로 이동
       window.location.href = "/"; // 또는 원하는 경로로 설정
     }
@@ -70,13 +99,14 @@ export function CenteredTabs() {
     >
       <Tabs value={value} onChange={handleChange} centered>
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="기본 정보" />
+        <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="해쉬태그 정보" />
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="리워드 정보" />
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="프로젝트 정보" />
       </Tabs>
 
       {value === 0 && (
         <Typography sx={{ p: 2 }}>
-          <BasicInfo />
+          <BasicInfo number={data.prod_no}/>
           <button style={btnstyle} value={value} onClick={clickbtn}>
             다음 단계
           </button>
@@ -85,7 +115,7 @@ export function CenteredTabs() {
 
       {value === 1 && (
         <Typography sx={{ p: 2 }}>
-          <RewardInfo />
+          <TagInfo number={data.prod_no}/>
           <button style={btnstyle} value={value} onClick={clickbtn}>
             다음 단계
           </button>
@@ -94,7 +124,16 @@ export function CenteredTabs() {
 
       {value === 2 && (
         <Typography sx={{ p: 2 }}>
-          <ProjectInfo />
+          <RewardInfo number={data.prod_no}/>
+          <button style={btnstyle} value={value} onClick={clickbtn}>
+            다음 단계
+          </button>
+        </Typography>
+      )}
+
+      {value === 3 && (
+        <Typography sx={{ p: 2 }}>
+          <ProjectInfo number={data.prod_no}/>
           <button style={btnstyle} value={value} onClick={clickbtn}>
             제출하기
           </button>
@@ -135,15 +174,6 @@ theme = createTheme(theme, {
     },
   },
 });
-
-// function NextPage() {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<NextBtn />} />
-//       <Route path="/RewardInfo" element={<RewardInfo />} />
-//     </Routes>
-//   );
-// }
 
 function Project() {
   return (
