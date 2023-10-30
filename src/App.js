@@ -20,8 +20,10 @@ import MyFundingProject from "./pages/mypages/MyFundingProject";
 import MyLikeProject from "./pages/mypages/MyLikeProject";
 import MyProceeds from "./pages/mypages/MyProceeds";
 import Prodadmin from "./pages/admin/Prodadmin";
+import Useradmin from "./pages/admin/Useradmin";
 import MyPwEdit from "./pages/mypages/MyPwEdit";
-import Guidepage from "./pages/guidepages/Guidepage";
+import AdminPage from "./pages/admin/AdminPage";
+import Guidepage from "./pages/guidepages/guidepage";
 
 function App() {
   const [isLoggedIn] = useState(false);
@@ -48,6 +50,8 @@ function App() {
           <Route path="/guide" element={<Guidepage />}></Route>
           <Route path="/project" element={<Project />}></Route>
           <Route path="/prodadmin" element={<Prodadmin />}></Route>
+          <Route path="/useradmin" element={<Useradmin />}></Route>
+          <Route path="/adminpage" element={<AdminPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />

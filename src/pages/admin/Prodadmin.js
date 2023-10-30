@@ -3,7 +3,7 @@ import projectData from "../../data/projectData.json";
 
 //import axios from "axios";
 import "./Prodadmin.css";
-import Tr from "./Tr";
+import ProdTr from "./ProdTr";
 
 const Prodadmin = () => {
   const [info, setInfo] = useState([]);
@@ -32,14 +32,14 @@ const Prodadmin = () => {
           <tr>
             <th>No</th>
             <th>제목</th>
-            <th>이메일</th>
+            <th>창작자 번호</th>
             <th>시작일</th>
             <th>종료일</th>
             <th>목표 금액</th>
-            <th>관리</th>
+            <th colspan="2">관리</th>
           </tr>
         </thead>
-        <Tr info={info} handleRemove={handleRemove} />
+        <ProdTr info={info} handleRemove={handleRemove} />
       </table>
     </div>
   );
