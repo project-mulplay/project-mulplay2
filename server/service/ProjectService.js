@@ -6,9 +6,9 @@ import * as projectRepository from "../repository/ProjectRepository.js";
  */
 
 export const postProjectMake = (req, res) => {
-    const {prod_title,prod_regdate,prod_opendate,prod_enddate,prod_current,prod_goal,prod_genre,prod_mainimg,prod_content,prod_stat,prod_time,prod_intro,prod_class,user_no,img_no} = req.body;
+    const {prod_title,prod_regdate,prod_opendate,prod_enddate,prod_goal,prod_genre,prod_mainimg,prod_content,prod_time,prod_intro,prod_class,user_no,img_no} = req.body;
     try {
-      projectRepository.insertByProjectMake(prod_title,prod_regdate,prod_opendate,prod_enddate,prod_current,prod_goal,prod_genre,prod_mainimg,prod_content,prod_stat,prod_time,prod_intro,prod_class,user_no,img_no).then((result) => {
+      projectRepository.insertByProjectMake(prod_title,prod_regdate,prod_opendate,prod_enddate,prod_goal,prod_genre,prod_mainimg,prod_content,prod_time,prod_intro,prod_class,user_no,img_no).then((result) => {
         res.status(200).json(result);
       });
     } catch (error) {
@@ -42,10 +42,21 @@ export const postProjectReward = (req, res) => {
     }
   };
 
-  export const patchProjectMake = (req, res) => {
-    const prod_content = req.body;
+  export const patchProjectContent = (req, res) => {
+    const {prod_content, prod_no} = req.body;
     try {
-      projectRepository.updateByProjectMake(prod_content).then((result) => {
+      projectRepository.updateByProjectContent(prod_content, prod_no).then((result) => {
+        res.status(200).json(result);
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const getProjectNo = (req, res) => {
+    const user_no = req.query.user_no;
+    try {
+      projectRepository.findByProjectNo(user_no).then((result) => {
         res.status(200).json(result);
       });
     } catch (error) {
