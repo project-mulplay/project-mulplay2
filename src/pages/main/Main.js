@@ -14,8 +14,7 @@ function Main() {
   return (
     <div className="main_Main">
       <div className="main_slide">
-        <Slider />
-        {/* <img src={banner1} alt="banner1" /> */}
+        <Slider type="main" />g {/* <img src={banner1} alt="banner1" /> */}
       </div>
 
       <div className="main_container">

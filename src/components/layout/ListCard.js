@@ -1,6 +1,6 @@
 import React from "react";
 // import React, { useState } from "react";
-import "../../pages/fundinglist/FundingListPage.css";
+import "./FundingList.css";
 import projectData from "../../data/projectData.json";
 
 function FundingListPage_Card() {
@@ -8,8 +8,11 @@ function FundingListPage_Card() {
     <div className="fundinglist_mainCard">
       <div className="fundinglist_dday">D-30</div>
       <div className="fundinglist_cardImg">
-        <img className="fundinglist_img"
-                alt="" src={projectData[0].prod_mainimg} />
+        <img
+          className="fundinglist_img"
+          alt=""
+          src={projectData[0].prod_mainimg}
+        />
       </div>
       <div className="fundinglist_cardInfo">
         <ul>
