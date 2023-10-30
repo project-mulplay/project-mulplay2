@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function TagCheckbox() {
+function TagCheckbox({ onChange }) {
   const [tagCheckboxes, settagCheckboxes] = useState({
     tagcheckbox1: false,
     tagcheckbox2: false,
@@ -13,96 +13,26 @@ function TagCheckbox() {
     tagcheckbox9: false,
     tagcheckbox10: false,
   });
-  const [tagcheckbox1, settagCheckbox1] = useState(false);
-  const [tagcheckbox2, settagCheckbox2] = useState(false);
-  const [tagcheckbox3, settagCheckbox3] = useState(false);
-  const [tagcheckbox4, settagCheckbox4] = useState(false);
-  const [tagcheckbox5, settagCheckbox5] = useState(false);
-  const [tagcheckbox6, settagCheckbox6] = useState(false);
-  const [tagcheckbox7, settagCheckbox7] = useState(false);
-  const [tagcheckbox8, settagCheckbox8] = useState(false);
-  const [tagcheckbox9, settagCheckbox9] = useState(false);
-  const [tagcheckbox10, settagCheckbox10] = useState(false);
+  
 
-  const handleCheckboxChange = (name) => {
-    settagCheckboxes({
-      ...tagCheckboxes,
-      [name]: !tagCheckboxes[name],
+  // 체크박스 상태 변경 함수
+  const handleCheckboxChange = (name, value) => {
+    settagCheckboxes((prevCheckboxes) => {
+      // 체크박스 상태를 변경
+      const newCheckboxes = { ...prevCheckboxes };
+      newCheckboxes[name] = !newCheckboxes[name]; // 상태를 반전 혹은 토글
+
+      // 해당 체크박스가 체크되었을 때 value를 전달, 아니라면 value 삭제
+      if (newCheckboxes[name]) {
+        onChange(name, value); // value를 부모 컴포넌트로 전달
+      } else {
+        onChange(name, null); // value를 삭제
+      }
+
+      return newCheckboxes; // 변경된 상태 반환
     });
   };
 
-  useEffect(() => {
-    if (tagcheckbox1) {
-      document.getElementById("taglbl1").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl1").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox2) {
-      document.getElementById("taglbl2").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl2").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox3) {
-      document.getElementById("taglbl3").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl3").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox4) {
-      document.getElementById("taglbl4").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl4").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox5) {
-      document.getElementById("taglbl5").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl5").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox6) {
-      document.getElementById("taglbl6").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl6").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox7) {
-      document.getElementById("taglbl7").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl7").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox8) {
-      document.getElementById("taglbl8").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl8").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox9) {
-      document.getElementById("taglbl9").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl9").style.backgroundColor = "white";
-    }
-
-    if (tagcheckbox10) {
-      document.getElementById("taglbl10").style.backgroundColor = "#EE833E";
-    } else {
-      document.getElementById("taglbl10").style.backgroundColor = "white";
-    }
-  }, [
-    tagcheckbox1,
-    tagcheckbox2,
-    tagcheckbox3,
-    tagcheckbox4,
-    tagcheckbox5,
-    tagcheckbox6,
-    tagcheckbox7,
-    tagcheckbox8,
-    tagcheckbox9,
-    tagcheckbox10,
-  ]);
   // 전체 스타일
   const checkboxContainer = {
     marginTop: "10px",
@@ -131,105 +61,123 @@ function TagCheckbox() {
     display: "none",
   };
 
+  // 여기서 해당 체크박스의 상태에 따라 스타일을 변경합니다.
+  const getLabelStyle = (name) => {
+    return {
+      ...labelStyle,
+      backgroundColor: tagCheckboxes[name] ? "#EE833E" : "white",
+    };
+  };
+
   return (
     <div style={checkboxContainer}>
-      <label style={labelStyle} id="taglbl1">
+      <label style={getLabelStyle("tagcheckbox1")} id="taglbl1">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox1}
-          onChange={() => settagCheckbox1(!tagcheckbox1)}
+          onChange={() => handleCheckboxChange("tagcheckbox1", 1)}
+          value={1}
           id="tagcheckbox1"
         />
         <p style={pStyle}>금융 </p>
       </label>
-      <label style={labelStyle} id="taglbl2">
+      <label style={getLabelStyle("tagcheckbox2")} id="taglbl2">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox2}
-          onChange={() => settagCheckbox2(!tagcheckbox2)}
+          onChange={() => handleCheckboxChange("tagcheckbox2", 2)}
           id="tagcheckbox2"
+          value={2}
         />
         <p style={pStyle}>교육</p>
       </label>
-      <label style={labelStyle} id="taglbl3">
+      <label style={getLabelStyle("tagcheckbox3")} id="taglbl3">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox3}
-          onChange={() => settagCheckbox3(!tagcheckbox3)}
+          onChange={() => handleCheckboxChange("tagcheckbox3", 3)}
           id="tagcheckbox3"
+          value={3}
         />
         <p style={pStyle}>여행</p>
       </label>
-      <label style={labelStyle} id="taglbl4">
+      <label style={getLabelStyle("tagcheckbox4")} id="taglbl4">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox4}
-          onChange={() => settagCheckbox4(!tagcheckbox4)}
+          onChange={() => handleCheckboxChange("tagcheckbox4", 4)}
           id="tagcheckbox4"
+          value={4}
         />
         <p style={pStyle}>건강 </p>
       </label>
-      <label style={labelStyle} id="taglbl5">
+      <label style={getLabelStyle("tagcheckbox5")} id="taglbl5">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox5}
-          onChange={() => settagCheckbox5(!tagcheckbox5)}
+          onChange={() => handleCheckboxChange("tagcheckbox5", 5)}
           id="tagcheckbox5"
+          value={5}
         />
         <p style={pStyle}>게임</p>
       </label>
-      <label style={labelStyle} id="taglbl6">
+      <label style={getLabelStyle("tagcheckbox6")} id="taglbl6">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox6}
-          onChange={() => settagCheckbox6(!tagcheckbox6)}
+          onChange={() => handleCheckboxChange("tagcheckbox6", 6)}
           id="tagcheckbox6"
+          value={6}
         />
         <p style={pStyle}>식품</p>
       </label>
-      <label style={labelStyle} id="taglbl7">
+      <label style={getLabelStyle("tagcheckbox7")} id="taglbl7">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox7}
-          onChange={() => settagCheckbox7(!tagcheckbox7)}
+          onChange={() => handleCheckboxChange("tagcheckbox7", 7)}
           id="tagcheckbox7"
+          value={7}
         />
         <p style={pStyle}>패션</p>
       </label>
-      <label style={labelStyle} id="taglbl8">
+      <label style={getLabelStyle("tagcheckbox8")} id="taglbl8">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox8}
-          onChange={() => settagCheckbox8(!tagcheckbox8)}
+          onChange={() => handleCheckboxChange("tagcheckbox8", 8)}
           id="tagcheckbox8"
+          value={8}
         />
         <p style={pStyle}>커뮤니티</p>
       </label>
-      <label style={labelStyle} id="taglbl9">
+      <label style={getLabelStyle("tagcheckbox9")} id="taglbl9">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox9}
-          onChange={() => settagCheckbox9(!tagcheckbox9)}
+          onChange={() => handleCheckboxChange("tagcheckbox9", 9)}
           id="tagcheckbox9"
+          value={9}
         />
         <p style={pStyle}>항공</p>
       </label>
-      <label style={labelStyle} id="taglbl10">
+      <label style={getLabelStyle("tagcheckbox10")} id="taglbl10">
         <input
           style={checkboxStyle}
           type="checkbox"
           checked={tagCheckboxes.tagcheckbox10}
-          onChange={() => settagCheckbox10(!tagcheckbox10)}
+          onChange={() => handleCheckboxChange("tagcheckbox10", 10)}
           id="tagcheckbox10"
+          value={10}
         />
         <p style={pStyle}>문화</p>
       </label>
