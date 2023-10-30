@@ -1,27 +1,68 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./ProjectInfo.css";
 
-class ProjectInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorData: "", // CKEditor로부터 받은 데이터를 저장하는 상태
-    };
-  }
+const ProjectInfo = ({number}) => {
 
-  handleEditorChange = (event, editor) => {
-    const data = editor.getData();
-    this.setState({ editorData: data });
+  const savebtnstyle3 = {
+    margin: "50px 0",
+    right: "260px",
+    float: 'left',
+    backgroundColor: "#EE833E",
+    color: "#fff",
+    fontSize: "18px",
+    fontWeight: "500",
+    width: "184px",
+    height: "50px",
+    borderRadius: "15px",
+    border: "none",
+    cursor: "pointer",
   };
 
-  render() {
-    return (
+  const [editorData, setEditorData] = useState(({
+    prod_content: "",
+    prod_no: number+1,
+  }));
+
+  const handleEditorChange = (event, editor) => {
+    const data = editor.getData();
+    const cleanData = data.replace(/<[^>]+>/g, ''); // HTML 태그 제거
+    setEditorData({
+      ...editorData,
+      prod_content: cleanData,
+    });
+    // console.log(cleanData);
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // 여기에서 데이터를 제출하거나 원하는 작업을 수행합니다.
+
+    
+    console.log(editorData);
+
+
+    try {
+      const response = await axios.post('http://localhost:3300/make/projectcontent', editorData);
+
+      console.log('요청 성공:', response);
+    } catch (error) {
+      console.log(editorData);
+      console.error('요청 실패:', error);
+    }
+  };
+
+  return (
+    <>
       <div className="pro_editor">
         <h3 style={{ fontWeight: "600" }}>프로젝트 소개</h3>
         <p>프로젝트 상세페이지 내용을 작성해 주세요.</p>
         <CKEditor
+          name="prod_content"
+          value={editorData.prod_content}
           editor={ClassicEditor}
           config={{
             placeholder: "내용을 입력하세요.",
@@ -32,7 +73,8 @@ class ProjectInfo extends Component {
           }}
           onChange={(event, editor) => {
             const data = editor.getData();
-            console.log({ event, editor, data });
+            // console.log({ event, editor, data });
+            handleEditorChange(event, editor); // Set the editor data on change
           }}
           onBlur={(event, editor) => {
             console.log("Blur.", editor);
@@ -41,9 +83,10 @@ class ProjectInfo extends Component {
             console.log("Focus.", editor);
           }}
         />
+      <button style={savebtnstyle3} type="submit" className="btn_signup" onClick={handleSubmit}>저장하기</button>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default ProjectInfo;
