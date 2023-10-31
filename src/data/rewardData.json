@@ -26,15 +26,15 @@
   {
     "reward_no": 4,
     "reward_name": "[기본 패키지]",
-    "reward_price": 10000,
+    "reward_price": 9900,
     "reward_categori": 0,
-    "reward_info": ["출시 전 오픈 베타테스트 가능", "프로젝트 업데이트 내역 상시 sns 전송"],
+    "reward_info": ["출시 후 신규 패키지 증정", "프로젝트 업데이트 내역 상시 sns 전송"],
     "prod_no": 2
   },
   {
     "reward_no": 5,
     "reward_name": "[얼리버드 패키지]",
-    "reward_price": 49000,
+    "reward_price": 39000,
     "reward_categori": 1,
     "reward_info": ["베이직 패키지 포함", "출시 후 5,000 포인트 충전", "소정의 패키지 상품 증정 [택1]"],
     "prod_no": 2
@@ -42,7 +42,7 @@
   {
     "reward_no": 6,
     "reward_name": "[프리미엄 패키지]",
-    "reward_price": 99000,
+    "reward_price": 69000,
     "reward_categori": 2,
     "reward_info": ["베이직 패키지 포함", "출시 후 20,000 포인트 충전", "출시 후 3개월 간 신규 상품 20% 할인", "소정의 패키지 상품 증정 [택1]", "창작자의 선물 (선택)"],
     "prod_no": 2
