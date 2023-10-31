@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/image/logo.png";
 import menu from "../../assets/image/menu.png";
-//import user from "../../assets/image/user_menu.png";
 import close from "../../assets/image/close.png";
 import search from "../../assets/image/search.png";
 //import bell from "../../assets/image/bell.png";
@@ -16,6 +16,19 @@ const LoggedOutHeader = ({ onLoginClick }) => {
   const toggleMenu = () => {
     setMenu((isOpen) => !isOpen); // on,off 개념 boolean
   };
+
+  // 윈도우 사이즈 변경 시 메뉴를 닫음
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <header className="header">
@@ -30,7 +43,6 @@ const LoggedOutHeader = ({ onLoginClick }) => {
         </div>
 
         {/* 메뉴리스트 */}
-
         <nav className={isOpen ? "show-menu" : "hide-menu"}>
           <ul>
             <li>
@@ -58,11 +70,12 @@ const LoggedOutHeader = ({ onLoginClick }) => {
             </div>
           </ul>
         </nav>
-
         <Link to="/guide">
           <button className="btn">프로젝트 만들기</button>
         </Link>
       </div>
+      {/* 배경을 어둡게 처리하기 위한 .menu_shadow */}
+      {isOpen && <div className="menu_shadow" onClick={toggleMenu}></div>}
     </header>
   );
 };
@@ -74,11 +87,25 @@ const LoggedInHeader = ({ onLogoutClick }) => {
   const handleLogout = () => {
     removeCookie("token"); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
   };
+  console.log(cookies.token);
 
   const [isOpen, setMenu] = useState(false);
   const toggleMenu = () => {
     setMenu((isOpen) => !isOpen); // on,off 개념 boolean
   };
+
+  // 윈도우 사이즈 변경 시 메뉴를 닫음
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <header className="header">
@@ -111,13 +138,16 @@ const LoggedInHeader = ({ onLogoutClick }) => {
             </div>
 
             <div className="login">
-              {/* <img className="alarm" src={bell} alt="알림" /> */}
-              <Link to="/">
-                <button onClick={handleLogout}>로그아웃</button>
-              </Link>
-              <Link to="/mypages/myinfoedit">
-                <button>마이페이지</button>
-              </Link>
+              <button onClick={handleLogout}>로그아웃</button>
+              {cookies.token === 1 ? (
+                <Link to="/adminpage">
+                  <button>관리자페이지</button>
+                </Link>
+              ) : (
+                <Link to="/mypages/myinfoedit">
+                  <button>마이페이지</button>
+                </Link>
+              )}
             </div>
           </ul>
         </nav>
@@ -125,6 +155,9 @@ const LoggedInHeader = ({ onLogoutClick }) => {
           <button className="btn">프로젝트 만들기</button>
         </Link>
       </div>
+
+      {/* 배경을 어둡게 처리하기 위한 .menu_shadow */}
+      {isOpen && <div className="menu_shadow" onClick={toggleMenu}></div>}
     </header>
   );
 };
