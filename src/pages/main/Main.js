@@ -21,8 +21,7 @@ function Main() {
   return (
     <div className="main_Main">
       <div className="main_slide">
-        <Slider type="main" />
-        {/* <img src={banner1} alt="banner1" /> */}
+        <Slider type="main" /> {/* <img src={banner1} alt="banner1" /> */}
       </div>
 
       <div className="main_container">
@@ -52,7 +51,7 @@ function Main() {
             <Open key={project.prod_no} project={project} />
           ))}
         </div>
-        <div className="main_line"></div>
+        {/* <div className="main_line"></div> */}
         <h2 className="main_mainTitle">에디터의 Pick</h2>
         <div className="main_pick">
           {pickProjects.map((project) => (
