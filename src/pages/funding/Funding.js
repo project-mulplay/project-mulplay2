@@ -12,9 +12,16 @@ import OffHeart from "../../assets/image/off_heart.png";
 import Share from "../../assets/image/share.png";
 import Fundingtab from "../../components/elements/Tab";
 import axios from "axios";
+import rewardData from "../../data/rewardData.json";
+
+import Reward from "../store/Reward";
+import MainReward from "../store/MainReward";
+
+//Atom
 
 // 리워드 박스
 import OutlinedCard from "./RewardCard";
+import { Drawer } from "antd";
 
 const Funding = () => {
     // API
@@ -59,6 +66,19 @@ const Funding = () => {
       setHeartResults(false);
     }
   };
+
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+
+
 
   return (
     <div>
@@ -136,14 +156,14 @@ const Funding = () => {
                 </div>
               </div>
             </div>
-            {/* 찜하기, 공유하기, 펀딩하기 버튼 */}
+            {/* 버튼 */}
             <div className="middle-right-3">
               {/* <div className="fbtn1"><img className="sidebtn" src={OffHeart} alt="" onClick={onClick}/></div> */}
               {/* 찜하기 */}
               {heartResults ? (
                 <div className="fbtn1">
                   <img
-                    className="sidebtn"
+                    className="sidebtn1"
                     src={OnHeart}
                     alt=""
                     onClick={onClick}
@@ -152,7 +172,7 @@ const Funding = () => {
               ) : (
                 <div className="fbtn1">
                   <img
-                    className="sidebtn"
+                    className="sidebtn2"
                     src={OffHeart}
                     alt=""
                     onClick={onClick}
@@ -161,7 +181,7 @@ const Funding = () => {
               )}
               {/* 공유하기 */}
               <div className="fbtn2">
-                <img className="sidebtn" src={Share} alt="" />
+                <img className="sidebtn2" src={Share} alt="" />
               </div>
               {/* 펀딩하기 */}
               <Link to="/cart">
@@ -171,6 +191,7 @@ const Funding = () => {
                     fontSize={14}
                     maxWidth={240}
                     minWidth={240}
+                    minHeight={45}
                     borderRadius={10}
                     onClick={goToCart}
                   />
@@ -182,26 +203,7 @@ const Funding = () => {
 
         {/* 상세보기 및 리워드 선택 */}
         <div className="top2">
-          {/* 중단바 */}
-          <Fundingtab
-            text1={"프로젝트"}
-            text2={"커뮤니티"}
-            text3={"문의하기"}
-            size={14}
-          />
-          {/* <nav className="fnav">
-            <ul>
-              <li>
-                <a href="#">프로젝트 </a>
-              </li>
-              <li>
-                <a href="#">커뮤니티</a>
-              </li>
-              <li>
-                <a href="#">문의하기 </a>
-              </li>
-            </ul>
-          </nav> */}
+          
         </div>
 
         {/* 상세보기 */}
@@ -220,8 +222,21 @@ const Funding = () => {
           <div className="middle2-right">
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
+              <div>
+                <button className="cartshow-btn" onClick={setOpen}>장바구니 보기</button>
+                <Drawer
+                title="Basic Drawer"
+                placement="right"
+                onClose={onClose}
+                open={open}
+              >
+                <Reward/>
+              </Drawer>
+              </div>
             </div>
-            <div className="middle2-right-1">
+            
+            <MainReward />
+            {/* <div className="middle2-right-1">
               <OutlinedCard fcard={0} />
             </div>
             <div className="middle2-right-2">
@@ -232,7 +247,7 @@ const Funding = () => {
             </div>
             <div className="middle2-right-3">
               <OutlinedCard fcard={3} />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="bottom">
@@ -261,12 +276,20 @@ const Search = () => {
   return (
     <div>
        {showResults ? <Results /> : null}
+       {showResults ?
+      <input
+        className="search-btn"
+        type="submit"
+        value="접기"
+        onClick={onClick}
+      /> :
       <input
         className="search-btn"
         type="submit"
         value="상세보기"
         onClick={onClick}
       />
+       }
     </div>
   );
 };
