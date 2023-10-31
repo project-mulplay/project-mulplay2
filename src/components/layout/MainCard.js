@@ -1,34 +1,55 @@
 import React from "react";
-// import React, { useState } from "react";
 import card1 from "../../assets/image/card1.png";
 import "../../pages/main/Main.css";
 
 const images = [card1];
 
-function Card() {
+const Card = ({ project }) => {
+  const currentDate = new Date();
+
+  const getDateDiff = (d1, d2) => {
+    const date1 = new Date(d1);
+    const date2 = new Date(d2);
+    const diffDate = date1.getTime() - date2.getTime();
+    const daysDiff = Math.floor(Math.abs(diffDate / (1000 * 60 * 60 * 24))); // 밀리세컨 * 초 * 분 * 시 = 일
+    return daysDiff;
+  };
+
+  const percent = (goal, current) => {
+    return goal > 0 ? Math.floor((current / goal) * 100) : 0;
+  };
+
+  function numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
-    <div className="main_mainCard">
-      <div className="main_dday">D-30</div>
+    <div className="main_mainCard" key={project.prod_no}>
+      <div className="main_dday">
+        {"D-" + getDateDiff(currentDate, project.prod_enddate)}
+      </div>
       <div className="main_cardImg">
-      <img src={card1} alt="card1" />
+        <img src={project.prod_mainimg} alt="card1" />
       </div>
       <div className="main_cardInfo">
-        <div className="main_tag">금융</div>
-        <div className="main_cardTitle">
-          모두가 꿈꾸는 내일의 금융세상을 만듭니다. 신한은행
+        <div className="main_hashtag">
+          {project.prod_hashtag.map((hashtag, index) => (
+            <div className="main_tag">{hashtag}</div>
+          ))}
         </div>
-        <div className="main_cardSubtitle">
-          신한금융 앱을 새롭게 리뉴얼하며 이용하는 사람들의 사용성을 향상시키고
-          필요한 정보를 한눈에 알아보기 쉽도록, 금융정보를 제공하는데 초점을
-          맞춰 진행한 앱 리뉴얼 프로젝트입니다.
-        </div>
+        <div className="main_cardTitle">{project.prod_title}</div>
+        <div className="main_cardSubtitle">{project.prod_intro}</div>
         <div className="main_cardFooter">
-          <div className="main_cardFunding">1,234,500 원 펀딩</div>
-          <div className="main_cardPercent">달성률 %</div>
+          <div className="main_cardFunding">
+            {numberWithCommas(project.prod_current)} 원 펀딩
+          </div>
+          <div className="main_cardPercent">
+            {"달성률 " + percent(project.prod_goal, project.prod_current) + "%"}
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Card;

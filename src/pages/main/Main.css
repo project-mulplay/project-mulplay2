@@ -64,20 +64,18 @@
 }
 
 .main_AppCard {
-  width: 100%;
+
   display: grid;
-  flex-flow: row wrap;
+  grid-template-columns: auto 1fr auto;
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   align-content: stretch;
-  /* grid-template-columns: auto auto auto auto; */
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 0 auto;
+
 }
 
 .main_mainCard {
-  width: 415px;
+  max-width: 410px;
   height: 520px;
   border: solid 1px #c8c8c8;
   border-radius: 20px;
@@ -87,8 +85,10 @@
   margin-right: 20px;
   display: inline-block;
   position: relative;
-  /* padding: 20px; */
+
 }
+
+
 .main_dday {
   width: 54px;
   height: 26px;
@@ -107,6 +107,14 @@
   display: inline-block;
   display: block;
 }
+
+.main_cardImg img{
+  height: 315px;
+  object-fit:cover;
+}
+.main_mainCard > .main_cardInfo > .main_hashtag {
+  display: flex;
+}
 .main_tag {
   background-color: #ebebeb;
   border-radius: 4px;
@@ -116,7 +124,7 @@
   box-sizing: border-box;
   font-size: 14px;
   color: #555555;
-  margin: 15px 15px 5px 15px;
+  margin: 15px 0px 5px 15px;
   line-height: 5px;
   text-align: center;
 }
@@ -155,6 +163,7 @@
 }
 .main_cardFooter {
   margin-top: 20px;
+
 }
 .main_cardFunding {
   font-size: 22px;
@@ -172,6 +181,7 @@
   /* position: absolute; */
   text-align: right;
   float: right;
+  margin-top: 5px;
   margin-right: 20px;
 }
 .main_tag1 {
@@ -230,6 +240,10 @@
   color: #555555;
   margin-left: 25px;
   margin-bottom: 60px;
+  max-width: 700px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 .main_openButton {
   width: 317px;
@@ -308,6 +322,10 @@
 }
 .main_pickSubtitle {
   font-size: 18px;
+  max-width: 480px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
   color: #888888;
 }
 .main_pickButton {
@@ -324,3 +342,4 @@
   cursor: pointer;
   float: right;
 }
+
