@@ -2,17 +2,35 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/image/logo.png";
+import menu from "../../assets/image/menu.png";
+//import user from "../../assets/image/user_menu.png";
+import close from "../../assets/image/close.png";
 import search from "../../assets/image/search.png";
-import bell from "../../assets/image/bell.png";
+//import bell from "../../assets/image/bell.png";
 
+// 로그인 안한 헤더
 const LoggedOutHeader = ({ onLoginClick }) => {
+  const [isOpen, setMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setMenu((isOpen) => !isOpen); // on,off 개념 boolean
+  };
+
   return (
     <header className="header">
       <div className="contents">
         <Link to="/">
           <img className="logo" src={logo} alt="로고" />
         </Link>
-        <nav className="navigation">
+
+        {/* 햄버거 버튼  */}
+        <div className="menu_toggle" onClick={() => toggleMenu()}>
+          <img className="menu" src={!isOpen ? menu : close} alt="메뉴" />
+        </div>
+
+        {/* 메뉴리스트 */}
+
+        <nav className={isOpen ? "show-menu" : "hide-menu"}>
           <ul>
             <li>
               <Link to="/openfundinglist">오픈예정 </Link>
@@ -23,20 +41,23 @@ const LoggedOutHeader = ({ onLoginClick }) => {
             <li>
               <Link to="/fundinglist">신규펀딩 </Link>
             </li>
+
+            <div className="search-bar">
+              <input type="text" placeholder="프로젝트명을 검색해보세요" />
+              <img className="search" src={search} alt="검색" />
+            </div>
+
+            <div className="login">
+              <Link to="/login">
+                <button>로그인</button>
+              </Link>
+              <Link to="/signup">
+                <button>회원가입</button>
+              </Link>
+            </div>
           </ul>
         </nav>
-        <div className="search-bar">
-          <input type="text" placeholder="프로젝트명을 검색해보세요" />
-          <img className="search" src={search} alt="검색" />
-        </div>
-        <div className="login">
-          <Link to="/login">
-            <button onClick={onLoginClick}>로그인</button>
-          </Link>
-          <Link to="/signup">
-            <button onClick={onLoginClick}>회원가입</button>
-          </Link>
-        </div>
+
         <Link to="/guide">
           <button className="btn">프로젝트 만들기</button>
         </Link>
@@ -44,34 +65,59 @@ const LoggedOutHeader = ({ onLoginClick }) => {
     </header>
   );
 };
+
+// 로그인 상태 헤더
 const LoggedInHeader = ({ onLogoutClick }) => {
+  const [isOpen, setMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setMenu((isOpen) => !isOpen); // on,off 개념 boolean
+  };
+
   return (
     <header className="header">
       <div className="contents">
-        <img className="logo" src={logo} alt="로고" />
-        <nav className="navigation">
+        <Link to="/">
+          <img className="logo" src={logo} alt="로고" />
+        </Link>
+
+        {/* 햄버거 버튼  */}
+        <div className="menu_toggle" onClick={() => toggleMenu()}>
+          <img className="menu" src={!isOpen ? menu : close} alt="메뉴" />
+        </div>
+
+        {/* 메뉴리스트 */}
+        <nav className={isOpen ? "show-menu" : "hide-menu"}>
           <ul>
             <li>
-              <a href="#">오픈예정 </a>
+              <Link to="/openfundinglist">오픈예정 </Link>
             </li>
             <li>
-              <a href="#">인기펀딩</a>
+              <Link to="/fundinglist">인기펀딩 </Link>
             </li>
             <li>
-              <a href="#">신규펀딩 </a>
+              <Link to="/fundinglist">신규펀딩 </Link>
             </li>
+
+            <div className="search-bar">
+              <input type="text" placeholder="프로젝트명을 검색해보세요" />
+              <img className="search" src={search} alt="검색" />
+            </div>
+
+            <div className="login">
+              {/* <img className="alarm" src={bell} alt="알림" /> */}
+              <Link to="/">
+                <button onClick={onLogoutClick}>로그아웃</button>
+              </Link>
+              <Link to="/mypages">
+                <button onClick={onLogoutClick}>마이페이지</button>
+              </Link>
+            </div>
           </ul>
         </nav>
-        <div className="search-bar">
-          <input type="text" placeholder="프로젝트명을 검색해보세요" />
-          <img className="search" src={search} alt="검색" />
-        </div>
-        <div className="login">
-          <img className="alarm" src={bell} alt="알림" />
-          <button onClick={onLogoutClick}>로그아웃</button>
-          <button onClick={onLogoutClick}>마이페이지</button>
-        </div>
-        <button className="btn">프로젝트 만들기</button>
+        <Link to="/guide">
+          <button className="btn">프로젝트 만들기</button>
+        </Link>
       </div>
     </header>
   );
