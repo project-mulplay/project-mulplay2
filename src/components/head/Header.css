@@ -1,5 +1,8 @@
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
   position: sticky;
   left: 0;
   top: 0;
@@ -9,6 +12,7 @@
   border-bottom: 1px solid #D9D9D9;
   z-index: 999;
   font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
 }
 .contents {
   width: 100%;
@@ -16,6 +20,7 @@
   height: 100%;
   margin: 0 auto;
   display: flex;
+  justify-content: flex-start;
   align-items: baseline;
 }
 .logo {
@@ -25,30 +30,43 @@
 }
 
 /* 메뉴 */
-.navigation {
-  margin-left: 50px;
+.show-menu,
+.hide-menu  {
+  margin-left: 35px;
   font-weight: 700;
   font-size: 18px;
+  display: flex;
+  flex-wrap: nowrap;
+  
 }
-.navigation ul {
-    display: flex;
+.show-menu ul,
+.hide-menu ul {
+   
     list-style: none;
     padding: 0;
+    display: flex;
   }
 
-.navigation li {
-       margin-right: 30px;
+.show-menu li,
+.hide-menu li {
+   margin-right: 30px;
+   cursor: pointer;
     }
 
 
-    .navigation a {
+.show-menu a,
+.hide-menu a {
       text-decoration: none;
       color: #333;
-    }
   
+    }
+
 /* 검색 박스 */
 .search-bar {
   position: relative;
+   margin-right: 34em;
+
+
 }
 .search-bar input {
   width: 325px;
@@ -60,9 +78,8 @@
 }
 .search {
   position: absolute;
-  top:50%;
-  right: 18px;
-  transform: translateY(-50%);
+  right: 15px;
+  transform: translateY(22%);
   cursor: pointer;
 }
 
@@ -70,10 +87,10 @@
 .login {
   margin-left: auto;
 }
-.login .alarm {
+/* .login .alarm {
   margin-right:20px;
   cursor: pointer;
-}
+} */
 .login button {
   margin-right:20px;
   background: none;
@@ -81,7 +98,9 @@
   padding: 0;
   cursor: pointer;
   font-size: 14px;
+
 }
+
 /* 프로젝트 만들기 버튼 */
 .btn {
   width: 130px;
@@ -93,6 +112,10 @@
   font-size: 14px;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
+}
+.menu_toggle {
+  display: none;
 }
 
 
@@ -100,6 +123,95 @@
   .search-bar {
     display: none;
   }
+  .login {
+    margin-left: 12em;
+  }
 }
+
+@media ( max-width: 768px ) {
+
+  .menu_toggle {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  right: 1em;
+  top: 1.5em;
+  }
+  .btn {
+  position: absolute;
+  right: 4em;
+  top: 1em;
+  }
+  .header {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+  }
+    
+  .show-menu {
+    width: 786px;
+    height: 500px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    transition: 1s;
+    background-color: #fff;
+    }
+
+    .hide-menu{
+      width: 786px;
+      height: 500px;
+      position: absolute;
+      top: 70px;
+      right: -786px;
+      transition: 1s;
+      background-color: #fff;
+    }
+    .show-menu ul,
+    .hide-menu ul {
+      display: block;
+      padding: 1em;
+      margin: 0 auto;
+
+    }
+    .show-menu li,
+    .hide-menu li {
+      padding: 1rem;
+      margin-right: 0;
+      font-size: 1.4em;
+      width: 4em;
+      
+    }
+
+    .login {
+      display:flex;
+      margin: 0 auto;
+      width: 20em;
+      position: absolute;
+      right: 10em;
+      top:14em;
+    }
+
+    .login button {
+      background: none;
+      border: 1px solid #EE833E;
+      color: #EE833E;
+      border-radius: 30px;
+      width: 8em;
+      padding: .5em;
+      cursor: pointer;
+      font-size: 1em;
+      margin-right: 1em;
+    }
+  
+
+    .search-bar {
+      display: none;
+      position: absolute;
+      margin: 0 auto;
+      width: 325px;
+    }
+  }
+
 
 
