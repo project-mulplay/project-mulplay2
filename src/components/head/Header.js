@@ -121,7 +121,6 @@ const LoggedInHeader = ({ onLogoutClick }) => {
             </div>
           </ul>
         </nav>
-
         <Link to="/guide">
           <button className="btn">프로젝트 만들기</button>
         </Link>

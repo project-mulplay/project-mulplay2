@@ -11,9 +11,11 @@ import {
   image8,
 } from "../../assets/image/listpageicon/ListImg";
 
-import FundingListPage_Card from "../layout/ListCard";
+import projectData from "../../data/projectData.json";
+import Card from "../layout/MainCard";
 
 const FundingList = () => {
+  const popularProject = projectData.slice(0, 9);
   return (
     <div className="fundinglistpage">
       <div className="fundinglist_tab">
@@ -99,12 +101,9 @@ const FundingList = () => {
 
         <div className="">
           <Link to="/funding">
-            <FundingListPage_Card />
-            <FundingListPage_Card />
-            <FundingListPage_Card />
-            <FundingListPage_Card />
-            <FundingListPage_Card />
-            <FundingListPage_Card />
+            {popularProject.map((project) => (
+              <Card key={project.prod_no} project={project} />
+            ))}
           </Link>
         </div>
       </div>

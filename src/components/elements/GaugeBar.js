@@ -34,7 +34,7 @@ const CurrentNum = styled.span`
   padding: 5px;
   color: #ee833e;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 17px;
 `;
 
 const GaugeBar = ({ goal, current }) => {

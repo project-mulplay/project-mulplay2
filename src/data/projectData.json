@@ -13,6 +13,7 @@
     "prod_stat": 2,
     "prod_intro": "멀플레이의 펀딩은 리워드를 단순히 구매하는 쇼핑이 아닌 창작자의 새로운 서비스, 콘텐츠 제작 과정을 지원합니다.",
     "prod_time": 75,
+    "prod_hashtag": ["금융", "교육"],
     "prod_class": 1,
     "user_no": 2,
     "img_no": 16
@@ -32,6 +33,7 @@
     "prod_intro": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
     "prod_time": 44,
     "prod_class": 1,
+    "prod_hashtag": ["여행", "교육"],
     "user_no": 10,
     "img_no": 11
   },
@@ -51,6 +53,7 @@
     "prod_time": 36,
     "prod_class": 0,
     "user_no": 9,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 4
   },
   {
@@ -68,6 +71,7 @@
     "prod_intro": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
     "prod_time": 33,
     "prod_class": 0,
+    "prod_hashtag": ["여행", "교육"],
     "user_no": 14,
     "img_no": 4
   },
@@ -86,6 +90,7 @@
     "prod_intro": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
     "prod_time": 64,
     "prod_class": 1,
+    "prod_hashtag": ["여행"],
     "user_no": 5,
     "img_no": 11
   },
@@ -105,6 +110,7 @@
     "prod_time": 79,
     "prod_class": 1,
     "user_no": 14,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 15
   },
   {
@@ -123,6 +129,7 @@
     "prod_time": 77,
     "prod_class": 0,
     "user_no": 2,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 20
   },
   {
@@ -140,6 +147,7 @@
     "prod_intro": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
     "prod_time": 61,
     "prod_class": 1,
+    "prod_hashtag": ["여행", "교육"],
     "user_no": 15,
     "img_no": 13
   },
@@ -159,6 +167,7 @@
     "prod_time": 68,
     "prod_class": 1,
     "user_no": 14,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 18
   },
   {
@@ -177,6 +186,7 @@
     "prod_time": 77,
     "prod_class": 0,
     "user_no": 8,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 3
   },
   {
@@ -194,6 +204,7 @@
     "prod_intro": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
     "prod_time": 42,
     "prod_class": 1,
+    "prod_hashtag": ["여행", "교육"],
     "user_no": 9,
     "img_no": 16
   },
@@ -212,6 +223,7 @@
     "prod_intro": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
     "prod_time": 55,
     "prod_class": 1,
+    "prod_hashtag": ["여행", "교육"],
     "user_no": 9,
     "img_no": 3
   },
@@ -231,6 +243,7 @@
     "prod_time": 71,
     "prod_class": 0,
     "user_no": 1,
+    "prod_hashtag": ["여행", "교육"],
     "img_no": 8
   },
   {
@@ -249,6 +262,7 @@
     "prod_time": 41,
     "prod_class": 1,
     "user_no": 2,
+    "prod_hashtag": ["여행", "게임"],
     "img_no": 4
   },
   {
@@ -267,6 +281,7 @@
     "prod_time": 31,
     "prod_class": 0,
     "user_no": 2,
+    "prod_hashtag": ["여행", "문화"],
     "img_no": 9
   },
   {
@@ -285,6 +300,7 @@
     "prod_time": 42,
     "prod_class": 1,
     "user_no": 1,
+    "prod_hashtag": ["여행", "식품"],
     "img_no": 5
   },
   {
@@ -299,10 +315,11 @@
     "prod_mainimg": "https://cdn.pixabay.com/photo/2015/01/08/18/25/startup-593324_640.jpg",
     "prod_content": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
     "prod_stat": 4,
-    "prod_intro": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+    "prod_intro": "ulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
     "prod_time": 56,
     "prod_class": 1,
     "user_no": 15,
+    "prod_hashtag": ["여행"],
     "img_no": 3
   },
   {
@@ -321,6 +338,7 @@
     "prod_time": 33,
     "prod_class": 0,
     "user_no": 5,
+    "prod_hashtag": ["여행"],
     "img_no": 8
   },
   {
@@ -337,6 +355,7 @@
     "prod_stat": 4,
     "prod_intro": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
     "prod_time": 46,
+    "prod_hashtag": ["여행", "항공"],
     "prod_class": 1,
     "user_no": 7,
     "img_no": 3
@@ -355,6 +374,7 @@
     "prod_stat": 1,
     "prod_intro": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
     "prod_time": 59,
+    "prod_hashtag": ["여행", "패션"],
     "prod_class": 1,
     "user_no": 5,
     "img_no": 19
