@@ -42,16 +42,21 @@
     margin: 0 auto;
     width: 1300px;
     min-height: 500px;
+    margin-bottom: 200px;
 }
 
 .fundinglist_title {
     display: flex;
+    margin-bottom: 30px;
+
+    justify-content: space-between;
+    align-items: center;
 }
 
 .fundinglist_title p{
     flex: 1;
-    margin: 15px 15px 0px 45px;
-    font-size: 26px;
+    margin: 15px 15px 0px 15px;
+    font-size: 28px;
     font-weight: 600;
 }
 
@@ -65,12 +70,15 @@
     flex: 1;
     list-style:none;
     padding:0;
+
+    display: flex;
+    gap: 10px;
 }
 
 .fundinglist_title_tab li {
     cursor: pointer;
     width: 100px;
-    margin: 20px 00px 0px 0px;
+    margin: 20px 0px 0px 0px;
     right: 0;
     text-align: center;
     padding: 0;
