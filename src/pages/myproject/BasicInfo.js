@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import "./BasicInfo.css";
 import MyDatePicker from "./DatePicker";
@@ -8,57 +9,84 @@ import StaffCheckbox from "./StaffCheckbox";
 import TagCheckbox from "./TagCheckbox";
 import ImageUploader from "./InputFile";
 
-function BasicInfo() {
+function BasicInfo({number}) {
+
+  const savebtnstyle1 = {
+    margin: "50px 0",
+    float: "left",
+    backgroundColor: "#EE833E",
+    color: "#fff",
+    fontSize: "18px",
+    fontWeight: "500",
+    width: "184px",
+    height: "50px",
+    borderRadius: "15px",
+    border: "none",
+    cursor: "pointer",
+  };
+
+
+  // 현재 날짜 '2023-10-30'
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}T${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
+  
+  // 오픈일 / 종료일
+  const [dates, setDates] = useState({ openDate: "", endDate: "" });
+
+  const handleDateChange = (key, value) => {
+    setDates(prev => ({ ...prev, [key]: value }));
+  };
+
+  // 유저 번호
+  const userno = 1;
+
+  // 데이터 DB 초기값
   const [formData, setFormData] = useState({
-    prod_genre: "",
+    prod_genre: 10,
     prod_title: "",
-    description: "",
-    prod_opendate: "",
-    prod_enddate: "",
-    prod_mainimg: "",
-    prod_goal: "",
-    tdata_name: "",
-    tdata_type: "",
-    prod_time: "",
+    prod_intro: "",
+    prod_regdate: formattedDate,
+    prod_mainimg: "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg",
+    prod_content: "",
+    prod_goal: 0,
+    prod_class: 0,
+    prod_time: 0,
+    user_no: userno,
+    img_no: 1,
   });
+  
+  useEffect(() => {
+    if (dates.openDate && dates.endDate) {
+      setFormData((prev) => ({
+        ...prev,
+        prod_opendate: dates.openDate,
+        prod_enddate: dates.endDate,
+      }));
+    }
+  }, [dates]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: (name === "prod_genre" || name === "prod_time" || name === "prod_goal") ? parseInt(value, 10) : value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // 여기에서 데이터를 제출하거나 원하는 작업을 수행합니다.
     console.log(formData);
+    console.log(formData.prod_mainimg);
+
+    try {
+      const response = await axios.post('http://localhost:3300/make/infoproject', formData);
+      console.log('요청 성공:', response);
+    } catch (error) {
+      console.log(formData);
+      console.error('요청 실패:', error);
+    }
   };
-
-  // 태그 데이터 선택 -> tagdconnect에 저장 -> project에서 join을 통해 가져오기
-  // const handleChange = (e) => {
-  //   setData({
-  //     ...data,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-  
-  // const [data, setData] = useState(
-  //   [1, 2, 3, 4]
-  // )
-
-  //  const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post('http://localhost:3300/make/infotag', {prod_no:1, tdata_no:data});
-  //     console.log('요청 성공:', response);
-  //   } catch (error) {
-  //     console.log(data);
-  //     console.error('요청 실패:', error);
-  //   }
-  // };
 
   return (
     <form onSubmit={handleSubmit} className="basicForm">
@@ -70,14 +98,14 @@ function BasicInfo() {
           value={formData.prod_genre}
           onChange={handleChange}
         >
-          <option value="select">프로젝트 선택</option>
-          <option value="web">웹</option>
-          <option value="app">애플리케이션</option>
-          <option value="software">일반 소프트웨어</option>
-          <option value="game">게임</option>
-          <option value="commerce">커머스 쇼핑몰</option>
-          <option value="publishing">퍼블리싱</option>
-          <option value="design">디자인</option>
+          <option value={10}>프로젝트 선택</option>
+          <option value={0}>웹</option>
+          <option value={1}>애플리케이션</option>
+          <option value={2}>일반 소프트웨어</option>
+          <option value={3}>게임</option>
+          <option value={4}>커머스 쇼핑몰</option>
+          <option value={5}>퍼블리싱</option>
+          <option value={6}>디자인</option>
         </select>
       </div>
       <div>
@@ -96,13 +124,13 @@ function BasicInfo() {
         <textarea
           type="text"
           id="prodescription"
-          name="description"
-          value={formData.description}
+          name="prod_intro"
+          value={formData.prod_intro}
           onChange={handleChange}
           placeholder="프로젝트에 대한 설명을 간단하게 입력해주세요."
         />
       </div>
-      <div class="custom-file-input">
+      <div className="custom-file-input">
         <label htmlFor="fileInput">대표 이미지</label>
         <p>
           프로젝트 썸네일 이미지를 한 개만 등록해주세요. <br />
@@ -114,12 +142,12 @@ function BasicInfo() {
           onChange={handleChange}
         />
       </div>
-      <div class="project-period">
+      <div className="project-period">
         <label htmlFor="properiod">프로젝트 기한</label>
         <p>
           프로젝트 심사부터 리워드 제작기간 등 전체 일정을 고려해 설정해 주세요.
         </p>
-        <MyDatePicker />
+        <MyDatePicker onDateChange={handleDateChange}/>
       </div>
       <div className="goalmoney">
         <label htmlFor="money">목표 금액</label>
@@ -129,15 +157,6 @@ function BasicInfo() {
           id="promoney"
           name="prod_goal"
           value={formData.prod_goal}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="pro_hashTag">
-        <label htmlFor="prohashTag">주제 해시태그</label>
-        <p>주제와 관련된 해시태그를 최소 1개 ~ 4개 미만으로 설정해 주세요. </p>
-        <TagCheckbox
-          name="tdata_name"
-          value={formData.tdata_name}
           onChange={handleChange}
         />
       </div>
@@ -164,28 +183,7 @@ function BasicInfo() {
         />
       </div>
 
-      <div>
-        <label htmlFor="staff">참여 인력</label>
-        <p>
-          프로젝트에 참여하는 포지션을 작성해 주세요.(예: Front-end개발자,
-          디자이너)
-        </p>
-        <StaffCheckbox
-          name="tdata_name"
-          value={formData.tdata_name}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="proskill">
-        <label htmlFor="skill">관련 기술</label>
-        <p>프로젝트에 사용되는 기술을 선택해 주세요. </p>
-        <SkillCheckbox
-          name="tdata_name"
-          value={formData.tdata_name}
-          onChange={handleChange}
-        />
-      </div>
+      <button style={savebtnstyle1} type="submit" className="btn_signup" onClick={handleSubmit}>저장하기</button>
     </form>
   );
 }

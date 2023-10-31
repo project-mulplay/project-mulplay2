@@ -72,7 +72,6 @@ export default class SimpleSlider extends Component {
             </div>
           </Slider>
         )}
-
         {/* 이전 버튼 */}
         <button onClick={this.handlePrev} className="banner_prev">
           <img src={prev} alt="이전" />

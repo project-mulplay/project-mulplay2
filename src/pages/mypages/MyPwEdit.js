@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 import axios from "axios";
 
@@ -8,9 +9,9 @@ import InputMedium from "../../components/elements/InputMedium";
 import "./MyInfoEdit.css";
 
 export default function MyPwEdit() {
-  const [loggedInUserId, setLoggedInUserId] = useState(1); // 사용자 아이디 초기화
+  const [cookies, setCookie] = useCookies();
   const [userPw, setUserPw] = useState("");
-  const [currentPw, setCurrentPw] = React.useState(""); //
+  const [currentPw, setCurrentPw] = React.useState("");
 
   const [newPw, setNewPw] = useState("");
   const [doublecheckPw, setdoublecheckPw] = useState("");
@@ -21,7 +22,7 @@ export default function MyPwEdit() {
     axios
       .get("http://localhost:3300/user/pw", {
         params: {
-          user_no: loggedInUserId,
+          user_no: cookies.token,
         },
       })
       .then((response) => {
@@ -34,7 +35,7 @@ export default function MyPwEdit() {
         // 에러 처리
         console.error("요청 실패:", error);
       });
-  }, [loggedInUserId]);
+  }, []);
 
   // Check current password
   const handleSubmitCheckPassword = (event) => {
@@ -56,7 +57,7 @@ export default function MyPwEdit() {
     if (window.confirm("비밀번호를를 수정하시겠습니까?")) {
       axios
         .patch("http://localhost:3300/user/pw", {
-          user_no: loggedInUserId,
+          user_no: cookies.token,
           user_pw: doublecheckPw,
         })
         .then((response) => {

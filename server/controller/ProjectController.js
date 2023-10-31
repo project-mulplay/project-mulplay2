@@ -10,8 +10,12 @@ const router = express.Router();
 //요청 url 확인
 router.post("/infoproject", projectService.postProjectMake);
 
+router.post("/projectcontent", projectService.patchProjectContent);
+
 router.post("/infotag", projectService.postProjectTag);
 
 router.post("/inforeward", projectService.postProjectReward);
+
+router.get("/infoproject", projectService.getProjectNo);
 
 export default router;

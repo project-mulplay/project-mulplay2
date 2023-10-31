@@ -2,15 +2,17 @@ import "./MyProfile.css";
 import profile from "../../../assets/image/profile.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 const MyProfile = ({ user_no }) => {
+  const [cookies, setCookie] = useCookies();
   const [data, setData] = useState({});
 
   useEffect(() => {
     axios
       .get("http://localhost:3300/user/profile", {
         params: {
-          user_no: 1,
+          user_no: cookies.token,
         },
       })
       .then((response) => {

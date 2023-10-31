@@ -1,25 +1,28 @@
 import "./Signup.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import GoogleIcon from "./../../assets/image/icon_google.svg";
 import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
 import AppleIcon from "./../../assets/image/icon_apple.svg";
 
 const Signup = () => {
-  // 시간
   const currentDate = new Date();
-  const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+  const formattedDate = `${currentDate.getFullYear()}-${String(
+    currentDate.getMonth() + 1
+  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
-    user_id: '', 
-    user_pw: '', 
-    user_name: '', 
-    user_phone: '', 
-    user_address: '', 
+    user_id: "",
+    user_pw: "",
+    user_name: "",
+    user_phone: "",
+    user_address: "",
     user_regdate: formattedDate,
     user_sns: 0,
     user_role: 1,
-    img_no: 1
+    img_no: 1,
   });
 
   const handleChange = (e) => {
@@ -33,11 +36,16 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3300/register/signup', data);
-      console.log('요청 성공:', response);
+      const response = await axios.post(
+        "http://localhost:3300/register/signup",
+        data
+      );
+      console.log("요청 성공:", response);
+      alert("회원가입이 완료되었습니다. 로그인페이지로 이동합니다.");
+      navigate("/login");
     } catch (error) {
       console.log(data);
-      console.error('요청 실패:', error);
+      console.error("요청 실패:", error);
     }
   };
 
@@ -116,8 +124,8 @@ const Signup = () => {
         <div className="agreement__container">
           <ul className="agreement__all">
             <li className="check_all">
-              <input type="checkbox" class="chk_btn" id="chk_all" />
-              <label className="title" for="chk_all">
+              <input type="checkbox" className="chk_btn" id="chk_all" />
+              <label className="title" htmlFor="chk_all">
                 전체 동의
               </label>
               <i></i>
@@ -125,30 +133,30 @@ const Signup = () => {
             <li>
               <ul className="agreement__each">
                 <li>
-                  <input type="checkbox" class="chk_btn" id="chk_01" />
-                  <label for="chk_01">선택 동의 01</label>
-                  <a href="#" class="more_btn">
+                  <input type="checkbox" className="chk_btn" id="chk_01" />
+                  <label htmlFor="chk_01">선택 동의 01</label>
+                  <a href="#" className="more_btn">
                     전문 보기
                   </a>
                 </li>
                 <li>
                   <input type="checkbox" className="chk_btn" id="chk_02" />
-                  <label for="chk_02">선택 동의 02</label>
-                  <a href="#" class="more_btn">
+                  <label htmlFor="chk_02">선택 동의 02</label>
+                  <a href="#" className="more_btn">
                     전문 보기
                   </a>
                 </li>
                 <li>
                   <input type="checkbox" className="chk_btn" id="chk_03" />
-                  <label for="chk_03">선택 동의 03</label>
-                  <a href="#" class="more_btn">
+                  <label htmlFor="chk_03">선택 동의 03</label>
+                  <a href="#" className="more_btn">
                     전문 보기
                   </a>
                 </li>
                 <li>
                   <input type="checkbox" className="chk_btn" id="chk_04" />
-                  <label for="chk_04">선택 동의 04</label>
-                  <a href="#" class="more_btn">
+                  <label htmlFor="chk_04">선택 동의 04</label>
+                  <a href="#" className="more_btn">
                     전문 보기
                   </a>
                 </li>
@@ -157,7 +165,9 @@ const Signup = () => {
           </ul>
         </div>
 
-        <button type="submit" className="btn_signup" onClick={handleSubmit}>완료</button>
+        <button type="submit" className="btn_signup" onClick={handleSubmit}>
+          완료
+        </button>
       </form>
     </section>
   );
