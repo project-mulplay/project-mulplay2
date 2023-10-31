@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./Funding.css";
 import Button_funding from "../../components/elements/Button_funding";
 import { useNavigate } from "react-router-dom";
@@ -24,26 +24,26 @@ import OutlinedCard from "./RewardCard";
 import { Drawer } from "antd";
 
 const Funding = () => {
-    // API
-    const [data, setData] = useState({});
+  // API
+  const [data, setData] = useState({});
 
-    useEffect(() => {
-      axios
-        .get("http://localhost:3300/project/funding", {
-          params: {
-            prod_no: 1,
-          },
-        })
-        .then((response) => {
-          // 요청 성공 시 실행할 코드
-          setData(response.data);
-          console.log("요청 성공:", response);
-        })
-        .catch((error) => {
-          // 에러 처리
-          console.error("요청 실패:", error);
-        });
-    }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3300/project/funding", {
+        params: {
+          prod_no: 1,
+        },
+      })
+      .then((response) => {
+        // 요청 성공 시 실행할 코드
+        setData(response.data);
+        console.log("요청 성공:", response);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("요청 실패:", error);
+      });
+  }, []);
 
   // 결제 페이지 이동 네비게이션
   const navigate = useNavigate();
@@ -77,8 +77,13 @@ const Funding = () => {
     setOpen(false);
   };
 
-
-
+  // 특정 prod_no 가져오기 여기서는 1에 해당하는 json 데이터를 가져옴
+  const filteredData = projectData.filter((data) => data.prod_no === 1);
+  // 상세보기 버튼
+  const [showAllContent, setShowAllContent] = useState(false);
+  const toggleContent = () => {
+    setShowAllContent(!showAllContent);
+  };
 
   return (
     <div>
@@ -202,19 +207,45 @@ const Funding = () => {
         </div>
 
         {/* 상세보기 및 리워드 선택 */}
-        <div className="top2">
-          
-        </div>
+        <div className="top2"></div>
 
         {/* 상세보기 */}
         <div className="middle2">
           <div className="middle2-left2">
             <div className="ml2-component">
-              <p>{projectData[i].prod_content}</p>
-              <p>{projectData[i].prod_content}</p>
-              <p><img src={projectData[2].prod_mainimg} alt="" width="400px"/></p>
-              <p>{projectData[i].prod_content}</p>
-              <Search />
+              {filteredData.map((data, i) => (
+                <div key={i}>
+                  {data.prod_content.split("\n").map((content, index) => {
+                     if (!showAllContent && index > 5) {
+                      // 내용이 5줄을 넘어가면 버튼을 보여줌
+                      return null;
+                    }
+
+                    if (
+                      content.includes(".jpg") ||
+                      content.includes(".webp") ||
+                      content.includes(".png") ||
+                      content.includes(".jpeg")
+                    ) {
+                      // 이미지 주소인 경우 이미지로 렌더링
+                      return (
+                        <img
+                          key={index}
+                          src={content}
+                          alt={`Image ${index}`}
+                          style={{ maxWidth: "100%" }}
+                        />
+                      );
+                    } else {
+                      // 텍스트인 경우 그대로 렌더링
+                      return <p className="prod_content_text" key={index}>{content}<br/></p>;
+                    }
+                  })}
+                  {filteredData[0].prod_content.split('\n').length > 5 && (
+                <button className="search-btn" onClick={toggleContent}>{showAllContent ? '접기' : '더 보기'}</button>
+              )}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -223,18 +254,20 @@ const Funding = () => {
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
               <div>
-                <button className="cartshow-btn" onClick={setOpen}>장바구니 보기</button>
+                <button className="cartshow-btn" onClick={setOpen}>
+                  장바구니 보기
+                </button>
                 <Drawer
-                title="Basic Drawer"
-                placement="right"
-                onClose={onClose}
-                open={open}
-              >
-                <Reward/>
-              </Drawer>
+                  title="Basic Drawer"
+                  placement="right"
+                  onClose={onClose}
+                  open={open}
+                >
+                  <Reward />
+                </Drawer>
               </div>
             </div>
-            
+
             <MainReward />
             {/* <div className="middle2-right-1">
               <OutlinedCard fcard={0} />
@@ -250,11 +283,11 @@ const Funding = () => {
             </div> */}
           </div>
         </div>
-        <div className="bottom">
+        {/* <div className="bottom">
           <div className="top">
             <h1>프로젝트 더보기</h1>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* <div>
             <Footer />
@@ -262,45 +295,5 @@ const Funding = () => {
     </div>
   );
 };
-
-// 상세보기 버튼
-const Search = () => {
-  const [showResults, setShowResults] = React.useState(false);
-  const onClick = () => {
-    if (showResults === false) {
-      setShowResults(true);
-    } else {
-      setShowResults(false);
-    }
-  };
-  return (
-    <div>
-       {showResults ? <Results /> : null}
-       {showResults ?
-      <input
-        className="search-btn"
-        type="submit"
-        value="접기"
-        onClick={onClick}
-      /> :
-      <input
-        className="search-btn"
-        type="submit"
-        value="상세보기"
-        onClick={onClick}
-      />
-       }
-    </div>
-  );
-};
-
-// 상세보기 숨겨진 내용
-const Results = () => (
-  <div id="results" className="search-results">
-    {projectData[1].prod_content}
-    <img src={projectData[1].prod_mainimg} alt="" />
-    {projectData[1].prod_content}
-  </div>
-);
 
 export default Funding;
