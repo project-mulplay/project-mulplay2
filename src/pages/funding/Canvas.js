@@ -4,10 +4,13 @@ import tdataData from "../../data/tdataData.json";
 import projectData from "../../data/projectData.json";
 import rewardData from "../../data/rewardData.json";
 import PropTypes from 'prop-types';
+import Reward from "../store/Reward";
 import "./Canvas.css";
 
 
 const Canvas = ({categori, name, info, price}) => {
+
+  // 리워드 카드 배열
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -36,6 +39,7 @@ const Canvas = ({categori, name, info, price}) => {
   if (categori == 3) {
     state = 'four';
   }
+
 
   // const [cartItems, setCartItems] = useState(initialCartItem);
   // const totlalCount = cartItems.reduce(
@@ -87,7 +91,6 @@ const Canvas = ({categori, name, info, price}) => {
               <div className="total-price">
                 <p>총 결제금액</p>
                 <p className="font-bold" id="total-count">
-                  {/* .reduce() 배열의 각 요소에 대하여 callback을 실행하여 1개의 출력 결과를 생성 */}
                   {price}원
                 </p>
               </div>
