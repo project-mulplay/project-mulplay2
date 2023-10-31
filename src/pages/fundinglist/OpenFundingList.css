@@ -1,5 +1,6 @@
 .openfundinglist {
   position: relative;
+  overflow-x: hidden;
 }
 
 .openfundinglist .banner_prev{
