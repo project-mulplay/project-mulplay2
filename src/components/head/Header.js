@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/image/logo.png";
 import search from "../../assets/image/search.png";
-import bell from "../../assets/image/bell.png";
 
 const LoggedOutHeader = ({ onLoginClick }) => {
   return (
@@ -46,19 +45,19 @@ const LoggedOutHeader = ({ onLoginClick }) => {
   );
 };
 const LoggedInHeader = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const handleLogout = () => {
-    removeCookie('token'); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
+    removeCookie("token"); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
   };
   return (
     <header className="header">
       <div className="contents">
-      <Link to="/">
-        <img className="logo" src={logo} alt="로고" />
+        <Link to="/">
+          <img className="logo" src={logo} alt="로고" />
         </Link>
         <nav className="navigation">
-        <ul>
+          <ul>
             <li>
               <Link to="/openfundinglist">오픈예정 </Link>
             </li>
@@ -75,14 +74,13 @@ const LoggedInHeader = () => {
           <img className="search" src={search} alt="검색" />
         </div>
         <div className="login">
-          <img className="alarm" src={bell} alt="알림" />
           <button onClick={handleLogout}>로그아웃</button>
           <Link to="/mypages/myinfoedit">
-          <button>마이페이지</button>
+            <button>마이페이지</button>
           </Link>
         </div>
         <Link to="/guide">
-        <button className="btn">프로젝트 만들기</button>
+          <button className="btn">프로젝트 만들기</button>
         </Link>
       </div>
     </header>
