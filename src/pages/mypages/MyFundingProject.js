@@ -1,4 +1,4 @@
-import ProjectManager from "../../hooks/ProjectManager";
+import ProjectManager from "../../components/layout/mypage/ProjectManager";
 
 const MyFundProject = () => {
   return (

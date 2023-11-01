@@ -427,7 +427,7 @@ export default function TableSortAndSelection({ data }) {
                   <td>
                     <Button
                       size="sm"
-                      variant={"outlined"}
+                      variant={buttonStates?.label || "outlined"}
                       onClick={() => toggleButton(row.pay_no)}
                     >
                       {buttonStates[row.pay_no]?.label || "대기중"}

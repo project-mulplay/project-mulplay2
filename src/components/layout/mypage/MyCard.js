@@ -3,11 +3,15 @@ import MyBadge from "../../elements/MyBadge";
 import MyDropdown from "../../elements/MyDropdown";
 import GaugeBar from "../../elements/GaugeBar";
 import "./MyCard.css";
+import useFormatDate from "../../../hooks/useFormatDate";
 
 //조건식으로 user_id 에 따라 Gaugebar Or cardDate 보여주기
 const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
   const pundingOpen = project.prod_stat === 3 || project.prod_stat === 4;
-  console.log(project.goal);
+
+  const openDate = useFormatDate(project.prod_opendate);
+  const closeDate = useFormatDate(project.prod_enddate);
+  const regDate = useFormatDate(project.prod_regdate);
 
   return (
     <div className="myCard" key={project.prod_no}>
@@ -24,13 +28,13 @@ const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
           {fundPrice === null ? (
             pundingOpen ? (
               <div className="cardDate">
-                펀딩시작일:{project.prod_opendate} | 펀딩종료일:
-                {project.prod_enddate}
+                펀딩시작일:{openDate} | 펀딩종료일:
+                {closeDate}
               </div>
             ) : (
               <div className="cardDate">
-                심사신청일:{project.prod_regdate} | 예상 펀딩종료일:
-                {project.prod_enddate}
+                심사신청일:{regDate} | 예상 펀딩종료일:
+                {closeDate}
               </div>
             )
           ) : (

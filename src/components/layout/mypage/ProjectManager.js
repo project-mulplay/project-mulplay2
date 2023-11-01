@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  selectedTabState,
+  projectDataState,
+} from "../../../recoil/MyProjectAtom";
+
 import axios from "axios";
 
-import MyCard from "../components/layout/mypage/MyCard";
-import "../pages/mypages/MyProjectManage.css";
+import MyCard from "./MyCard";
+import "../../../pages/mypages/MyProjectManage.css";
 
 const filterOptionListCreated = [
   { value: "all", name: "전체" },
@@ -24,9 +30,9 @@ const filterOptionListLiked = [
 ];
 
 const ProjectManager = ({ type }) => {
-  const [selectedTab, setSelectedTab] = useState("all"); // 기본 탭 선택
+  const [selectedTab, setSelectedTab] = useRecoilState(selectedTabState);
+  const [data, setData] = useRecoilState(projectDataState);
 
-  const [data, setData] = useState([]);
   const [cookies, setCookie] = useCookies();
 
   useEffect(() => {

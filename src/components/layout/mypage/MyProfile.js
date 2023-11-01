@@ -1,12 +1,14 @@
 import "./MyProfile.css";
-import profile from "../../../assets/image/profile.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useRecoilValue } from "recoil";
+import { ProfileImgAtom } from "../../../recoil/ProfileImgAtom";
 
 const MyProfile = ({ user_no }) => {
   const [cookies, setCookie] = useCookies();
   const [data, setData] = useState({});
+  const profileImg = useRecoilValue(ProfileImgAtom);
 
   useEffect(() => {
     axios
@@ -26,9 +28,10 @@ const MyProfile = ({ user_no }) => {
       });
   }, []);
 
+  console.log("img", data.user_profileimg);
   return (
     <div className="myprofile" key={user_no}>
-      <img className="profileImg" src={profile} alt="profile_img"></img>
+      <img className="profileImg" src={profileImg} alt="profile_img"></img>
       <div className="profileText">
         <div className="userName">{data.user_name}</div>
         <div className="easyLogin">

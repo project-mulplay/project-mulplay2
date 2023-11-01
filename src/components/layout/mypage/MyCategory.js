@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { MyCategoryAtom } from "../../../recoil/MyCategoryAtom";
 
 import "./MyCategory.css";
 
@@ -10,11 +13,11 @@ import "@fontsource/roboto/700.css";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useNavigate } from "react-router-dom";
 
 function ColorTabs() {
-  const [value, setValue] = React.useState("one");
   const navigate = useNavigate();
+
+  const [value, setValue] = useRecoilState(MyCategoryAtom);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

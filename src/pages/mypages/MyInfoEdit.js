@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useRecoilState } from "recoil";
+import { ProfileImgAtom } from "../../recoil/ProfileImgAtom";
 
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
@@ -25,9 +27,11 @@ export default function MyInfoEdit({ user_no }) {
   const [userName, setUserName] = React.useState("");
   const [userPhone, setUserPhone] = React.useState("");
   const [userAddress, setUserAddress] = React.useState("");
+  const [userProfile, setUserProfile] = useRecoilState(ProfileImgAtom);
 
-  const [selectedImage, setSelectedImage] = React.useState(profile);
   const [modalOpen, setModalOpen] = React.useState(false);
+
+  // const imageBuffer = Buffer.from(userProfile, "base64");
 
   const authCheck = () => {
     axios
@@ -41,6 +45,7 @@ export default function MyInfoEdit({ user_no }) {
         setUserName(response.data.user_name || "");
         setUserPhone(response.data.user_phone || "");
         setUserAddress(response.data.user_address || "");
+        setUserProfile(response.data.user_profileimg || profile);
         console.log("infoedit 요청 성공:", response);
       })
       .catch((error) => {
@@ -54,20 +59,17 @@ export default function MyInfoEdit({ user_no }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(event.target);
+    console.log(userProfile);
     if (window.confirm("회원정보를 수정하시겠습니까?")) {
       axios
         .patch("http://localhost:3300/user/info", {
           user_name: userName,
           user_phone: userPhone,
           user_address: userAddress,
+          user_profileimg: userProfile,
           user_no: cookies.token,
         })
         .then((response) => {
-          // setUserName(response.data.user_name);
-          // setUserPhone(response.data.user_phone);
-          // setUserAddress(response.data.user_address);
-          // setData(response.data);
           console.log("update 요청 성공:", response);
 
           alert("회원정보가 수정되었습니다.");
@@ -108,7 +110,7 @@ export default function MyInfoEdit({ user_no }) {
           <li className="imgEdit">
             <span>프로필 이미지</span>
             <div>
-              <img src={selectedImage} alt="profile-img" />
+              <img src={userProfile} alt="profile-img" />
               <button type="button" onClick={() => setModalOpen(true)}>
                 이미지변경
               </button>
@@ -130,6 +132,7 @@ export default function MyInfoEdit({ user_no }) {
                 pb: 3,
               }}
             >
+              <span>선택해서 이미지변경하기</span>
               <div className="imageSelection">
                 {images.map((image, index) => (
                   <img
@@ -137,7 +140,7 @@ export default function MyInfoEdit({ user_no }) {
                     src={image}
                     alt={`selectable-img-${index}`}
                     onClick={() => {
-                      setSelectedImage(image); // 클릭 시 해당 이미지로 변경
+                      setUserProfile(image); // 클릭 시 해당 이미지로 변경
                       setModalOpen(false); // 클릭 후 모달 창 닫기
                     }}
                   />

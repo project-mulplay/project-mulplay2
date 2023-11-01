@@ -3,7 +3,7 @@ import db from "../config/db.js";
 export const findByUserProfile = async (user_no) => {
   const conn = await db;
   const [data, fields] = await conn.query(
-    "SELECT user_name, user_sns FROM user WHERE user_no = ?",
+    "SELECT user_name, user_sns, user_profileimg FROM user WHERE user_no = ?",
     [user_no]
   );
 
@@ -23,11 +23,12 @@ export const updateByUserInfo = async (userData) => {
   const conn = await db;
 
   const [data, fields] = await conn.query(
-    "update `user` set user_name = ? , user_phone = ? , user_address = ? where user_no = ?",
+    "update `user` set user_name = ? , user_phone = ? , user_address = ?, user_profileimg = ? where user_no = ?",
     [
       userData.user_name,
       userData.user_phone,
       userData.user_address,
+      userData.user_profileimg,
       userData.user_no,
     ]
   );
