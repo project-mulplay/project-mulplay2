@@ -158,6 +158,14 @@
     margin-right: 20px;
   }
 
+  .prod_content_text {
+    font-size: 14px;
+    margin: 40px auto;
+    width: 520px;
+    line-height: 2;
+    text-align: justify;
+  }
+
 
   .middle-right-2{
     border-bottom-left-radius: 10px;
