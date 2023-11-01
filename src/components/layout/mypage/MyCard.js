@@ -55,7 +55,9 @@ const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
           )}
         </div>
       </div>
-      {type === "created" && <MyDropdown stat={project.prod_stat} />}
+      {type === "created" && (
+        <MyDropdown prod_no={project.prod_no} stat={project.prod_stat} />
+      )}
     </div>
   );
 };

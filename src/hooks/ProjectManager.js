@@ -13,6 +13,7 @@ const filterOptionListCreated = [
   { value: "3", name: "펀딩중" },
   { value: "4", name: "펀딩성공" },
   { value: "5", name: "펀딩실패" },
+  { value: "6", name: "보류" },
 ];
 
 const filterOptionListLiked = [
@@ -94,6 +95,8 @@ const ProjectManager = ({ type }) => {
         return "펀딩성공";
       case 5:
         return "펀딩실패";
+      case 6:
+        return "보류";
       default:
         return "정보없음";
     }
@@ -108,6 +111,8 @@ const ProjectManager = ({ type }) => {
       return "positive";
     } else if (prod_stat === 2 || prod_stat === 5) {
       return "negative";
+    } else if (prod_stat === 6) {
+      return "hold";
     } else {
       return "neutral";
     }

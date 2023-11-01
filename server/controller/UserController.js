@@ -22,7 +22,7 @@ router.patch("/pw", userService.patchUserPw);
 
 router.get("/myproject", userService.getUserMyProd);
 
-router.delete("/myproject", userService.deleteUserMyProd);
+router.patch("/myproject", userService.patchUserMyProd);
 
 router.get("/myproceeds", userService.getUserMyProceed);
 

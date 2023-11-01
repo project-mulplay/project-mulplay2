@@ -260,7 +260,7 @@ export default function TableSortAndSelection({ data }) {
   const [page, setPage] = React.useState(0);
   const [dataPerPage] = React.useState(5);
 
-  // Map data into an object where keys are pay_no and values are button states
+  // 송금상태
   const getStatusLabel = (prod_stat) => {
     return prod_stat === 4 ? "송금완료" : "대기중";
   };
@@ -270,7 +270,7 @@ export default function TableSortAndSelection({ data }) {
       ...states,
       [data.pay_no]: {
         label: "대기중",
-        color: "neutral",
+        color: "#EE833E",
       },
     }),
     {}
@@ -364,7 +364,7 @@ export default function TableSortAndSelection({ data }) {
             // 수정된 부분: padding을 추가하여 간격 조정
           },
           "& thead th:nth-of-type(3)": {
-            width: "25%",
+            width: "35%",
           },
           "& tr > *:nth-of-type(n+5)": { textAlign: "right" }, // 수정된 부분: nth-type 대신 nth-of-type 사용
         }}
@@ -394,8 +394,8 @@ export default function TableSortAndSelection({ data }) {
                   style={
                     isItemSelected
                       ? {
-                          "--TableCell-dataBackground": "#EE833E",
-                          "--TableCell-headBackground": "#EE833E",
+                          "--TableCell-dataBackground": "gray",
+                          "--TableCell-headBackground": "gray",
                           opacity: "50%",
                         }
                       : {}
@@ -418,7 +418,7 @@ export default function TableSortAndSelection({ data }) {
                   </th>
 
                   <td>{row.prod_title}</td>
-                  <td>{row.user_id}</td>
+                  <td>{row.user_id.split("@")[0]}</td>
                   <td style={{ textAlign: "right" }}>{row.pay_price}</td>
                   <td style={{ textAlign: "right" }}>
                     {formatDate(row.pay_regdate)}
@@ -427,7 +427,7 @@ export default function TableSortAndSelection({ data }) {
                   <td>
                     <Button
                       size="sm"
-                      variant={buttonStates[row.pay_no]?.label || "plain"}
+                      variant={"outlined"}
                       onClick={() => toggleButton(row.pay_no)}
                     >
                       {buttonStates[row.pay_no]?.label || "대기중"}
