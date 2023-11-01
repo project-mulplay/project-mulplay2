@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import * as React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../../util/api";
 
 import IconButton from "@mui/joy/IconButton";
 import Menu from "@mui/joy/Menu";
@@ -15,28 +14,19 @@ import Dropdown from "@mui/joy/Dropdown";
 
 const MyDropdown = ({ stat, prod_no }) => {
   const pundingOpen = stat === 3 || stat === 4;
-  const [cookies, setCookie] = useCookies();
-
-  console.log(prod_no);
 
   const stateChange = (event) => {
     event.preventDefault();
-    console.log(event.target);
+
     if (stat == 6) {
       alert("이미 보류된 프로젝트입니다.");
     } else if (window.confirm("정말 보류하시겠습니까?")) {
       axios
-        .patch("http://localhost:3300/user/myproject", {
-          user_no: cookies.token,
+        .patch("/user/myproject", {
           prod_no: prod_no,
         })
         .then((response) => {
-          console.log("update 요청 성공:", response);
-
           alert("프로젝트가 보류되었습니다.");
-        })
-        .catch((error) => {
-          console.error("요청 실패:", error);
         });
     }
   };

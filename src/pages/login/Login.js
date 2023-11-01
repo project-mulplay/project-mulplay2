@@ -41,6 +41,8 @@ const Login = () => {
       ) {
         alert("로그인되었습니다.");
         navigate("/");
+      } else if (response.data.user_stat === 2) {
+        alert("탈퇴한 회원입니다.");
       } else {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
@@ -51,8 +53,8 @@ const Login = () => {
 
   // 미완성된 기능 알람
   const onClick = () => {
-    alert("아직 미구현된 기능입니다.")
-  }
+    alert("아직 미구현된 기능입니다.");
+  };
 
   return (
     <section id="container_login">
@@ -82,8 +84,10 @@ const Login = () => {
         </div>
         <div className="container_savefind">
           <div className="save_box">
-            <input type="checkbox" className="chk_btn" id="chk_save"/>
-            <label for="chk_save" className="title">아이디 저장</label>
+            <input type="checkbox" className="chk_btn" id="chk_save" />
+            <label for="chk_save" className="title">
+              아이디 저장
+            </label>
           </div>
 
           <div className="find_box">
@@ -109,10 +113,10 @@ const Login = () => {
         </div>
         <div className="signup_btn">
           아직 계정이 없으신가요?{" "}
-          <Link to='/signup'>
-          <a className="atag" href="#">
-            회원가입
-          </a>
+          <Link to="/signup">
+            <a className="atag" href="#">
+              회원가입
+            </a>
           </Link>
         </div>
       </form>

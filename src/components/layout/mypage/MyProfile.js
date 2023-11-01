@@ -1,40 +1,20 @@
-import "./MyProfile.css";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { ImgUrlSelector, ProfileImgAtom } from "../../../recoil/ProfileImgAtom";
+import { useRecoilState } from "recoil";
+import { ProfileImgAtom } from "../../../recoil/ProfileImgAtom";
+import axios from "../../../util/api";
 
-import profile0 from "../../../assets/image/profile0.png";
-import profile1 from "../../../assets/image/profile1.png";
-import profile2 from "../../../assets/image/profile2.png";
-import profile3 from "../../../assets/image/profile3.png";
-import profile4 from "../../../assets/image/profile4.png";
+import "./MyProfile.css";
 
 const MyProfile = ({ user_no }) => {
-  const [cookies, setCookie] = useCookies();
   const [data, setData] = useState({});
   const [userProfile, setUserProfile] = useRecoilState(ProfileImgAtom);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3300/user/profile", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        // 요청 성공 시 실행할 코드
-        setData(response.data);
-        console.log("profile 요청 성공:", response);
-      })
-      .catch((error) => {
-        // 에러 처리
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/profile").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
-  console.log("img", data.user_profileimg);
   return (
     <div className="myprofile" key={user_no}>
       <img

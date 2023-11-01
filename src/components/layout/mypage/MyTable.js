@@ -1,7 +1,6 @@
-import * as React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import Box from "@mui/joy/Box";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
@@ -19,7 +18,6 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { visuallyHidden } from "@mui/utils";
-
 import Button from "@mui/joy/Button";
 
 function labelDisplayeddata({ from, to, count }) {
@@ -150,7 +148,6 @@ function EnhancedTableHead(props) {
                   : undefined
               }
             >
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <Link
                 underline="none"
                 color="neutral"
@@ -263,7 +260,7 @@ export default function TableSortAndSelection({ data }) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dataPerPage] = React.useState(5);
+  const [dataPerPage, setDataPerPage] = React.useState(5);
 
   // 송금상태
   const getStatusLabel = (prod_stat) => {
@@ -284,7 +281,6 @@ export default function TableSortAndSelection({ data }) {
   const [buttonStates, setButtonStates] = useState(initialButtonStates);
 
   const toggleButton = (id) => {
-    console.log(id);
     setButtonStates((prevState) => ({
       ...prevState,
       [id]: {
@@ -339,11 +335,10 @@ export default function TableSortAndSelection({ data }) {
   };
 
   const handleChangedataPerPage = (event, newValue) => {
-    dataPerPage(parseInt(newValue.toString(), 10));
+    setDataPerPage(parseInt(newValue.toString(), 10));
     setPage(0);
   };
 
-  // getLabelDisplayedRowsTo 함수 수정
   const getLabelDisplayeddataTo = () => {
     if (data.length === -1) {
       return data.length;
@@ -376,12 +371,11 @@ export default function TableSortAndSelection({ data }) {
             theme.vars.palette.success.softBg,
           "& thead th:nth-of-type(1), & thead th:nth-of-type(2)": {
             width: "50px",
-            // 수정된 부분: padding을 추가하여 간격 조정
           },
           "& thead th:nth-of-type(3)": {
             width: "35%",
           },
-          "& tr > *:nth-of-type(n+5)": { textAlign: "right" }, // 수정된 부분: nth-type 대신 nth-of-type 사용
+          "& tr > *:nth-of-type(n+5)": { textAlign: "right" },
         }}
       >
         <EnhancedTableHead

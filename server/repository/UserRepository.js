@@ -19,7 +19,7 @@ export const findByUserInfo = async (user_no) => {
   return data[0];
 };
 
-export const updateByUserInfo = async (userData) => {
+export const updateByUserInfo = async (userData, user_no) => {
   const conn = await db;
 
   const [data, fields] = await conn.query(
@@ -29,7 +29,7 @@ export const updateByUserInfo = async (userData) => {
       userData.user_phone,
       userData.user_address,
       userData.user_profileimg,
-      userData.user_no,
+      user_no,
     ]
   );
   return data[0];

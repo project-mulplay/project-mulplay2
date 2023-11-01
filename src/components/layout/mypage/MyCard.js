@@ -1,9 +1,11 @@
 import thumbnail from "../../../assets/image/thumbnailSmall.png";
+
 import MyBadge from "../../elements/MyBadge";
 import MyDropdown from "../../elements/MyDropdown";
 import GaugeBar from "../../elements/GaugeBar";
-import "./MyCard.css";
 import useFormatDate from "../../../hooks/useFormatDate";
+
+import "./MyCard.css";
 
 //조건식으로 user_id 에 따라 Gaugebar Or cardDate 보여주기
 const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {

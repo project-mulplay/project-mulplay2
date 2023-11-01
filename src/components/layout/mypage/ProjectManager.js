@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  selectedTabState,
-  projectDataState,
-} from "../../../recoil/MyProjectAtom";
-
-import axios from "axios";
+import axios from "../../../util/api";
 
 import MyCard from "./MyCard";
+
 import "../../../pages/mypages/MyProjectManage.css";
 
 const filterOptionListCreated = [
@@ -30,27 +24,13 @@ const filterOptionListLiked = [
 ];
 
 const ProjectManager = ({ type }) => {
-  // const [selectedTab, setSelectedTab] = useRecoilState(selectedTabState);
-
   const [selectedTab, setSelectedTab] = useState("all");
   const [data, setData] = useState([]);
 
-  const [cookies, setCookie] = useCookies();
-
   useEffect(() => {
-    axios
-      .get("http://localhost:3300/user/myproject", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        setData(response.data);
-        console.log("요청 성공:", response);
-      })
-      .catch((error) => {
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/myproject").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
   let filterOptions;

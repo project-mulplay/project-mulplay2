@@ -1,103 +1,73 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import axios from "../../util/api";
+import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { ImgUrlSelector, ProfileImgAtom } from "../../recoil/ProfileImgAtom";
+import { useRecoilState } from "recoil";
+import { ProfileImgAtom } from "../../recoil/ProfileImgAtom";
 
-import Stack from "@mui/joy/Stack";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import profile0 from "../../assets/image/profile0.png";
 import profile1 from "../../assets/image/profile1.png";
 import profile2 from "../../assets/image/profile2.png";
 import profile3 from "../../assets/image/profile3.png";
 import profile4 from "../../assets/image/profile4.png";
 import InputMedium from "../../components/elements/InputMedium";
+
 import "./MyInfoEdit.css";
+
+import Stack from "@mui/joy/Stack";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 const images = [profile0, profile1, profile2, profile3, profile4];
 
-export default function MyInfoEdit({ user_no }) {
+export default function MyInfoEdit() {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies();
 
   const [userId, setUserId] = React.useState("");
   const [userName, setUserName] = React.useState("");
   const [userPhone, setUserPhone] = React.useState("");
   const [userAddress, setUserAddress] = React.useState("");
-  const [modalOpen, setModalOpen] = React.useState(false);
   const [userProfile, setUserProfile] = useRecoilState(ProfileImgAtom);
 
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   const authCheck = () => {
-    axios
-      .get("http://localhost:3300/user/info", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setUserId(response.data.user_id || "");
-        setUserName(response.data.user_name || "");
-        setUserPhone(response.data.user_phone || "");
-        setUserAddress(response.data.user_address || "");
-        setUserProfile(response.data.user_profileimg || 0);
-        console.log("infoedit 요청 성공:", response);
-      })
-      .catch((error) => {
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/info").then((response) => {
+      console.log("get info : ", response.data);
+      setUserId(response.data.user_id || "");
+      setUserName(response.data.user_name || "");
+      setUserPhone(response.data.user_phone || "");
+      setUserAddress(response.data.user_address || "");
+      setUserProfile(response.data.user_profileimg || 0);
+    });
   };
   useEffect(() => {
     authCheck();
   }, []);
 
-  console.log("$$$$$ -> " + userProfile);
-  console.log(require(`../../assets/image/profile${userProfile}.png`));
-  console.log(`profile${userProfile}.png`);
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(userProfile);
     if (window.confirm("회원정보를 수정하시겠습니까?")) {
       axios
-        .patch("http://localhost:3300/user/info", {
+        .patch("/user/info", {
           user_name: userName,
           user_phone: userPhone,
           user_address: userAddress,
           user_profileimg: userProfile,
-          user_no: cookies.token,
         })
         .then((response) => {
-          console.log("update 요청 성공:", response);
-
           alert("회원정보가 수정되었습니다.");
-        })
-        .catch((error) => {
-          console.error("요청 실패:", error);
         });
     }
   };
   const handleDelete = () => {
     if (window.confirm("정말 탈퇴하시겠습니까?")) {
-      axios
-        .delete("http://localhost:3300/user/info", {
-          params: {
-            user_no: cookies.token,
-          },
-        })
-        .then((response) => {
-          console.log("요청 성공:", response);
-
-          alert("회원탈퇴가 완료되었습니다.");
-          navigate("/");
-        })
-        .catch((error) => {
-          console.error("요청 실패:", error);
-        });
+      axios.delete("/user/info").then((response) => {
+        alert("회원탈퇴가 완료되었습니다.");
+        Cookies.remove("token");
+        navigate("/");
+      });
     }
   };
 
