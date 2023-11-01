@@ -30,8 +30,10 @@ const filterOptionListLiked = [
 ];
 
 const ProjectManager = ({ type }) => {
-  const [selectedTab, setSelectedTab] = useRecoilState(selectedTabState);
-  const [data, setData] = useRecoilState(projectDataState);
+  // const [selectedTab, setSelectedTab] = useRecoilState(selectedTabState);
+
+  const [selectedTab, setSelectedTab] = useState("all");
+  const [data, setData] = useState([]);
 
   const [cookies, setCookie] = useCookies();
 

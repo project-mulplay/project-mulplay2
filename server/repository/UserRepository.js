@@ -13,7 +13,7 @@ export const findByUserProfile = async (user_no) => {
 export const findByUserInfo = async (user_no) => {
   const conn = await db;
   const [data, fields] = await conn.query(
-    "select user_id, user_name, user_phone, user_address from user where user_no = ? and user_stat = 1",
+    "select user_id, user_name, user_phone, user_address, user_profileimg from user where user_no = ? and user_stat = 1",
     [user_no]
   );
   return data[0];

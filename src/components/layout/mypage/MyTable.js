@@ -19,6 +19,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { visuallyHidden } from "@mui/utils";
+
 import Button from "@mui/joy/Button";
 
 function labelDisplayeddata({ from, to, count }) {
@@ -129,6 +130,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            color="warning"
             slotProps={{
               input: {
                 "aria-label": "select all desserts",
@@ -152,7 +154,7 @@ function EnhancedTableHead(props) {
               <Link
                 underline="none"
                 color="neutral"
-                textColor={active ? "primary.plainColor" : undefined}
+                textColor={active ? "neutral.plainColor" : undefined}
                 component="button"
                 onClick={createSortHandler(headCell.id)}
                 fontWeight="lg"
@@ -204,7 +206,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, handleToggleGiftStatus } = props;
 
   return (
     <Box
@@ -239,7 +241,10 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title="선물상태변경">
           <IconButton size="sm" color="Neutral" variant="solid">
-            <AddCircleOutlineOutlinedIcon />
+            <AddCircleOutlineOutlinedIcon
+              onClick={handleToggleGiftStatus}
+              style={{ cursor: "pointer" }}
+            />
           </IconButton>
         </Tooltip>
       ) : (
@@ -286,6 +291,12 @@ export default function TableSortAndSelection({ data }) {
         label: prevState[id]?.label === "대기중" ? "전달완료" : "대기중",
       },
     }));
+  };
+  const handleToggleGiftStatus = () => {
+    // 여기에서 선택된 행의 id를 가져와 toggleButton 함수를 호출합니다.
+    selected.forEach((pay_no) => {
+      toggleButton(pay_no);
+    });
   };
 
   const handleRequestSort = (event, property) => {
@@ -350,8 +361,12 @@ export default function TableSortAndSelection({ data }) {
     <Sheet
       variant="outlined"
       sx={{ width: "80%", boxShadow: "sm", borderRadius: "sm" }}
+      color="white"
     >
-      <EnhancedTableToolbar numSelected={selected.length} />
+      <EnhancedTableToolbar
+        numSelected={selected.length}
+        handleToggleGiftStatus={handleToggleGiftStatus}
+      />
       <Table
         aria-labelledby="tableTitle"
         hoverRow
@@ -394,9 +409,9 @@ export default function TableSortAndSelection({ data }) {
                   style={
                     isItemSelected
                       ? {
-                          "--TableCell-dataBackground": "gray",
-                          "--TableCell-headBackground": "gray",
-                          opacity: "50%",
+                          "--TableCell-dataBackground": "#f0f4f8",
+                          "--TableCell-headBackground": "#f0f4f8",
+                          opacity: "75%",
                         }
                       : {}
                   }
@@ -410,6 +425,7 @@ export default function TableSortAndSelection({ data }) {
                           "aria-labelledby": labelId,
                         },
                       }}
+                      color="warning"
                       sx={{ verticalAlign: "top" }}
                     />
                   </th>
@@ -427,7 +443,8 @@ export default function TableSortAndSelection({ data }) {
                   <td>
                     <Button
                       size="sm"
-                      variant={buttonStates?.label || "outlined"}
+                      variant="outlined"
+                      color="warning"
                       onClick={() => toggleButton(row.pay_no)}
                     >
                       {buttonStates[row.pay_no]?.label || "대기중"}
