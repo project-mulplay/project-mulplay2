@@ -24,20 +24,11 @@
     width: 520px;
     height: 50px;
     margin: 0 auto;
-}
-
-.Guide_btn1 {
-    font-size: 16px;
-    font-weight: 500;
-    background: #fff;
-    border: 1px solid #b1b1b1;
-    border-radius: 10px;
-    width: 180px;
-    height: 50px;
-    cursor: pointer;
+    text-align: center
 }
 
 .Guide_btn2 {
+    display :inline-block;
     font-size: 16px;
     font-weight: 500;
     color: #fff;
@@ -47,11 +38,6 @@
     width: 180px;
     height: 50px;
     cursor: pointer;
-}
-
-.Guide_btn Button {
-    margin-left: 55px;
-    margin-top: 15px;
 }
 
 .Guide_subtitle {

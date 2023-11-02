@@ -50,9 +50,7 @@ export function CenteredTabs() {
 
   //  버튼 스타일
   const btnstyle = {
-    margin: "50px 0",
-    position: "absolute",
-    right: "660px",
+    margin: "50px 20px",
     backgroundColor: "#EE833E",
     color: "#fff",
     fontSize: "18px",
