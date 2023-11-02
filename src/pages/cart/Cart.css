@@ -21,6 +21,11 @@
   vertical-align: middle;
 }
 
+.cart_MainReward ul{
+  list-style: none;
+  margin-left: 100px;
+}
+
 .ctitle{
   margin: 100px auto;
   width: 800px;
@@ -55,6 +60,30 @@
 
 .ctitle h2 {
   margin-top: 20px;
+}
+
+.clist {
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 100px;
+  border: 1px solid #9F9F9F;
+  width: 800px;
+  min-height: 300px;
+  height: 100%;
+  display: table;
+  background-color: #ffffff;
+}
+
+.clist ul {
+
+  list-style: none; /* 기본 목록 스타일 제거 */
+  padding: 0; /* 내부 간격 제거 */
+  max-width: 760px;
+}
+
+.clist .rewarditem li {
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  margin-top: 5px;
 }
 
 .clist1 {

@@ -120,16 +120,16 @@ const bull = (
       }
 
       var state = 'null'
-      if (fcard == 0) {
+      if (fcard === 0) {
         state = 'one';
       }
-      if (fcard == 1) {
+      if (fcard === 1) {
         state = 'two';
       }
-      if (fcard == 2) {
+      if (fcard === 2) {
         state = 'three';
       }
-      if (fcard == 3) {
+      if (fcard === 3) {
         state = 'four';
       }
   
