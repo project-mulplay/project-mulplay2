@@ -16,7 +16,7 @@
 /* container */
 #container_login {
   width: 445px;
-  margin: 100px auto;
+  margin: 250px auto;
 }
 #container_login h1 {
   display: block;
@@ -101,7 +101,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  width: 100%;
+  width: 107%;
   height: 55px;
   border: none;
   border-radius: 8px;
@@ -114,26 +114,12 @@
   background-color: #ffa66b;
 }
 
+
 /* sns 로그인 */
 
-.sns_container {
-  margin: 40px 0 20px 0;
-  display: flex;
-  justify-content: center;
-}
-.sns_login {
-  padding: 18px 28px;
-  background-color: #fff;
-  border: 1px solid #d1d1d1;
-  border-radius: 16px;
-  margin-right: 12px;
-  cursor: pointer;
-}
-.sns_container:last-child {
-  margin-right: 0;
-}
-
 .signup_btn {
+  margin-top: 40px;
+  margin-left: 15px;
   font-size: 14px;
   color: #888;
   font-weight: 400;

@@ -101,12 +101,11 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="container_savefind">
+        {/* 아이디 저장, 아이디 찾기 주석처리 */}
+        {/* <div className="container_savefind">
           <div className="save_box">
-            <input type="checkbox" className="chk_btn" id="chk_save" />
-            <label for="chk_save" className="title">
-              아이디 저장
-            </label>
+            <input type="checkbox" className="chk_btn" id="chk_save"/>
+            <label for="chk_save" className="title">아이디 저장</label>
           </div>
 
           <div className="find_box">
@@ -114,22 +113,11 @@ const Login = () => {
               아이디 / 비밀번호 찾기
             </a>
           </div>
-        </div>
+        </div> */}
         <button type="submit" className="btn_login">
           로그인
         </button>
-        {/* sns 로그인 */}
-        {/* <div className="sns_container">
-          <div className="sns_login google" onClick={onClick}>
-            <img src={GoogleIcon} alt="" />
-          </div>
-          <div className="sns_login kakao" onClick={onClick}>
-            <img src={KakaoIcon} alt="" />
-          </div>
-          <div className="sns_login apple" onClick={onClick}>
-            <img src={AppleIcon} alt="" />
-          </div>
-        </div> */}
+
         <div className="signup_btn">
           아직 계정이 없으신가요?{" "}
           <Link to="/signup">

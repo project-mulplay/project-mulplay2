@@ -2,8 +2,9 @@ import "./Signup.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-import Swal from "sweetalert2";
+import GoogleIcon from "./../../assets/image/icon_google.svg";
+import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
+import AppleIcon from "./../../assets/image/icon_apple.svg";
 
 const Signup = () => {
   const currentDate = new Date();
@@ -24,10 +25,12 @@ const Signup = () => {
     img_no: 1,
   });
 
+  // 주소 변경을 포함하여 모든 입력 변경을 다루는 handleChange 함수
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -40,16 +43,7 @@ const Signup = () => {
         data
       );
       console.log("요청 성공:", response);
-
-      Swal.fire({
-        icon: "success",
-        title: "회원가입이 완료되었습니다. ",
-        text: "로그인페이지로 이동합니다.",
-        showCancelButton: false,
-        confirmButtonColor: "#EE833E",
-        confirmButtonText: "OK",
-      });
-
+      alert("회원가입이 완료되었습니다. 로그인페이지로 이동합니다.");
       navigate("/login");
     } catch (error) {
       console.log(data);
@@ -76,7 +70,7 @@ const Signup = () => {
           <label>비밀번호</label>
           <input
             className="input_text"
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해 주세요"
             required
             name="user_pw"
@@ -109,68 +103,32 @@ const Signup = () => {
           <label>주소</label>
           <div className="column">
             <input
-              type="text"
               className="input_text"
+              onChange={handleZipCode}
+              value={inputZipCodeValue}
               placeholder="우편번호"
-              required
-              name="user_address"
-              onChange={handleChange}
+              type={"text"}
             />
-
-            <button className="btn_search">검색</button>
+            <button className="btn_search" type="button" onClick={openModal}>
+              주소 검색
+            </button>
+            {/* <button className="btn_search" id="yourButtonId" onclick={openDaumPostcode}>검색</button> */}
           </div>
-        </div>
-        <div className="input_box">
           <input
             className="input_text"
-            type="text"
-            placeholder="상세주소를 입력해 주세요"
-            required
+            value={inputAddressValue}
+            name="user_address"
+            onChange={handleAddressChange}
+            placeholder="주소"
+            type={"text"}
           />
-        </div>
 
-        <div className="agreement__container">
-          <ul className="agreement__all">
-            <li className="check_all">
-              <input type="checkbox" className="chk_btn" id="chk_all" />
-              <label className="title" htmlFor="chk_all">
-                전체 동의
-              </label>
-              <i></i>
-            </li>
-            <li>
-              <ul className="agreement__each">
-                <li>
-                  <input type="checkbox" className="chk_btn" id="chk_01" />
-                  <label htmlFor="chk_01">선택 동의 01</label>
-                  <a href="#" className="more_btn">
-                    전문 보기
-                  </a>
-                </li>
-                <li>
-                  <input type="checkbox" className="chk_btn" id="chk_02" />
-                  <label htmlFor="chk_02">선택 동의 02</label>
-                  <a href="#" className="more_btn">
-                    전문 보기
-                  </a>
-                </li>
-                <li>
-                  <input type="checkbox" className="chk_btn" id="chk_03" />
-                  <label htmlFor="chk_03">선택 동의 03</label>
-                  <a href="#" className="more_btn">
-                    전문 보기
-                  </a>
-                </li>
-                <li>
-                  <input type="checkbox" className="chk_btn" id="chk_04" />
-                  <label htmlFor="chk_04">선택 동의 04</label>
-                  <a href="#" className="more_btn">
-                    전문 보기
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <AddressModal
+            showModal={modalState}
+            closeModal={closeModal}
+            setInputAddressValue={setInputAddressValue}
+            setInputZipCodeValue={setInputZipCodeValue}
+          />
         </div>
 
         <button type="submit" className="btn_signup" onClick={handleSubmit}>
