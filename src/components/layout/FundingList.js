@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./FundingList.css";
@@ -18,6 +18,45 @@ import Card from "../layout/MainCard";
 
 const FundingList = () => {
   const [selectedTab, setSelectedTab] = useState("all");
+  const [order, setOrder] = useState(projectData);
+
+  useEffect(() => {
+    const filteredProjects = projectData
+      .filter((project) => {
+        return (
+          selectedTab === "all" || project.prod_genre === parseInt(selectedTab)
+        );
+      })
+      .slice(0, 12);
+
+    setOrder(filteredProjects);
+  }, [selectedTab]);
+
+  const handleBestClick = () => {
+    const sortedBestList = [...order];
+    sortedBestList.sort((a, b) => {
+      if (a.prod_title && b.prod_title) {
+        return a.prod_title.toLowerCase() < b.prod_title.toLowerCase() ? -1 : 1;
+      }
+    });
+
+    setOrder(sortedBestList);
+  };
+
+  const handleRecentClick = () => {
+    const sortedRecentList = [...order];
+    sortedRecentList.sort((a, b) => {
+      return new Date(b.prod_regdate) - new Date(a.prod_regdate);
+    });
+    setOrder(sortedRecentList);
+  };
+
+  const handleResetClick = () => {
+    // 현재 상태와 원래 순서를 비교하여 원래 순서로 돌아가도록 함
+    if (JSON.stringify(order) !== JSON.stringify(projectData)) {
+      setOrder(projectData);
+    }
+  };
 
   const selectOptionList = [
     { value: "all", name: "전체", image: image1 },
@@ -30,49 +69,48 @@ const FundingList = () => {
     { value: "6", name: "디자인", image: image8 },
   ];
 
-  const popularProject = projectData
-    .filter((project) => {
-      return (
-        selectedTab === "all" || project.prod_genre === parseInt(selectedTab)
-      );
-    })
-    .slice(0, 12);
-
   return (
     <div className="fundinglistpage">
       <div className="fundinglist_tab">
-        {/* <ul className="fundinglist_tabs"> */}
         {selectOptionList.map((option) => (
           <button
             key={option.value}
             className={selectedTab === option.value ? "active" : ""}
             onClick={() => setSelectedTab(option.value)}
           >
-            <div className="Imagetab_img">
+            <div>
               <img src={option.image} alt="" width={50} />
             </div>
             {option.name}
           </button>
         ))}
-
-        {/* </ul> */}
       </div>
       <div className="fundinglist_contents">
         <div className="fundinglist_title">
-          <p>전체</p>
+          <h1>전체</h1>
           <div className="fundinglist_title_tab">
-            <ul>
-              <li>추천순</li>
-              <li>최신순</li>
-              <li>달성률순</li>
-              <li>마감임박순</li>
-            </ul>
+            <label
+              onClick={() => {
+                handleBestClick();
+                handleResetClick();
+              }}
+            >
+              추천순
+            </label>
+            <label
+              onClick={() => {
+                handleRecentClick();
+                handleResetClick();
+              }}
+            >
+              최신순
+            </label>
           </div>
         </div>
 
         <div className="">
           <Link to="/funding">
-            {popularProject.map((project) => (
+            {order.map((project) => (
               <Card key={project.prod_no} project={project} />
             ))}
           </Link>
