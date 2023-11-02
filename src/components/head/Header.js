@@ -86,6 +86,7 @@ const LoggedInHeader = ({ onLogoutClick }) => {
 
   const handleLogout = () => {
     removeCookie("token"); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
+    alert("로그아웃 되었습니다");
   };
   console.log(cookies.token);
 
