@@ -34,7 +34,9 @@ const Card = ({ project }) => {
       <div className="main_cardInfo">
         <div className="main_hashtag">
           {project.prod_hashtag.map((hashtag, index) => (
-            <div className="main_tag">{hashtag}</div>
+            <div key={index} className="main_tag">
+              {hashtag}
+            </div>
           ))}
         </div>
         <div className="main_cardTitle">{project.prod_title}</div>

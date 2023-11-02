@@ -42,7 +42,6 @@ const GaugeBar = ({ goal, current }) => {
     current !== undefined ? current.toLocaleString() : "N/A";
   const percent = goal > 0 ? Math.floor((current / goal) * 100) : 0;
 
-  // const percent = Math.floor((current / goal) * 100);
   return (
     <GaugeContainer>
       <CurrentNum>{`${formattedCurrent}원 펀딩`}</CurrentNum>{" "}
