@@ -25,7 +25,6 @@ const Guidepage = () => {
         </div>
         {/* 가이드 이동 버튼 */}
         <div className="Guide_btn">
-          <button className="Guide_btn1">창작자 가이드</button>
           <Link to="/project">
             <button className="Guide_btn2">지금 시작하기</button>
           </Link>

@@ -48,9 +48,9 @@ function BasicInfo({number}) {
     prod_regdate: formattedDate,
     prod_mainimg: "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg",
     prod_content: "",
-    prod_goal: 0,
+    prod_goal: "",
     prod_class: 0,
-    prod_time: 0,
+    prod_time: "",
     user_no: userno,
     img_no: 1,
   });
