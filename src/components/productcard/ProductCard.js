@@ -10,15 +10,15 @@ import { Button, Drawer } from "antd";
 import MainReward from "../../pages/store/MainReward";
 import Reward from "../../pages/store/Reward";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, rewardData }) => {
   // 구조분해할당을 통해 data.id, data.title 대신 간단하게 사용
-  const { id, title, description, price } = data;
+  const { reward_no: rewardno, reward_price: rewardprice, reward_name: rewardname, reward_info: rewardinfo} = data;
 
   // 아톰 불러오기
   const [cartItem, setCartItem] = useRecoilState(CartAtom);
 
   // 이미 장바구니에 들어있는지 확인
-  const isAlreadyInCart = cartItem.filter((e) => e.id === id).length;
+  const isAlreadyInCart = cartItem.filter((e) => e.reward_no === rewardno).length;
 
   /**
    * 장바구니에 있는지 확인후, 없을때만 아톰에 추가
@@ -50,18 +50,18 @@ const ProductCard = ({ data }) => {
         src={dummyImage}
         alt={`${id}의 더미이미지`}
       /> */}
-      <Haeding className="cardheading">{title}</Haeding>
+      <Haeding className="cardheading">{rewardname}</Haeding>
       <hr></hr>
-      <Price className="cardprice">{price.toLocaleString()}원</Price>
+      <Price className="cardprice">{rewardprice.toLocaleString()}원</Price>
       <MaxLine1 className="cardmax">
-        {Array.isArray(description) ? (
+        {Array.isArray(rewardinfo) ? (
           <ul>
-            {description.map((item, index) => (
+            {rewardinfo.map((item, index) => (
               <li key={index}>ㆍ{item}</li>
             ))}
           </ul>
         ) : (
-          <div>{description}</div>
+          <div>{rewardinfo}</div>
         )}
       </MaxLine1>
       <CardButton

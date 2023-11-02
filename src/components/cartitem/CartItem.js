@@ -6,10 +6,9 @@ import { CartAtom } from "../../recoil/CartAtom";
 
 const CartItem = ({ data }) => {
   const setCartItem = useSetRecoilState(CartAtom);
-  const { id, title, description, price } = data;
-
+  const { reward_no: rewardno, reward_price: rewardprice, reward_name: rewardname, reward_info: rewardinfo} = data;
   const removeFromCart = () => {
-    setCartItem((prev) => prev.filter((e) => e.id !== id));
+    setCartItem((prev) => prev.filter((e) => e.reward_no !== rewardno));
   };
 
   return (
@@ -18,20 +17,20 @@ const CartItem = ({ data }) => {
       <div>
         {/* <ImageWrapper src={dummyImage} alt={title}></ImageWrapper> */}
         <ColumnWrapper className="cartitemcolumn">
-          <Title className="cartitemtitle">{title}</Title>
-          <span>{Array.isArray(description) ? (
+          <Title className="cartitemtitle">{rewardname}</Title>
+          <span>{Array.isArray(rewardinfo) ? (
           <ul style={{listStyle: 'none'}}>
-            {description.map((item, index) => (
+            {rewardinfo.map((item, index) => (
               <li key={index}>ㆍ{item}</li>
             ))}
           </ul>
         ) : (
-          <div>{description}</div>
+          <div>{rewardinfo}</div>
         )}</span>
         </ColumnWrapper>
       </div>
       <RightWrapper className="cartitemright">
-        <Title className="cartitemtitle">{`${price.toLocaleString()}원`}</Title>
+        <Title className="cartitemtitle">{`${rewardprice.toLocaleString()}원`}</Title>
         <Button className="cartitembutton" onClick={removeFromCart}>삭제</Button>
       </RightWrapper>
     </Wrapper>

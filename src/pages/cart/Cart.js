@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import "./Cart.css";
 import Button_funding from "../../components/elements/Button_funding";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "antd";
+import { useCookies } from 'react-cookie';
 import OutlinedCard from "../funding/RewardCard";
 import dummyData from "../../model/dummyData";
+import rewardData from "../../data/rewardData.json";
 import ProductCard from "../../components/productcard/ProductCard";
 import { useRecoilValue } from "recoil";
 import {
@@ -14,8 +17,18 @@ import {
   TotalPriceSelector,
 } from "../../recoil/CartAtom";
 import CartItem from "../../components/cartitem/CartItem";
+import MainReward from "../store/MainReward";
+import axios from "axios";
 
 const Cart = () => {
+  const { prod_no } = useParams();
+  console.log(prod_no);
+
+  // 후원자 정보
+  const [cookies, setCookie] = useCookies();
+
+  const user = cookies.token;
+
   // 모달창
   const [open, setOpen] = useState(false);
 
@@ -31,6 +44,9 @@ const Cart = () => {
   const cartItem = useRecoilValue(CartAtom);
   const TotalQuantity = useRecoilValue(QuantitySelector);
   const TotalPrice = useRecoilValue(TotalPriceSelector);
+
+  const intProdNo = parseInt(prod_no, 10);
+  const filteredData = rewardData.filter((e) => e.prod_no === intProdNo);
 
   return (
     <div className="Cart">
@@ -68,22 +84,16 @@ const Cart = () => {
               <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
             </div>
-            <ul className="mainrewardlist">
-              {dummyData.map((e) => {
-                return (
-                  <li key={e.id}>
-                    <ProductCard data={e} />
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="cart_MainReward">
+              <MainReward prodNo={prod_no} />
+            </div>
             </Modal>
           </div>
         </div>
-        <div className="clist1">
+        <div className="clist">
           <ul className="rewarditem">
           {cartItem.length ? (
-            cartItem.map((e) => <CartItem data={e} key={e.id} />)
+            cartItem.map((e) => <CartItem data={e} key={e.reward_no} />)
           ) : (
             <div className="rewardnoitem">상품이 없습니다</div>
           )}
@@ -98,25 +108,25 @@ const Cart = () => {
               <span>
                 <b>이름</b>
               </span>
-              <div className="user-text text1">홍길동</div>
+              <div className="user-text text1">이름</div>
             </div>
             <div className="cuser">
               <span>
                 <b>연락처</b>
               </span>
-              <div className="user-text text2">010-1234-5678</div>
+              <div className="user-text text2">연락처</div>
             </div>
             <div className="cuser">
               <span>
                 <b>이메일</b>
               </span>
-              <div className="user-text text3">abc@mulplay.com</div>
+              <div className="user-text text3">이메일</div>
             </div>
             <div className="cuser">
               <span>
                 <b>주소</b>
               </span>
-              <div className="user-text text4">홍길동 1-3번지</div>
+              <div className="user-text text4">주소</div>
             </div>
           </div>
         </div>
@@ -149,7 +159,7 @@ const Cart = () => {
           <div className="clist2-text">최종 펀딩 금액</div>
           <div className="clist2-price">{`${TotalPrice}원`}</div>
         </div>
-        <Link to="/mypages/myfundingproject">
+        <Link to="/">
           <div className="clist3">
             <Button_funding text={"결제하기"} minWidth={320} minHeight={50} />
           </div>

@@ -3,13 +3,16 @@ import ProductCard from "../../components/productcard/ProductCard";
 import dummyData from "../../model/dummyData";
 import rewardData from "../../data/rewardData.json"
 
-function MainReward() {
+function MainReward({prodNo}) {
+  const intProdNo = parseInt(prodNo, 10);
+  const filteredData = rewardData.filter((e) => e.prod_no === intProdNo);
+
   return (
     <ListWrapper className="mainrewardlistwrapper">
-      {dummyData.map((e) => {
+      {filteredData.map((e) => {
         return (
-          <li key={e.id}>
-            <ProductCard data={e} />
+          <li key={e.reward_no}>
+            <ProductCard data={e} rewardData={rewardData}/>
           </li>
         );
       })}
