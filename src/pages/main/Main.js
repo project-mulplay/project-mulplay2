@@ -8,7 +8,7 @@ import Pick from "../../components/layout/MainPick";
 import Slider from "../../components/layout/Slider";
 import "../../pages/main/Main.css";
 
-import banner4 from "../../assets/image/banner4.png";
+import MiddleBanner from "../../components/layout/MiddleBanner";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -26,6 +26,7 @@ function Main() {
 
       <div className="main_container">
         <h2 className="main_mainTitle">인기 펀딩</h2>
+
         <div className="main_AppCard">
           <Link to="/funding">
             {popularProject.map((project) => (
@@ -33,6 +34,7 @@ function Main() {
             ))}
           </Link>
         </div>
+
         <div className="main_line"></div>
         <h2 className="main_mainTitle">신규 펀딩</h2>
         <div className="main_AppCard">
@@ -42,9 +44,7 @@ function Main() {
             ))}
           </Link>
         </div>
-        <div className="sub_banner">
-          <img src={banner4} alt="banner4" />
-        </div>
+        <MiddleBanner />
         <h2 className="main_mainTitle">오픈 예정</h2>
         <div className="main_open">
           {openProjects.map((project) => (
