@@ -45,8 +45,8 @@ function App() {
       {cookies.token ? <LoggedInHeader /> : <LoggedOutHeader />}
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/funding" element={<Funding />}></Route>
+        <Route path="/cart/:prod_no" element={<Cart />}></Route>
+        <Route path="/funding/:prod_no" element={<Funding />}></Route>
         <Route path="/openfundinglist" element={<OpenFundingList />}></Route>
         <Route path="/fundinglist" element={<FundingListPage />}></Route>
         <Route path="/login" element={<Login />}></Route>

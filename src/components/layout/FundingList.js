@@ -100,11 +100,11 @@ const FundingList = () => {
         </div>
 
         <div className="">
-          <Link to="/funding">
-            {popularProject.map((project) => (
+        {popularProject.map((project) => (
+          <Link to={`/funding/${project.prod_no}`}>
               <Card key={project.prod_no} project={project} />
-            ))}
           </Link>
+            ))}
         </div>
       </div>
     </div>

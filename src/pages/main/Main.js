@@ -28,21 +28,25 @@ function Main() {
         <h2 className="main_mainTitle">인기 펀딩</h2>
 
         <div className="main_AppCard">
-          <Link to="/funding">
-            {popularProject.map((project) => (
+          <div className="main_AppCard_fa">
+          {popularProject.map((project) => (
+            <Link to={`/funding/${project.prod_no}`}>
               <Card key={project.prod_no} project={project} />
-            ))}
-          </Link>
+            </Link>
+          ))}
+          </div>
         </div>
 
         <div className="main_line"></div>
         <h2 className="main_mainTitle">신규 펀딩</h2>
         <div className="main_AppCard">
-          <Link to="/funding">
-            {newProjects.map((project) => (
+        <div className="main_AppCard_fa">
+          {newProjects.map((project) => (
+            <Link to={`/funding/${project.prod_no}`}>
               <Card key={project.prod_no} project={project} />
-            ))}
-          </Link>
+            </Link>
+          ))}
+          </div>
         </div>
         <MiddleBanner />
         <h2 className="main_mainTitle">오픈 예정</h2>
