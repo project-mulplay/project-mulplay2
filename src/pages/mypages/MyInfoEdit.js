@@ -74,13 +74,13 @@ export default function MyInfoEdit() {
   return (
     <form className="myInfoEdit" onSubmit={handleSubmit}>
       <Stack spacing={1}>
-        <ul className="editForm">
+        <fieldset className="editForm">
           <li>
             <h1 className="editHeader">회원정보</h1>
           </li>
 
           <li className="imgEdit">
-            <span>프로필 이미지</span>
+            <label>프로필 이미지</label>
             <div>
               <img
                 src={require(`../../assets/image/profile${userProfile}.png`)}
@@ -107,7 +107,7 @@ export default function MyInfoEdit() {
                 pb: 3,
               }}
             >
-              <span>선택해서 이미지변경하기</span>
+              <label>선택해서 이미지변경하기</label>
               <div className="imageSelection">
                 {images.map((image, index) => (
                   <img
@@ -124,11 +124,11 @@ export default function MyInfoEdit() {
             </Box>
           </Modal>
           <li>
-            <span>아이디</span>
+            <label>아이디</label>
             <InputMedium placeholder={userId} disabled />
           </li>
           <li>
-            <span>이름</span>
+            <label>이름</label>
             <InputMedium
               name="user_name"
               placeholder={"이름을 입력하세요"}
@@ -138,7 +138,7 @@ export default function MyInfoEdit() {
             />
           </li>
           <li>
-            <span>전화번호</span>
+            <label>전화번호</label>
             <InputMedium
               name="user_phone"
               placeholder={"전화번호를 입력하세요"}
@@ -148,7 +148,7 @@ export default function MyInfoEdit() {
             />
           </li>
           <li>
-            <span>주소</span>
+            <label>주소</label>
             <InputMedium
               name="user_address"
               placeholder={"주소를 입력하세요"}
@@ -170,7 +170,7 @@ export default function MyInfoEdit() {
               회원탈퇴
             </button>
           </li>
-        </ul>
+        </fieldset>
       </Stack>
     </form>
   );
