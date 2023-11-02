@@ -5,9 +5,10 @@
   width: 100%;
   overflow-x: hidden;
 }
-
+/* 슬라이드 배너  */
  .main_slide {
   position: relative;
+
 }
 
 .banner_prev{
@@ -48,11 +49,8 @@
 } */
 
 .sub_banner {
-  width: 100%;
-  background-color: #ee833e;
   margin: 0 auto;
-  margin-top: 50px;
-  margin-bottom: 70px;
+  margin: 50px 0;
 }
 
 .main_line {
@@ -63,10 +61,10 @@
   margin-bottom: 50px;
 }
 
+/* 펀딩 카드  */
 .main_AppCard {
-
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  /* grid-template-columns: auto 1fr auto; */
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
@@ -163,7 +161,6 @@
 }
 .main_cardFooter {
   margin-top: 20px;
-
 }
 .main_cardFunding {
   font-size: 22px;
@@ -194,7 +191,7 @@
   font-size: 14px;
   color: #555555;
 }
-
+/* 오픈 예정 카드 */
 .main_openCard {
   width: 100%;
   height: 478px;
@@ -209,8 +206,8 @@
 
 .main_openImg {
   display: inline-block;
-  display: block;
 }
+
 .main_openImg > img{
  width: 850px;
  padding: 0;
@@ -238,7 +235,7 @@
 .main_openSubtitle {
   font-size: 24px;
   color: #555555;
-  margin-left: 25px;
+  margin-left: 20px;
   margin-bottom: 60px;
   max-width: 700px; 
   white-space: nowrap; 
@@ -262,7 +259,7 @@
 .main_pick {
   width: 100%;
   display:flex;
-  margin: 0 auto 100px;
+  margin: 0 auto;
 
 }
 
@@ -286,10 +283,6 @@
 
 }
 
-
-.main_openImg {
-  display: inline-block;
-}
 .main_pickImg {
   width: 845px;
   height: 400px;
@@ -323,10 +316,11 @@
 .main_pickSubtitle {
   font-size: 18px;
   max-width: 480px; 
+  font-weight: 400;
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
-  color: #888888;
+  color: #555;
 }
 .main_pickButton {
   width: 152px;
@@ -343,3 +337,182 @@
   float: right;
 }
 
+
+/* 화면 너비가 1204px~768px 일 때 */
+@media all and (min-width:768px) and (max-width:1024px) { 
+  .main_container{
+   width:1024px;
+  }
+  .main_mainTitle {
+    margin: 50px 20px 20px;
+  }
+  .main_AppCard {
+    width: 100%;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr; */
+    /* grid-gap: 24px;  */
+    margin:20px 30px;
+  }
+  .main_mainCard {
+    /* grid-gap: 30px; */
+    max-width: 472px;
+    height: 530px;
+  }
+  .main_cardImg img{
+    object-fit:cover;
+  }
+  .main_cardSubtitle {
+    font-size: 16px;
+  }
+  .main_cardFooter {
+    margin: 20px 0 40px;
+  }
+/* 오픈예정 카드 */
+.main_openCard {
+  width: 980px;
+  height: 400px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 20px;
+  margin-bottom: 50px;
+  position: relative;
+}
+.main_openImg {
+  width: 480px;
+}
+.main_openImg > img{
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.main_openInfo {
+  margin-top: 50px;
+}
+
+.main_openSubtitle {
+  margin-bottom: 60px;
+  max-width: 400px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+/* 에디터의 픽 카드  */
+  .main_pick {
+    width: 980px;
+    margin: 0 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1em;
+  }
+  .main_pickCard:first-child {
+    margin-right: 0;
+  }
+
+  .main_pickCard {
+    flex-grow: 1;
+    margin-bottom: 100px;
+  }
+  .main_pickImg {
+    height: 300px;
+  }
+  .main_pickSubtitle {
+    max-width: 400px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+  .main_pickButton{
+    float: left;
+    margin-left: 40px;
+  }
+} 
+
+/* 화면 너비가 768px 이하 일 때 */
+@media all and (max-width:768px) {
+
+  .main_mainTitle {
+    margin: 50px 20px 20px;
+  }
+  .banner_prev{ 
+    display: none;
+  }
+  .banner_next {
+    display: none;
+  }
+  /* 펀딩 카드  */
+  .main_AppCard {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    margin-left:20px;
+  }
+  .main_mainCard {
+    max-width: 340px;
+    height: 520px;
+  }
+
+  .main_cardImg { height: 290px;}
+  .main_cardImg img{
+    height: 290px;
+    object-fit:cover;
+  }
+  .main_cardTitle{ width: 300px; }
+  .main_cardSubtitle{font-size: 20px;}
+  /* 오픈예정 카드 */
+  .main_openCard {
+    width: 700px;
+    height: 720px;
+    margin: 0 20px;
+  }
+  .main_openImg {
+    width: 100%;
+  }
+  .main_openImg > img{
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
+  .main_openInfo {
+    position: absolute;
+    left: 20px;
+    bottom: 50px;
+  }
+  .main_openSubtitle {
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    max-width: 570px;
+    margin-bottom: 40px;
+  }
+/* 에디터의 픽 카드  */
+.main_pick {
+  width: 700px;
+  margin: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+.main_pickCard:first-child {
+  margin-right: 0;
+}
+.main_pickCard:not(:first-child) {
+  margin-bottom: 100px;
+}
+.main_pickCard {
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+.main_pickImg {
+  width: 700px;
+  height: 400px;
+}
+.main_pickSubtitle {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  max-width: 570px;
+}
+.main_pickButton {
+  display: none;
+}
+
+}
+  

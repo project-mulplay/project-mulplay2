@@ -1,4 +1,4 @@
-import Slider from "../../components/layout/Slider";
+import SubSlider from "../../components/layout/SubSlider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FundingList from "../../components/layout/FundingList";
@@ -7,7 +7,7 @@ import "./OpenFundingList.css";
 const OpenFundingList = () => {
   return (
     <div className="openfundinglist">
-      <Slider />
+      <SubSlider />
       <FundingList />
     </div>
   );
