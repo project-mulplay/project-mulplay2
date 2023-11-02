@@ -3,7 +3,6 @@
     margin: 100px auto;
   }
   .fund_container div{
-    text-align: center;
     display: table;
   }
   .fund_container div span{
@@ -19,6 +18,7 @@
 
   .top h1 {
     margin-top: 20px;
+    text-align: center;
   }
 
   .top2{
@@ -54,7 +54,7 @@
     border-radius: 20px;
     margin-top: 10px;
     width: 700px;
-    height: auto;
+    height: 110px;
     background-color: #F2F4F6;
   }
 
@@ -69,21 +69,32 @@
   }
 
   .ml-image {
-    position: absolute; 
-    top:0; 
-    left: 0;
-    width: 700px;
-    height: 470px;
-    object-fit: cover;
+    max-width: 100%; /* 이미지의 최대 너비를 부모 요소에 맞게 설정 */
+  height: 460px; /* 높이 자동 조정 */
+  display: block;
+  position: absolute;
+  top: 50%; /* 이미지 세로 중앙 정렬을 위해 사용 */
+  left: 50%; /* 이미지 가로 중앙 정렬을 위해 사용 */
+  transform: translate(-50%, -50%); /* 이미지 가운데 정렬 */
   }
 
   .fintro {
+    text-align: left;
     margin: 20px 20px 0 20px;
     font-size: 14px;
   }
 
+  .fintro p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
   .fmaker {
-    margin: 10px 20px 20px 20px;
+    position: absolute;
+    bottom: 0;
+    margin: 10px 20px 40px 20px;
     font-size: 14px;
     color: #555555;
   }
@@ -105,7 +116,7 @@
   .middle-right-1{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    outline: 1px solid #9F9F9F;
+    outline: 1px solid #d1d1d1;
     width: 380px;
     height: 220px;
   }
@@ -129,10 +140,17 @@
         background-color: #ebebeb;
     }
 
-  .time, .class, .people, .stack, .current, .goal, .date {
+  .time, .class, .people, .stack, .goal, .date {
     font-size: 14px;
     margin: 10px 20px 10px 20px;
     color: #5f5f5f;
+  }
+
+  .current {
+    font-size: 20px;
+    margin: 10px 20px 10px 20px;
+    color: #EE833E;
+    font-weight: bold;
   }
 
   .stack {
@@ -142,15 +160,36 @@
   .mr1-title {
     color: #888888;
     font-size: 12px;
-    margin-right: 20px;
+  }
+
+  .mr1-title2 {
+    color: #333333;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .fund_icon {
+    margin-right: 10px;
+  }
+
+  .mr1-textwrap {
+    margin-left: 10px;
+    margin-top: 4px;
   }
 
   .mr1-text {
     float: left;
     padding: 2px 10px;
-    margin: 0;
+    margin-left: 0;
     font-weight: bold; 
     font-size: 11px;
+    color: #333333;
+  }
+
+  .mr1-text2 {
+    padding: 2px 10px;
+    margin: 0;
+    font-size: 12px;
     color: #333333;
   }
 
@@ -170,15 +209,16 @@
   .middle-right-2{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    outline: 1px solid #9F9F9F;
+    outline: 1px solid #d1d1d1;
     margin-top: 0px;
     width: 380px;
-    height: 230px;
+    height: 220px;
   }
 
   .middle-right-2 .current-text {
-    font-size: 12px;
+    font-size: 14px;
     margin: 20px 0 0 20px;
+    font-weight: bold;
   }
 
   .middle-right-3{
@@ -209,11 +249,13 @@
 
   .sidebtn1 {
     margin-top: 10px;
+    margin-left: 8px;
     cursor: pointer;
   }
 
   .sidebtn2 {
     margin-top: 7px;
+    margin-left: 5px;
     cursor: pointer;
   }
 
@@ -272,13 +314,18 @@
         align-items: center;
         margin: 0 auto;
         padding-bottom: 20px;
-        width: 600px;
-        height: 460px;
+        width: 700px;
+        height: 100%;
         border-radius: 20px;
       }
 
+      .prod_content_text {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
       .search-btn {
-        width: 650px;
+        width: 700px;
         height: 50px;
         background-color: #fff;
         border: 1px solid #EE833E;
@@ -304,9 +351,10 @@
       }
 
       .middle2-right{
-        position: relative;
-        top: 0px;
-        left: 50px;
+        position: sticky;
+        top: 100px;
+        left: 0;
+        margin-left: 780px;
         width: 380px;
         height: 500px;
       }
