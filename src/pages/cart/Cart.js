@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import "./Cart.css";
 import Button_funding from "../../components/elements/Button_funding";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "antd";
-import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 import OutlinedCard from "../funding/RewardCard";
 import dummyData from "../../model/dummyData";
 import rewardData from "../../data/rewardData.json";
@@ -18,16 +18,28 @@ import {
 } from "../../recoil/CartAtom";
 import CartItem from "../../components/cartitem/CartItem";
 import MainReward from "../store/MainReward";
-import axios from "axios";
+import axios from "../../util/api";
 
 const Cart = () => {
   const { prod_no } = useParams();
   console.log(prod_no);
 
   // 후원자 정보
-  const [cookies, setCookie] = useCookies();
+  const [userData, setUserData] = useState({}); // 데이터를 저장할 상태
 
-  const user = cookies.token;
+  const authCheck = () => {
+    axios.get("user/info")
+      .then((response) => {
+        setUserData(response.data); // 데이터를 상태에 저장
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+      });
+  };
+
+  useEffect(() => {
+    authCheck();
+  }, []);
 
   // 모달창
   const [open, setOpen] = useState(false);
@@ -108,30 +120,30 @@ const Cart = () => {
               <span>
                 <b>이름</b>
               </span>
-              <div className="user-text text1">이름</div>
+              <div className="user-text text1">{userData.user_name}</div>
             </div>
             <div className="cuser">
               <span>
                 <b>연락처</b>
               </span>
-              <div className="user-text text2">연락처</div>
+              <div className="user-text text2">{userData.user_phone}</div>
             </div>
             <div className="cuser">
               <span>
                 <b>이메일</b>
               </span>
-              <div className="user-text text3">이메일</div>
+              <div className="user-text text3">{userData.user_id}</div>
             </div>
             <div className="cuser">
               <span>
                 <b>주소</b>
               </span>
-              <div className="user-text text4">주소</div>
+              <div className="user-text text4">{userData.user_address}</div>
             </div>
           </div>
         </div>
 
-        <span>결제 정보</span>
+        {/* <span>결제 정보</span>
 
         <div className="clist1">
           <div className="cpayment">
@@ -154,7 +166,7 @@ const Cart = () => {
             <label>계좌이체</label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="clist2">
           <div className="clist2-text">최종 펀딩 금액</div>
           <div className="clist2-price">{`${TotalPrice}원`}</div>
