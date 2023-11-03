@@ -1,5 +1,7 @@
-import "./FundingList.css";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import "./FundingList.css";
 import {
   image1,
   image2,
@@ -15,87 +17,94 @@ import projectData from "../../data/projectData.json";
 import Card from "../layout/MainCard";
 
 const FundingList = () => {
-  const popularProject = projectData.slice(0, 9);
+  const [selectedTab, setSelectedTab] = useState("all");
+  const [order, setOrder] = useState(projectData);
+
+  useEffect(() => {
+    const filteredProjects = projectData
+      .filter((project) => {
+        return (
+          selectedTab === "all" || project.prod_genre === parseInt(selectedTab)
+        );
+      })
+      .slice(0, 12);
+
+    setOrder(filteredProjects);
+  }, [selectedTab]);
+
+  const handleBestClick = () => {
+    const sortedBestList = [...order];
+    sortedBestList.sort((a, b) => {
+      if (a.prod_title && b.prod_title) {
+        return a.prod_title.toLowerCase() < b.prod_title.toLowerCase() ? -1 : 1;
+      }
+    });
+
+    setOrder(sortedBestList);
+  };
+
+  const handleRecentClick = () => {
+    const sortedRecentList = [...order];
+    sortedRecentList.sort((a, b) => {
+      return new Date(b.prod_regdate) - new Date(a.prod_regdate);
+    });
+    setOrder(sortedRecentList);
+  };
+
+  const handleResetClick = () => {
+    // 현재 상태와 원래 순서를 비교하여 원래 순서로 돌아가도록 함
+    if (JSON.stringify(order) !== JSON.stringify(projectData)) {
+      setOrder(projectData);
+    }
+  };
+
+  const selectOptionList = [
+    { value: "all", name: "전체", image: image1 },
+    { value: "0", name: "웹", image: image2 },
+    { value: "1", name: "애플리케이션", image: image3 },
+    { value: "2", name: "일반소프트웨어", image: image4 },
+    { value: "3", name: "게임", image: image5 },
+    { value: "4", name: "커머스쇼핑몰", image: image6 },
+    { value: "5", name: "퍼블리싱", image: image7 },
+    { value: "6", name: "디자인", image: image8 },
+  ];
+
   return (
     <div className="fundinglistpage">
       <div className="fundinglist_tab">
-        <ul className="fundinglist_tabs">
-          <li data-index="0">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image1} alt="" width={50} />
-              </div>
-              <div>전체</div>
-            </button>
-          </li>
-          <li data-index="1">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image2} alt="" width={50} />
-              </div>
-              <div>웹</div>
-            </button>
-          </li>
-          <li data-index="2">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image3} alt="" width={50} />
-              </div>
-              <div>애플리케이션</div>
-            </button>
-          </li>
-          <li data-index="3">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image4} alt="" width={50} />
-              </div>
-              <div>일반 소프트웨어</div>
-            </button>
-          </li>
-          <li data-index="4">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image5} alt="" width={50} />
-              </div>
-              <div>게임</div>
-            </button>
-          </li>
-          <li data-index="5">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image6} alt="" width={50} />
-              </div>
-              <div>커머스 쇼핑몰</div>
-            </button>
-          </li>
-          <li data-index="6">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image7} alt="" width={50} />
-              </div>
-              <div>퍼블리싱</div>
-            </button>
-          </li>
-          <li data-index="7">
-            <button className="fundinglist_Imagetab">
-              <div className="Imagetab_img">
-                <img src={image8} alt="" width={50} />
-              </div>
-              <div>디자인</div>
-            </button>
-          </li>
-        </ul>
+        {selectOptionList.map((option) => (
+          <button
+            key={option.value}
+            className={selectedTab === option.value ? "active" : ""}
+            onClick={() => setSelectedTab(option.value)}
+          >
+            <div>
+              <img src={option.image} alt="" width={50} />
+            </div>
+            {option.name}
+          </button>
+        ))}
       </div>
       <div className="fundinglist_contents">
         <div className="fundinglist_title">
-          <p>전체</p>
+          <h1>전체</h1>
           <div className="fundinglist_title_tab">
-            <ul>
-              <li>추천순</li>
-              <li>최신순</li>
-              <li>달성률순</li>
-              <li>마감임박순</li>
-            </ul>
+            <label
+              onClick={() => {
+                handleBestClick();
+                handleResetClick();
+              }}
+            >
+              추천순
+            </label>
+            <label
+              onClick={() => {
+                handleRecentClick();
+                handleResetClick();
+              }}
+            >
+              최신순
+            </label>
           </div>
         </div>
 
