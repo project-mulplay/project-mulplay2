@@ -107,14 +107,15 @@ const ProductCard = ({ data, rewardData }) => {
 
 const MustLogin = styled.p`
   &.mustlogin {
-    font-size: 12px;
+    font-size: 13px;
     position: relative;
     margin-top:50px;
+    margin-left:0px;
     border: 1px solid #ee833e;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 8px;
     color: #000;
-    width: 265px;
+    width: 260px;
     text-align: center;
   }
 `
