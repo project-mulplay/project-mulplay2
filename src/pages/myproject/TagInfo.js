@@ -11,16 +11,16 @@ import ImageUploader from "./InputFile";
 
 function TagInfo({ number }) {
   const savebtnstyle1 = {
-    margin: "50px 0",
+    margin: "50px 60px",
     float: "left",
-    backgroundColor: "#EE833E",
-    color: "#fff",
+    border: "1px solid #EE833E",
+    backgroundColor: "#fff",
+    color: "#EE833E",
     fontSize: "18px",
     fontWeight: "500",
     width: "184px",
     height: "50px",
     borderRadius: "15px",
-    border: "none",
     cursor: "pointer",
   };
 
