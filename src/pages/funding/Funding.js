@@ -91,7 +91,7 @@ const Funding = () => {
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
-    setOpen(true);
+      setOpen(true);
   };
 
   const onClose = () => {
@@ -335,9 +335,13 @@ const Funding = () => {
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
               <div>
+                {LoginState ?  
                 <button className="cartshow-btn" onClick={setOpen}>
-                  장바구니 보기
-                </button>
+                장바구니 보기
+                </button> : 
+                <Link to="/login">
+                  <button className="cartshow-btn">로그인 하기</button>
+                  </Link>}
                 <Drawer
                   title="Basic Drawer"
                   placement="right"
