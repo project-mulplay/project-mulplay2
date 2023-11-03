@@ -7,7 +7,8 @@ import logo from "../../assets/image/logo.png";
 import menu from "../../assets/image/menu.png";
 import close from "../../assets/image/close.png";
 import search from "../../assets/image/search.png";
-//import bell from "../../assets/image/bell.png";
+
+import Swal from "sweetalert2";
 
 // 로그인 안한 헤더
 const LoggedOutHeader = ({ onLoginClick }) => {
@@ -86,7 +87,13 @@ const LoggedInHeader = ({ onLogoutClick }) => {
 
   const handleLogout = () => {
     removeCookie("token"); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
-    alert("로그아웃 되었습니다");
+    Swal.fire({
+      icon: "info",
+      title: "로그아웃 되었습니다.",
+      showCancelButton: false,
+      confirmButtonColor: "#EE833E",
+      confirmButtonText: "OK",
+    });
   };
   console.log(cookies.token);
 
