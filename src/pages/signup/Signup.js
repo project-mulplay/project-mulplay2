@@ -52,7 +52,7 @@ const Signup = () => {
     user_role: 1,
     img_no: 1,
   });
-  
+
   // 주소 변경을 포함하여 모든 입력 변경을 다루는 handleChange 함수
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -165,11 +165,34 @@ const Signup = () => {
         <div className="input_box adr">
           <label>주소</label>
           <div className="column">
+
+            <input
+              className="input_text"
+              onChange={handleZipCode}
+              value={inputZipCodeValue}
+              placeholder="우편번호"
+              type={"text"}
+            />
+            <button className="btn_search" type="button" onClick={openModal}>
+              주소 검색
+            </button>
+            {/* <button className="btn_search" id="yourButtonId" onclick={openDaumPostcode}>검색</button> */}
+          </div>
+          <input
+            className="input_text"
+            value={inputAddressValue}
+            name="user_address"
+            onChange={handleAddressChange}
+            placeholder="주소"
+            type={"text"}
+          />
+           {/*
           <input className="input_text" onChange={handleZipCode} value={inputZipCodeValue} placeholder="우편번호" type={'text'} />
           <button className="btn_search" type="button"  onClick={openModal}>주소 검색</button>
             {/* <button className="btn_search" id="yourButtonId" onclick={openDaumPostcode}>검색</button> */}
           </div>
           <input className="input_text" value={inputAddressValue} name="user_address" onChange={handleAddressChange} placeholder="주소" type={'text'} />
+          */}
 
           <AddressModal
             showModal={modalState}

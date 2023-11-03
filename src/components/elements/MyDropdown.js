@@ -14,6 +14,8 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import MenuButton from "@mui/joy/MenuButton";
 import Dropdown from "@mui/joy/Dropdown";
 
+import Swal from "sweetalert2";
+
 const MyDropdown = ({ stat, prod_no }) => {
   const pundingOpen = stat === 3 || stat === 4;
   const [value, setValue] = useRecoilState(MyCategoryAtom);
@@ -22,16 +24,40 @@ const MyDropdown = ({ stat, prod_no }) => {
     event.preventDefault();
 
     if (stat == 6) {
-      alert("이미 보류된 프로젝트입니다.");
-    } else if (window.confirm("정말 보류하시겠습니까?")) {
-      axios
-        .patch("/user/myproject", {
-          prod_no: prod_no,
-        })
-        .then((response) => {
-          alert("프로젝트가 보류되었습니다.");
-        });
-    }
+      Swal.fire({
+        icon: "info",
+        title: "이미 보류된 프로젝트입니다.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
+    } else
+      Swal.fire({
+        title: "정말 보류하시겠습니까?",
+        icon: "warning",
+
+        showCancelButton: true,
+        confirmButtonColor: "#EE833E",
+        cancelButtonColor: "gray",
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancle",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .patch("/user/myproject", {
+              prod_no: prod_no,
+            })
+            .then((response) => {
+              Swal.fire({
+                icon: "success",
+                title: "프로젝트가 보류되었습니다.",
+                showCancelButton: false,
+                confirmButtonColor: "#EE833E",
+                confirmButtonText: "OK",
+              });
+            });
+        }
+      });
   };
 
   const ClickCategory = () => {
