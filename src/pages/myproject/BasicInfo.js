@@ -8,10 +8,9 @@ import SkillCheckbox from "./SkillCheckbox";
 import StaffCheckbox from "./StaffCheckbox";
 import TagCheckbox from "./TagCheckbox";
 import ImageUploader from "./InputFile";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
-function BasicInfo({number}) {
-
+function BasicInfo({ number }) {
   const savebtnstyle1 = {
     margin: "50px 60px",
     float: "left",
@@ -30,16 +29,22 @@ function BasicInfo({number}) {
 
   const LoginState = cookies.token;
 
-
   // 현재 날짜 '2023-10-30'
   const currentDate = new Date();
-  const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}T${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
-  
+  const formattedDate = `${currentDate.getFullYear()}-${String(
+    currentDate.getMonth() + 1
+  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(
+    2,
+    "0"
+  )}T${String(currentDate.getHours()).padStart(2, "0")}:${String(
+    currentDate.getMinutes()
+  ).padStart(2, "0")}:${String(currentDate.getSeconds()).padStart(2, "0")}`;
+
   // 오픈일 / 종료일
   const [dates, setDates] = useState({ openDate: "", endDate: "" });
 
   const handleDateChange = (key, value) => {
-    setDates(prev => ({ ...prev, [key]: value }));
+    setDates((prev) => ({ ...prev, [key]: value }));
   };
 
   // 유저 번호
@@ -51,7 +56,8 @@ function BasicInfo({number}) {
     prod_title: "",
     prod_intro: "",
     prod_regdate: formattedDate,
-    prod_mainimg: "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg",
+    prod_mainimg:
+      "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg",
     prod_content: "",
     prod_goal: "",
     prod_class: 0,
@@ -59,7 +65,7 @@ function BasicInfo({number}) {
     user_no: userno,
     img_no: 1,
   });
-  
+
   useEffect(() => {
     if (dates.openDate && dates.endDate) {
       setFormData((prev) => ({
@@ -73,17 +79,18 @@ function BasicInfo({number}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     // 예시: 'prod_goal'을 숫자 값만 입력할 수 있도록 제한
-    if (name === 'prod_goal' || name === "prod_genre" || name === "prod_time") {
+    if (name === "prod_goal" || name === "prod_genre" || name === "prod_time") {
       // 빈 문자열 또는 비숫자 문자를 제거하고 숫자로 변환
-      const numericValue = value.replace(/\D/g, ''); // 숫자 외의 문자 제거
-  
-      if (numericValue) { // 빈 문자열이 아닌 경우에만 처리
+      const numericValue = value.replace(/\D/g, ""); // 숫자 외의 문자 제거
+
+      if (numericValue) {
+        // 빈 문자열이 아닌 경우에만 처리
         const numericIntValue = parseInt(numericValue, 10);
         // 예시: 50,000부터 100,000,000 사이의 값만 허용
         if (numericIntValue >= 0 && numericIntValue <= 100000000) {
           setFormData({
             ...formData,
-            [name]: numericIntValue
+            [name]: numericIntValue,
           });
         }
         // 범위를 벗어난 경우 오류 메시지 표시 또는 사용자 알림
@@ -91,14 +98,14 @@ function BasicInfo({number}) {
         // 빈 문자열인 경우, 0 또는 다른 기본값으로 설정하거나 오류 처리
         setFormData({
           ...formData,
-          [name]: '' // 혹은 다른 기본값 설정 가능
+          [name]: "", // 혹은 다른 기본값 설정 가능
         });
       }
     } else {
       // 다른 필드의 경우 기존과 같이 처리
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
         // [name]: (name === "prod_genre" || name === "prod_time") ? parseInt(value, 10) : value
       });
     }
@@ -111,11 +118,14 @@ function BasicInfo({number}) {
     console.log(formData.prod_mainimg);
 
     try {
-      const response = await axios.post('http://localhost:3300/make/infoproject', formData);
-      console.log('요청 성공:', response);
+      const response = await axios.post(
+        "http://localhost:3300/make/infoproject",
+        formData
+      );
+      console.log("요청 성공:", response);
     } catch (error) {
       console.log(formData);
-      console.error('요청 실패:', error);
+      console.error("요청 실패:", error);
     }
   };
 
@@ -178,7 +188,7 @@ function BasicInfo({number}) {
         <p>
           프로젝트 심사부터 리워드 제작기간 등 전체 일정을 고려해 설정해 주세요.
         </p>
-        <MyDatePicker onDateChange={handleDateChange}/>
+        <MyDatePicker onDateChange={handleDateChange} />
       </div>
       <div className="goalmoney">
         <label htmlFor="money">목표 금액</label>
@@ -214,7 +224,14 @@ function BasicInfo({number}) {
         />
       </div>
 
-      <button style={savebtnstyle1} type="submit" className="btn_signup" onClick={handleSubmit}>저장하기</button>
+      <button
+        style={savebtnstyle1}
+        type="submit"
+        className="btn_signup"
+        onClick={handleSubmit}
+      >
+        저장하기
+      </button>
     </form>
   );
 }

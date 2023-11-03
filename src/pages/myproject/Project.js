@@ -24,7 +24,6 @@ const ProjectTitle = () => {
 // 메뉴 탭 //
 
 export function CenteredTabs() {
-
   const [data, setData] = useState({});
   console.log(data);
   console.log(data.prod_no);
@@ -97,14 +96,14 @@ export function CenteredTabs() {
     >
       <Tabs value={value} onChange={handleChange} centered>
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="기본 정보" />
-        <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="해쉬태그 정보" />
+        <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="해시태그 정보" />
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="리워드 정보" />
         <Tab sx={{ fontSize: 18, fontWeight: 600 }} label="프로젝트 정보" />
       </Tabs>
 
       {value === 0 && (
         <Typography sx={{ p: 2 }}>
-          <BasicInfo number={data.prod_no}/>
+          <BasicInfo number={data.prod_no} />
           <button style={btnstyle} value={value} onClick={clickbtn}>
             다음 단계
           </button>
@@ -113,7 +112,7 @@ export function CenteredTabs() {
 
       {value === 1 && (
         <Typography sx={{ p: 2 }}>
-          <TagInfo number={data.prod_no}/>
+          <TagInfo number={data.prod_no} />
           <button style={btnstyle} value={value} onClick={clickbtn}>
             다음 단계
           </button>
@@ -122,7 +121,7 @@ export function CenteredTabs() {
 
       {value === 2 && (
         <Typography sx={{ p: 2 }}>
-          <RewardInfo number={data.prod_no}/>
+          <RewardInfo number={data.prod_no} />
           <button style={btnstyle} value={value} onClick={clickbtn}>
             다음 단계
           </button>
@@ -131,7 +130,7 @@ export function CenteredTabs() {
 
       {value === 3 && (
         <Typography sx={{ p: 2 }}>
-          <ProjectInfo number={data.prod_no}/>
+          <ProjectInfo number={data.prod_no} />
           <button style={btnstyle} value={value} onClick={clickbtn}>
             제출하기
           </button>
