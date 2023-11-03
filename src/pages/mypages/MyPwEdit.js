@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../util/api";
 
 import Stack from "@mui/joy/Stack";
+import Swal from "sweetalert2";
 import InputMedium from "../../components/elements/InputMedium";
 
 import "./MyInfoEdit.css";
@@ -27,7 +28,14 @@ export default function MyPwEdit() {
     if (currentPw === userPw) {
       setIsCurrentPwValid(true);
     } else {
-      alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+      Swal.fire({
+        icon: "error",
+        title: "비밀번호가 일치하지 않습니다.",
+        text: "다시 확인해주세요",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -35,18 +43,43 @@ export default function MyPwEdit() {
   const handleSubmitChangePassword = (event) => {
     event.preventDefault();
     if (newPw !== doublecheckPw) {
-      alert("입력한 비밀번호가 일치하지 않습니다");
+      Swal.fire({
+        icon: "error",
+        title: "비밀번호가 일치하지 않습니다.",
+        text: "같은 비밀번호를 입력해주세요",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
       return;
     }
-    if (window.confirm("비밀번호를를 수정하시겠습니까?")) {
-      axios
-        .patch("/user/pw", {
-          user_pw: doublecheckPw,
-        })
-        .then((response) => {
-          alert("비밀번호가 수정되었습니다.");
-        });
-    }
+
+    Swal.fire({
+      title: "비밀번호를 수정하시겠습니까?",
+      icon: "question",
+
+      showCancelButton: true,
+      confirmButtonColor: "#EE833E",
+      cancelButtonColor: "gray",
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancle",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch("/user/pw", {
+            user_pw: doublecheckPw,
+          })
+          .then((response) => {
+            Swal.fire({
+              icon: "success",
+              title: "비밀번호가 수정되었습니다.",
+              showCancelButton: false,
+              confirmButtonColor: "#EE833E",
+              confirmButtonText: "OK",
+            });
+          });
+      }
+    });
   };
 
   return (

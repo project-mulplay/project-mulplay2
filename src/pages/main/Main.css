@@ -91,6 +91,8 @@
   width: 54px;
   height: 26px;
   font-size: 14px;
+  font-weight: bold;
+
   background-color: #ee833e;
   color: white;
   border-radius: 100px;
@@ -126,6 +128,7 @@
   margin: 15px 0px 5px 15px;
   line-height: 5px;
   text-align: center;
+  
 }
 .main_cardInfo {
   background-color: white;
@@ -174,9 +177,9 @@
 }
 .main_cardPercent {
   font-size: 16px;
-  color: #333333;
+  color: #555555;
   display: block;
-  /* position: absolute; */
+  font-weight: 500;
   text-align: right;
   float: right;
   margin-top: 5px;

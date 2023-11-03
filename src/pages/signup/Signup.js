@@ -2,9 +2,8 @@ import "./Signup.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import GoogleIcon from "./../../assets/image/icon_google.svg";
-import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
-import AppleIcon from "./../../assets/image/icon_apple.svg";
+
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const currentDate = new Date();
@@ -41,7 +40,16 @@ const Signup = () => {
         data
       );
       console.log("요청 성공:", response);
-      alert("회원가입이 완료되었습니다. 로그인페이지로 이동합니다.");
+
+      Swal.fire({
+        icon: "success",
+        title: "회원가입이 완료되었습니다. ",
+        text: "로그인페이지로 이동합니다.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
+
       navigate("/login");
     } catch (error) {
       console.log(data);

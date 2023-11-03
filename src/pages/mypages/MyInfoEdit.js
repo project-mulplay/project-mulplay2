@@ -17,6 +17,7 @@ import "./MyInfoEdit.css";
 import Stack from "@mui/joy/Stack";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import Swal from "sweetalert2";
 
 const images = [profile0, profile1, profile2, profile3, profile4];
 
@@ -48,27 +49,62 @@ export default function MyInfoEdit() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (window.confirm("회원정보를 수정하시겠습니까?")) {
-      axios
-        .patch("/user/info", {
-          user_name: userName,
-          user_phone: userPhone,
-          user_address: userAddress,
-          user_profileimg: userProfile,
-        })
-        .then((response) => {
-          alert("회원정보가 수정되었습니다.");
-        });
-    }
+    Swal.fire({
+      title: "회원정보를 수정하시겠습니까?",
+      icon: "question",
+
+      showCancelButton: true,
+      confirmButtonColor: "#EE833E",
+      cancelButtonColor: "gray",
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancle",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch("/user/info", {
+            user_name: userName,
+            user_phone: userPhone,
+            user_address: userAddress,
+            user_profileimg: userProfile,
+          })
+          .then((response) => {
+            Swal.fire({
+              icon: "success",
+              title: "회원정보가 수정되었습니다.",
+              showCancelButton: false,
+              confirmButtonColor: "#EE833E",
+              confirmButtonText: "OK",
+            });
+          });
+      }
+    });
   };
   const handleDelete = () => {
-    if (window.confirm("정말 탈퇴하시겠습니까?")) {
-      axios.delete("/user/info").then((response) => {
-        alert("회원탈퇴가 완료되었습니다.");
-        Cookies.remove("token");
-        navigate("/");
-      });
-    }
+    Swal.fire({
+      title: "정말 탈퇴하시겠습니까?",
+      text: "되돌릴수 없습니다. 신중하세요",
+      icon: "question",
+
+      showCancelButton: true,
+      confirmButtonColor: "#EE833E",
+      cancelButtonColor: "gray",
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancle",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete("/user/info").then((response) => {
+          Swal.fire({
+            icon: "success",
+            title: "회원탈퇴가 완료되었습니다.",
+            showCancelButton: false,
+            confirmButtonColor: "#EE833E",
+            confirmButtonText: "OK",
+          });
+          Cookies.remove("token");
+          navigate("/");
+        });
+      }
+    });
   };
 
   return (

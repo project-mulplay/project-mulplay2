@@ -46,7 +46,9 @@ const Card = ({ project }) => {
             {numberWithCommas(project.prod_current)} 원 펀딩
           </div>
           <div className="main_cardPercent">
-            {"달성률 " + percent(project.prod_goal, project.prod_current) + "%"}
+            {"달성률 " +
+              percent(project.prod_goal, project.prod_current) +
+              "% "}
           </div>
         </div>
       </div>

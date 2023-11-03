@@ -1,12 +1,10 @@
 import "./Login.css";
 import { useState } from "react";
-import GoogleIcon from "./../../assets/image/icon_google.svg";
-import KakaoIcon from "./../../assets/image/icon_kakaotalk.svg";
-import AppleIcon from "./../../assets/image/icon_apple.svg";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import axios from "axios";
+
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [data, setData] = useState({});
@@ -39,12 +37,33 @@ const Login = () => {
         response.data.user_id === username &&
         response.data.user_pw === password
       ) {
-        alert("로그인되었습니다.");
+        Swal.fire({
+          icon: "success",
+          title: "로그인 되었습니다.",
+          text: "MULPLAY에 오신걸 환영합니다.",
+          showCancelButton: false,
+          confirmButtonColor: "#EE833E",
+          confirmButtonText: "OK",
+        });
+
         navigate("/");
       } else if (response.data.user_stat === 2) {
-        alert("탈퇴한 회원입니다.");
+        Swal.fire({
+          icon: "info",
+          title: "탈퇴한 회원입니다.",
+          showCancelButton: false,
+          confirmButtonColor: "#EE833E",
+          confirmButtonText: "OK",
+        });
       } else {
-        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+        Swal.fire({
+          icon: "error",
+          title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          text: "다시 확인해주세요.",
+          showCancelButton: false,
+          confirmButtonColor: "#EE833E",
+          confirmButtonText: "OK",
+        });
       }
     } catch (error) {
       console.error("요청 실패:", error);
@@ -100,7 +119,7 @@ const Login = () => {
           로그인
         </button>
         {/* sns 로그인 */}
-        <div className="sns_container">
+        {/* <div className="sns_container">
           <div className="sns_login google" onClick={onClick}>
             <img src={GoogleIcon} alt="" />
           </div>
@@ -110,7 +129,7 @@ const Login = () => {
           <div className="sns_login apple" onClick={onClick}>
             <img src={AppleIcon} alt="" />
           </div>
-        </div>
+        </div> */}
         <div className="signup_btn">
           아직 계정이 없으신가요?{" "}
           <Link to="/signup">
