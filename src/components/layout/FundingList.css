@@ -3,18 +3,36 @@
 }
 
 .fundinglist_tab {
-    margin-top: 100px;
-    margin-bottom: 100px;
-    height: 120px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  height: 120px;
   text-align: center;
+  
 }
 
-.fundinglist_tabs {
-  display: inline-block;
-    list-style:none;
-    margin:0 auto;
-    padding:0;
+.fundinglist_tab button{
+  background-color: white;
+  border: none;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 20px;
+  box-shadow: 0.5px 2px 5px rgb(218, 218, 218);
+  padding: 3px;
 }
+
+.fundinglist_tab .active{
+  cursor: pointer;
+  width: 100px;
+  margin-bottom: 15px;
+  background: white;
+  border-radius: 20px;
+  border: 3px solid #ee833e;
+  box-shadow: 0.5px 2px 5px rgb(218, 218, 218);
+}
+
 
 .fundinglist_Imagetab {
     background-color: #fff;
@@ -22,7 +40,7 @@
     
 }
 
-.fundinglist_tabs .Imagetab_img {
+.fundinglist_tab .Imagetab_img {
     cursor: pointer;
     width: 100px;
     margin-bottom: 15px;
@@ -31,12 +49,6 @@
     box-shadow: 0.5px 2px 5px rgb(168, 168, 168);
 }
 
-.fundinglist_tabs li {
-    width: 100px;
-    margin: 20px;
-    padding: 0;
-    float: left;
-}
 
 .fundinglist_contents {
     margin: 0 auto;
@@ -48,46 +60,38 @@
 .fundinglist_title {
     display: flex;
     margin-bottom: 30px;
-
     justify-content: space-between;
     align-items: center;
 }
 
-.fundinglist_title p{
-    flex: 1;
+.fundinglist_title h1{
     margin: 15px 15px 0px 15px;
-    font-size: 28px;
-    font-weight: 600;
 }
 
 .fundinglist_title_tab {
-    flex: 1;
-    display: inline-block;
-    margin-left: 300px;
+    padding-right: 30px;
 }
 
-.fundinglist_title_tab ul {
-    flex: 1;
-    list-style:none;
-    padding:0;
 
-    display: flex;
-    gap: 10px;
-}
-
-.fundinglist_title_tab li {
+.fundinglist_title_tab label {
     cursor: pointer;
     width: 100px;
     margin: 20px 0px 0px 0px;
-    right: 0;
     text-align: center;
-    padding: 0;
     float: left;
+    font-weight: 600;
+    color: #555555;
+    
 }
 
+.fundinglist_title_tab label:hover {
+  cursor: pointer;
+  color:#ee833e;
+  
+}
 
-/* 펀딩 카로셀 카드 */
-.fundinglist_mainCard {
+/* 이전버전 펀딩 카로셀 카드 */
+/* .fundinglist_mainCard {
     border: solid 1px #c8c8c8;
     width: 350px;
     height: 420px;
@@ -96,7 +100,7 @@
     overflow: hidden;
     margin: 40px;
     display: inline-block;
-    /* padding: 20px; */
+  
   }
   .fundinglist_dday {
     width: 54px;
@@ -146,7 +150,6 @@
   }
   .fundinglist_cardTitle {
     width: 350px;
-    /* padding: 0px 10px 10px 10px; */
     font-size: 24px;
     color: #333333;
     font-weight: bold;
@@ -188,8 +191,7 @@
     flex: 1;
     font-size: 14px;
     color: #333333;
-    /* position: absolute; */
     text-align: center;
     margin-top: 5px;
     margin-right: 10px;
-  }
+  } */
