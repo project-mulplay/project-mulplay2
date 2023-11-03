@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import axios from "../../util/api";
+import { useRecoilState } from "recoil";
+import { MyCategoryAtom } from "../../recoil/MyCategoryAtom";
 
 import IconButton from "@mui/joy/IconButton";
 import Menu from "@mui/joy/Menu";
@@ -16,6 +18,7 @@ import Swal from "sweetalert2";
 
 const MyDropdown = ({ stat, prod_no }) => {
   const pundingOpen = stat === 3 || stat === 4;
+  const [value, setValue] = useRecoilState(MyCategoryAtom);
 
   const stateChange = (event) => {
     event.preventDefault();
@@ -57,6 +60,10 @@ const MyDropdown = ({ stat, prod_no }) => {
       });
   };
 
+  const ClickCategory = () => {
+    setValue("four");
+  };
+
   return (
     <Dropdown>
       <MenuButton
@@ -69,7 +76,7 @@ const MyDropdown = ({ stat, prod_no }) => {
 
       <Menu placement="right-end">
         {pundingOpen ? (
-          <MenuItem variant="soft" color="primary">
+          <MenuItem variant="soft" color="primary" onClick={ClickCategory}>
             <Link to="/mypages/myproceeds">
               <ListItemDecorator>
                 <Edit />
