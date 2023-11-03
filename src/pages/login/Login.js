@@ -1,6 +1,8 @@
 import "./Login.css";
 import { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
@@ -47,6 +49,7 @@ const Login = () => {
         });
 
         navigate("/");
+
       } else if (response.data.user_stat === 2) {
         Swal.fire({
           icon: "info",
@@ -55,6 +58,7 @@ const Login = () => {
           confirmButtonColor: "#EE833E",
           confirmButtonText: "OK",
         });
+
       } else {
         Swal.fire({
           icon: "error",
@@ -72,8 +76,8 @@ const Login = () => {
 
   // 미완성된 기능 알람
   const onClick = () => {
-    alert("아직 미구현된 기능입니다.");
-  };
+    alert("아직 미구현된 기능입니다.")
+  }
 
   return (
     <section id="container_login">
@@ -120,10 +124,10 @@ const Login = () => {
 
         <div className="signup_btn">
           아직 계정이 없으신가요?{" "}
-          <Link to="/signup">
-            <a className="atag" href="#">
-              회원가입
-            </a>
+          <Link to='/signup'>
+          <a className="atag" href="#">
+            회원가입
+          </a>
           </Link>
         </div>
       </form>
