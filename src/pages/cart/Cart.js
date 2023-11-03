@@ -5,6 +5,15 @@ import Button_funding from "../../components/elements/Button_funding";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "antd";
 import OutlinedCard from "../funding/RewardCard";
+import dummyData from "../../model/dummyData";
+import ProductCard from "../../components/productcard/ProductCard";
+import { useRecoilValue } from "recoil";
+import {
+  CartAtom,
+  QuantitySelector,
+  TotalPriceSelector,
+} from "../../recoil/CartAtom";
+import CartItem from "../../components/cartitem/CartItem";
 
 const Cart = () => {
   // 모달창
@@ -17,6 +26,11 @@ const Cart = () => {
     console.log(e.target.value);
     setX(e.target.value);
   };
+
+  // 장바구니
+  const cartItem = useRecoilValue(CartAtom);
+  const TotalQuantity = useRecoilValue(QuantitySelector);
+  const TotalPrice = useRecoilValue(TotalPriceSelector);
 
   return (
     <div className="Cart">
@@ -44,41 +58,36 @@ const Cart = () => {
               변경
             </Button>
             <Modal
-              title="Modal 1000px width"
+              title="Reward Change"
               centered
               open={open}
               onOk={() => setOpen(false)}
               onCancel={() => setOpen(false)}
-              width={800}
+              width={600}
             >
               <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
             </div>
-            <div className="modal-cart-card">
-              <div className="cart-card">
-                <OutlinedCard fcard={0} />
-              </div>
-              <div className="cart-card">
-                <OutlinedCard fcard={1} />
-              </div>
-              <div className="cart-card">
-                <OutlinedCard fcard={2} />
-              </div>
-              <div className="cart-card">
-                <OutlinedCard fcard={3} />
-              </div>
-            </div>
+            <ul className="mainrewardlist">
+              {dummyData.map((e) => {
+                return (
+                  <li key={e.id}>
+                    <ProductCard data={e} />
+                  </li>
+                );
+              })}
+            </ul>
             </Modal>
           </div>
         </div>
         <div className="clist1">
-          <div className="citembox">
-            <div className="citem">
-              모두가 꿈꾸는 내일의 펀딩세상을 만듭니다. 멀플 유니버셜
-            </div>
-            <div className="citem">얼리버드</div>
-            <div className="citem">10000원</div>
-          </div>
+          <ul className="rewarditem">
+          {cartItem.length ? (
+            cartItem.map((e) => <CartItem data={e} key={e.id} />)
+          ) : (
+            <div className="rewardnoitem">상품이 없습니다</div>
+          )}
+        </ul>
         </div>
 
         <span>후원자 정보</span>
@@ -138,7 +147,7 @@ const Cart = () => {
         </div>
         <div className="clist2">
           <div className="clist2-text">최종 펀딩 금액</div>
-          <div className="clist2-price">20,000,000원</div>
+          <div className="clist2-price">{`${TotalPrice}원`}</div>
         </div>
         <Link to="/mypages/myfundingproject">
           <div className="clist3">

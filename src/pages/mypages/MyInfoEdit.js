@@ -1,51 +1,45 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import axios from "../../util/api";
+import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useRecoilState } from "recoil";
+import { ProfileImgAtom } from "../../recoil/ProfileImgAtom";
 
-import Stack from "@mui/joy/Stack";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import profile from "../../assets/image/profile.png";
+import profile0 from "../../assets/image/profile0.png";
 import profile1 from "../../assets/image/profile1.png";
 import profile2 from "../../assets/image/profile2.png";
 import profile3 from "../../assets/image/profile3.png";
 import profile4 from "../../assets/image/profile4.png";
 import InputMedium from "../../components/elements/InputMedium";
+
 import "./MyInfoEdit.css";
 
-const images = [profile1, profile2, profile3, profile4];
+import Stack from "@mui/joy/Stack";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
-export default function MyInfoEdit({ user_no }) {
+const images = [profile0, profile1, profile2, profile3, profile4];
+
+export default function MyInfoEdit() {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies();
 
   const [userId, setUserId] = React.useState("");
   const [userName, setUserName] = React.useState("");
   const [userPhone, setUserPhone] = React.useState("");
   const [userAddress, setUserAddress] = React.useState("");
+  const [userProfile, setUserProfile] = useRecoilState(ProfileImgAtom);
 
-  const [selectedImage, setSelectedImage] = React.useState(profile);
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const authCheck = () => {
-    axios
-      .get("http://localhost:3300/user/info", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        setUserId(response.data.user_id || "");
-        setUserName(response.data.user_name || "");
-        setUserPhone(response.data.user_phone || "");
-        setUserAddress(response.data.user_address || "");
-        console.log("infoedit 요청 성공:", response);
-      })
-      .catch((error) => {
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/info").then((response) => {
+      console.log("get info : ", response.data);
+      setUserId(response.data.user_id || "");
+      setUserName(response.data.user_name || "");
+      setUserPhone(response.data.user_phone || "");
+      setUserAddress(response.data.user_address || "");
+      setUserProfile(response.data.user_profileimg || 0);
+    });
   };
   useEffect(() => {
     authCheck();
@@ -54,61 +48,44 @@ export default function MyInfoEdit({ user_no }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(event.target);
     if (window.confirm("회원정보를 수정하시겠습니까?")) {
       axios
-        .patch("http://localhost:3300/user/info", {
+        .patch("/user/info", {
           user_name: userName,
           user_phone: userPhone,
           user_address: userAddress,
-          user_no: cookies.token,
+          user_profileimg: userProfile,
         })
         .then((response) => {
-          // setUserName(response.data.user_name);
-          // setUserPhone(response.data.user_phone);
-          // setUserAddress(response.data.user_address);
-          // setData(response.data);
-          console.log("update 요청 성공:", response);
-
           alert("회원정보가 수정되었습니다.");
-        })
-        .catch((error) => {
-          console.error("요청 실패:", error);
         });
     }
   };
   const handleDelete = () => {
     if (window.confirm("정말 탈퇴하시겠습니까?")) {
-      axios
-        .delete("http://localhost:3300/user/info", {
-          params: {
-            user_no: cookies.token,
-          },
-        })
-        .then((response) => {
-          console.log("요청 성공:", response);
-
-          alert("회원탈퇴가 완료되었습니다.");
-          navigate("/");
-        })
-        .catch((error) => {
-          console.error("요청 실패:", error);
-        });
+      axios.delete("/user/info").then((response) => {
+        alert("회원탈퇴가 완료되었습니다.");
+        Cookies.remove("token");
+        navigate("/");
+      });
     }
   };
 
   return (
     <form className="myInfoEdit" onSubmit={handleSubmit}>
       <Stack spacing={1}>
-        <ul className="editForm">
+        <fieldset className="editForm">
           <li>
             <h1 className="editHeader">회원정보</h1>
           </li>
 
           <li className="imgEdit">
-            <span>프로필 이미지</span>
+            <label>프로필 이미지</label>
             <div>
-              <img src={selectedImage} alt="profile-img" />
+              <img
+                src={require(`../../assets/image/profile${userProfile}.png`)}
+                alt="profile-img"
+              />
               <button type="button" onClick={() => setModalOpen(true)}>
                 이미지변경
               </button>
@@ -121,7 +98,7 @@ export default function MyInfoEdit({ user_no }) {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: 400,
+                width: 500,
                 bgcolor: "background.paper",
                 borderRadius: 10,
                 boxShadow: 24,
@@ -130,6 +107,7 @@ export default function MyInfoEdit({ user_no }) {
                 pb: 3,
               }}
             >
+              <label>선택해서 이미지변경하기</label>
               <div className="imageSelection">
                 {images.map((image, index) => (
                   <img
@@ -137,7 +115,7 @@ export default function MyInfoEdit({ user_no }) {
                     src={image}
                     alt={`selectable-img-${index}`}
                     onClick={() => {
-                      setSelectedImage(image); // 클릭 시 해당 이미지로 변경
+                      setUserProfile(index); // 클릭 시 해당 이미지로 변경
                       setModalOpen(false); // 클릭 후 모달 창 닫기
                     }}
                   />
@@ -146,11 +124,11 @@ export default function MyInfoEdit({ user_no }) {
             </Box>
           </Modal>
           <li>
-            <span>아이디</span>
+            <label>아이디</label>
             <InputMedium placeholder={userId} disabled />
           </li>
           <li>
-            <span>이름</span>
+            <label>이름</label>
             <InputMedium
               name="user_name"
               placeholder={"이름을 입력하세요"}
@@ -160,7 +138,7 @@ export default function MyInfoEdit({ user_no }) {
             />
           </li>
           <li>
-            <span>전화번호</span>
+            <label>전화번호</label>
             <InputMedium
               name="user_phone"
               placeholder={"전화번호를 입력하세요"}
@@ -170,7 +148,7 @@ export default function MyInfoEdit({ user_no }) {
             />
           </li>
           <li>
-            <span>주소</span>
+            <label>주소</label>
             <InputMedium
               name="user_address"
               placeholder={"주소를 입력하세요"}
@@ -192,7 +170,7 @@ export default function MyInfoEdit({ user_no }) {
               회원탈퇴
             </button>
           </li>
-        </ul>
+        </fieldset>
       </Stack>
     </form>
   );

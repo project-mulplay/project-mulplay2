@@ -1,7 +1,6 @@
-import * as React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import Box from "@mui/joy/Box";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
@@ -129,6 +128,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            color="warning"
             slotProps={{
               input: {
                 "aria-label": "select all desserts",
@@ -148,11 +148,10 @@ function EnhancedTableHead(props) {
                   : undefined
               }
             >
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <Link
                 underline="none"
                 color="neutral"
-                textColor={active ? "primary.plainColor" : undefined}
+                textColor={active ? "neutral.plainColor" : undefined}
                 component="button"
                 onClick={createSortHandler(headCell.id)}
                 fontWeight="lg"
@@ -204,7 +203,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, handleToggleGiftStatus } = props;
 
   return (
     <Box
@@ -239,7 +238,10 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title="선물상태변경">
           <IconButton size="sm" color="Neutral" variant="solid">
-            <AddCircleOutlineOutlinedIcon />
+            <AddCircleOutlineOutlinedIcon
+              onClick={handleToggleGiftStatus}
+              style={{ cursor: "pointer" }}
+            />
           </IconButton>
         </Tooltip>
       ) : (
@@ -258,9 +260,9 @@ export default function TableSortAndSelection({ data }) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dataPerPage] = React.useState(5);
+  const [dataPerPage, setDataPerPage] = React.useState(5);
 
-  // Map data into an object where keys are pay_no and values are button states
+  // 송금상태
   const getStatusLabel = (prod_stat) => {
     return prod_stat === 4 ? "송금완료" : "대기중";
   };
@@ -270,7 +272,7 @@ export default function TableSortAndSelection({ data }) {
       ...states,
       [data.pay_no]: {
         label: "대기중",
-        color: "neutral",
+        color: "#EE833E",
       },
     }),
     {}
@@ -279,13 +281,18 @@ export default function TableSortAndSelection({ data }) {
   const [buttonStates, setButtonStates] = useState(initialButtonStates);
 
   const toggleButton = (id) => {
-    console.log(id);
     setButtonStates((prevState) => ({
       ...prevState,
       [id]: {
         label: prevState[id]?.label === "대기중" ? "전달완료" : "대기중",
       },
     }));
+  };
+  const handleToggleGiftStatus = () => {
+    // 여기에서 선택된 행의 id를 가져와 toggleButton 함수를 호출합니다.
+    selected.forEach((pay_no) => {
+      toggleButton(pay_no);
+    });
   };
 
   const handleRequestSort = (event, property) => {
@@ -328,11 +335,10 @@ export default function TableSortAndSelection({ data }) {
   };
 
   const handleChangedataPerPage = (event, newValue) => {
-    dataPerPage(parseInt(newValue.toString(), 10));
+    setDataPerPage(parseInt(newValue.toString(), 10));
     setPage(0);
   };
 
-  // getLabelDisplayedRowsTo 함수 수정
   const getLabelDisplayeddataTo = () => {
     if (data.length === -1) {
       return data.length;
@@ -350,8 +356,12 @@ export default function TableSortAndSelection({ data }) {
     <Sheet
       variant="outlined"
       sx={{ width: "80%", boxShadow: "sm", borderRadius: "sm" }}
+      color="white"
     >
-      <EnhancedTableToolbar numSelected={selected.length} />
+      <EnhancedTableToolbar
+        numSelected={selected.length}
+        handleToggleGiftStatus={handleToggleGiftStatus}
+      />
       <Table
         aria-labelledby="tableTitle"
         hoverRow
@@ -361,12 +371,11 @@ export default function TableSortAndSelection({ data }) {
             theme.vars.palette.success.softBg,
           "& thead th:nth-of-type(1), & thead th:nth-of-type(2)": {
             width: "50px",
-            // 수정된 부분: padding을 추가하여 간격 조정
           },
           "& thead th:nth-of-type(3)": {
-            width: "25%",
+            width: "35%",
           },
-          "& tr > *:nth-of-type(n+5)": { textAlign: "right" }, // 수정된 부분: nth-type 대신 nth-of-type 사용
+          "& tr > *:nth-of-type(n+5)": { textAlign: "right" },
         }}
       >
         <EnhancedTableHead
@@ -394,9 +403,9 @@ export default function TableSortAndSelection({ data }) {
                   style={
                     isItemSelected
                       ? {
-                          "--TableCell-dataBackground": "#EE833E",
-                          "--TableCell-headBackground": "#EE833E",
-                          opacity: "50%",
+                          "--TableCell-dataBackground": "#f0f4f8",
+                          "--TableCell-headBackground": "#f0f4f8",
+                          opacity: "75%",
                         }
                       : {}
                   }
@@ -410,6 +419,7 @@ export default function TableSortAndSelection({ data }) {
                           "aria-labelledby": labelId,
                         },
                       }}
+                      color="warning"
                       sx={{ verticalAlign: "top" }}
                     />
                   </th>
@@ -418,7 +428,7 @@ export default function TableSortAndSelection({ data }) {
                   </th>
 
                   <td>{row.prod_title}</td>
-                  <td>{row.user_id}</td>
+                  <td>{row.user_id.split("@")[0]}</td>
                   <td style={{ textAlign: "right" }}>{row.pay_price}</td>
                   <td style={{ textAlign: "right" }}>
                     {formatDate(row.pay_regdate)}
@@ -427,7 +437,8 @@ export default function TableSortAndSelection({ data }) {
                   <td>
                     <Button
                       size="sm"
-                      variant={buttonStates[row.pay_no]?.label || "plain"}
+                      variant="outlined"
+                      color="warning"
                       onClick={() => toggleButton(row.pay_no)}
                     >
                       {buttonStates[row.pay_no]?.label || "대기중"}

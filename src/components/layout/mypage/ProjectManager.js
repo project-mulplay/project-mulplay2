@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import axios from "axios";
+import axios from "../../../util/api";
 
-import MyCard from "../components/layout/mypage/MyCard";
-import "../pages/mypages/MyProjectManage.css";
+import MyCard from "./MyCard";
+
+import "../../../pages/mypages/MyProjectManage.css";
 
 const filterOptionListCreated = [
   { value: "all", name: "전체" },
@@ -13,6 +13,7 @@ const filterOptionListCreated = [
   { value: "3", name: "펀딩중" },
   { value: "4", name: "펀딩성공" },
   { value: "5", name: "펀딩실패" },
+  { value: "6", name: "보류" },
 ];
 
 const filterOptionListLiked = [
@@ -23,25 +24,13 @@ const filterOptionListLiked = [
 ];
 
 const ProjectManager = ({ type }) => {
-  const [selectedTab, setSelectedTab] = useState("all"); // 기본 탭 선택
-
+  const [selectedTab, setSelectedTab] = useState("all");
   const [data, setData] = useState([]);
-  const [cookies, setCookie] = useCookies();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3300/user/myproject", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        setData(response.data);
-        console.log("요청 성공:", response);
-      })
-      .catch((error) => {
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/myproject").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
   let filterOptions;
@@ -94,6 +83,8 @@ const ProjectManager = ({ type }) => {
         return "펀딩성공";
       case 5:
         return "펀딩실패";
+      case 6:
+        return "보류";
       default:
         return "정보없음";
     }
@@ -108,6 +99,8 @@ const ProjectManager = ({ type }) => {
       return "positive";
     } else if (prod_stat === 2 || prod_stat === 5) {
       return "negative";
+    } else if (prod_stat === 6) {
+      return "hold";
     } else {
       return "neutral";
     }

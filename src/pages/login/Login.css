@@ -87,7 +87,7 @@
   box-sizing: border-box;
 }
 .chk_btn:checked + label:before {
-  background-image: url("../../assets/image/icon_checked.png");
+  background: url("../../assets/image/icon_checked.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

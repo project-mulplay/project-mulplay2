@@ -139,10 +139,10 @@
 
 
 @media ( max-width: 1100px ) {
+
   .search-bar {
     display: none;
   }
-
 }
 
 @media ( max-width: 768px ) {

@@ -48,6 +48,11 @@
   margin: 0 auto;
 }
 
+.mainrewardlist {
+  list-style: none;
+  margin-left: 100px;
+}
+
 .ctitle h2 {
   margin-top: 20px;
 }
@@ -62,6 +67,19 @@
   display: table;
   background-color: #ffffff;
 }
+
+.clist1 ul {
+
+  list-style: none; /* 기본 목록 스타일 제거 */
+  padding: 0; /* 내부 간격 제거 */
+  max-width: 760px;
+}
+
+.clist1 .rewarditem li {
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  margin-top: 5px;
+}
+
 
 .clist2 {
   border-radius: 4px;

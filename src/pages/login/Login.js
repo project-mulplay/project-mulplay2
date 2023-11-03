@@ -6,6 +6,7 @@ import AppleIcon from "./../../assets/image/icon_apple.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({});
@@ -40,12 +41,19 @@ const Login = () => {
       ) {
         alert("로그인되었습니다.");
         navigate("/");
+      } else if (response.data.user_stat === 2) {
+        alert("탈퇴한 회원입니다.");
       } else {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
     } catch (error) {
       console.error("요청 실패:", error);
     }
+  };
+
+  // 미완성된 기능 알람
+  const onClick = () => {
+    alert("아직 미구현된 기능입니다.");
   };
 
   return (
@@ -77,11 +85,13 @@ const Login = () => {
         <div className="container_savefind">
           <div className="save_box">
             <input type="checkbox" className="chk_btn" id="chk_save" />
-            <label className="title">아이디 저장</label>
+            <label for="chk_save" className="title">
+              아이디 저장
+            </label>
           </div>
 
           <div className="find_box">
-            <a className="atag" href="#">
+            <a className="atag" href="#" onClick={onClick}>
               아이디 / 비밀번호 찾기
             </a>
           </div>
@@ -91,21 +101,23 @@ const Login = () => {
         </button>
         {/* sns 로그인 */}
         <div className="sns_container">
-          <div className="sns_login google">
+          <div className="sns_login google" onClick={onClick}>
             <img src={GoogleIcon} alt="" />
           </div>
-          <div className="sns_login kakao">
+          <div className="sns_login kakao" onClick={onClick}>
             <img src={KakaoIcon} alt="" />
           </div>
-          <div className="sns_login apple">
+          <div className="sns_login apple" onClick={onClick}>
             <img src={AppleIcon} alt="" />
           </div>
         </div>
         <div className="signup_btn">
           아직 계정이 없으신가요?{" "}
-          <a className="atag" href="#">
-            회원가입
-          </a>
+          <Link to="/signup">
+            <a className="atag" href="#">
+              회원가입
+            </a>
+          </Link>
         </div>
       </form>
     </section>

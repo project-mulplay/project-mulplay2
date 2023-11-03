@@ -1,34 +1,27 @@
-import "./MyProfile.css";
-import profile from "../../../assets/image/profile.png";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { useRecoilState } from "recoil";
+import { ProfileImgAtom } from "../../../recoil/ProfileImgAtom";
+import axios from "../../../util/api";
+
+import "./MyProfile.css";
 
 const MyProfile = ({ user_no }) => {
-  const [cookies, setCookie] = useCookies();
   const [data, setData] = useState({});
+  const [userProfile, setUserProfile] = useRecoilState(ProfileImgAtom);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3300/user/profile", {
-        params: {
-          user_no: cookies.token,
-        },
-      })
-      .then((response) => {
-        // 요청 성공 시 실행할 코드
-        setData(response.data);
-        console.log("profile 요청 성공:", response);
-      })
-      .catch((error) => {
-        // 에러 처리
-        console.error("요청 실패:", error);
-      });
+    axios.get("/user/profile").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
   return (
     <div className="myprofile" key={user_no}>
-      <img className="profileImg" src={profile} alt="profile_img"></img>
+      <img
+        className="profileImg"
+        src={require(`../../../assets/image/profile${userProfile}.png`)}
+        alt="profile_img"
+      ></img>
       <div className="profileText">
         <div className="userName">{data.user_name}</div>
         <div className="easyLogin">

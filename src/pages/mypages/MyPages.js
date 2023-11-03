@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
 import MyProfile from "../../components/layout/mypage/MyProfile";
 import MyCategory from "../../components/layout/mypage/MyCategory";
-import user from "../../data/userData.json";
 
 const MyPages = () => {
-  const loggedInUserId = 1;
+  const [cookies, setCookie] = useCookies();
 
-  const loggedInUser = user.find((user) => user.user_no === loggedInUserId);
+  const loggedInUser = cookies.token;
 
   return (
     <div className="MyPages">

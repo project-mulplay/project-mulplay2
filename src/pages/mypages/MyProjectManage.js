@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import ProjectManager from "../../hooks/ProjectManager";
+import ProjectManager from "../../components/layout/mypage/ProjectManager";
 
 const MyProjectManage = () => {
   return (
