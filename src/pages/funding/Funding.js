@@ -9,8 +9,8 @@ import userData from "../../data/userData.json";
 import OnHeart from "../../assets/image/on_heart.png";
 import OffHeart from "../../assets/image/off_heart.png";
 import Share from "../../assets/image/share.png";
-import axios from "axios";
-
+import axios from "../../util/api";
+import { useCookies } from 'react-cookie';
 // 아이콘
 import { FaRegClock, FaBox, FaUserCircle, FaWrench } from "react-icons/fa";
 
@@ -29,6 +29,9 @@ const Funding = () => {
 
   const { prod_no } = useParams();
 
+  const [cookies, setCookie] = useCookies();
+
+  const LoginState = cookies.token;
 
   // API
   // const [data, setData] = useState({});
@@ -248,6 +251,7 @@ const Funding = () => {
               </div>
               {/* 펀딩하기 */}
                 <div className="fbtn3">
+                  {LoginState ? 
               <Link to={`/cart/${prod_no}`}>
                   <Button_funding
                     text={"펀딩하기"}
@@ -258,7 +262,19 @@ const Funding = () => {
                     borderRadius={10}
                     onClick={goToCart}
                   />
-              </Link>
+              </Link> :
+              <Link to={'/login'}>
+              <Button_funding
+                text={"로그인 하러 가기"}
+                fontSize={14}
+                maxWidth={240}
+                minWidth={240}
+                minHeight={45}
+                borderRadius={10}
+                onClick={goToCart}
+              />
+            </Link>
+              }
                 </div>
             </div>
           </div>
