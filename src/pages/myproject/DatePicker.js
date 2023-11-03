@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
@@ -10,12 +10,12 @@ function MyDatePicker({ onDateChange }) {
 
   const handleOpenDateChange = (date) => {
     setOpenDate(date);
-    onDateChange('openDate', format(date, 'yyyy-MM-dd'));
+    onDateChange("openDate", format(date, "yyyy-MM-dd"));
   };
 
   const handleEndDateChange = (date) => {
     setEndDate(date);
-    onDateChange('endDate', format(date, 'yyyy-MM-dd'));
+    onDateChange("endDate", format(date, "yyyy-MM-dd"));
   };
 
   return (

@@ -10,7 +10,7 @@ import OnHeart from "../../assets/image/on_heart.png";
 import OffHeart from "../../assets/image/off_heart.png";
 import Share from "../../assets/image/share.png";
 import axios from "../../util/api";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 // 아이콘
 import { FaRegClock, FaBox, FaUserCircle, FaWrench } from "react-icons/fa";
 
@@ -91,7 +91,7 @@ const Funding = () => {
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
-      setOpen(true);
+    setOpen(true);
   };
 
   const onClose = () => {
@@ -99,7 +99,7 @@ const Funding = () => {
   };
 
   // 특정 prod_no 가져오기 여기서는 1에 해당하는 json 데이터를 가져옴
-  const filteredData = projectData.filter((data) => data.prod_no === i+1);
+  const filteredData = projectData.filter((data) => data.prod_no === i + 1);
   // 상세보기 버튼
   const [showAllContent, setShowAllContent] = useState(false);
   const toggleContent = () => {
@@ -129,7 +129,9 @@ const Funding = () => {
               ></img>
             </div>
             <div className="middle-left1-2">
-              <div className="fintro"><p>{projectData[i].prod_intro}</p></div>
+              <div className="fintro">
+                <p>{projectData[i].prod_intro}</p>
+              </div>
               <div className="fmaker">
                 <div className="fmaker-text">
                   <b>등록자 정보</b>
@@ -157,7 +159,7 @@ const Funding = () => {
                 </div>
                 <span className="mr1-title">예상 기간</span>
                 <div className="mr1-textwrap">
-                <div className="mr1-text">{projectData[i].prod_time}일</div>
+                  <div className="mr1-text">{projectData[i].prod_time}일</div>
                 </div>
               </div>
               <div className="class">
@@ -166,7 +168,7 @@ const Funding = () => {
                 </div>
                 <span className="mr1-title">진행 분류</span>
                 <div className="mr1-textwrap">
-                <div className="mr1-text">{pclass}</div>
+                  <div className="mr1-text">{pclass}</div>
                 </div>
               </div>
               <div className="people">
@@ -175,11 +177,11 @@ const Funding = () => {
                 </div>
                 <span className="mr1-title">참여 인력</span>
                 <div className="mr1-textwrap">
-                {projectData[i].prod_people.map((people, index) => (
-                  <div key={index} className="mr1-text">
-                    {people}
-                  </div>
-                ))}
+                  {projectData[i].prod_people.map((people, index) => (
+                    <div key={index} className="mr1-text">
+                      {people}
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="stack">
@@ -188,11 +190,11 @@ const Funding = () => {
                 </div>
                 <span className="mr1-title">관련 기술</span>
                 <div className="mr1-textwrap">
-                {projectData[i].prod_skill.map((skill, index) => (
-                  <div key={index} className="mr1-text">
-                    {skill}
-                  </div>
-                ))}
+                  {projectData[i].prod_skill.map((skill, index) => (
+                    <div key={index} className="mr1-text">
+                      {skill}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -250,32 +252,33 @@ const Funding = () => {
                 <img className="sidebtn2" src={Share} alt="" />
               </div>
               {/* 펀딩하기 */}
-                <div className="fbtn3">
-                  {LoginState ? 
-              <Link to={`/cart/${prod_no}`}>
-                  <Button_funding
-                    text={"펀딩하기"}
-                    fontSize={14}
-                    maxWidth={240}
-                    minWidth={240}
-                    minHeight={45}
-                    borderRadius={10}
-                    onClick={goToCart}
-                  />
-              </Link> :
-              <Link to={'/login'}>
-              <Button_funding
-                text={"로그인 하러 가기"}
-                fontSize={14}
-                maxWidth={240}
-                minWidth={240}
-                minHeight={45}
-                borderRadius={10}
-                onClick={goToCart}
-              />
-            </Link>
-              }
-                </div>
+              <div className="fbtn3">
+                {LoginState ? (
+                  <Link to={`/cart/${prod_no}`}>
+                    <Button_funding
+                      text={"펀딩하기"}
+                      fontSize={16}
+                      maxWidth={240}
+                      minWidth={240}
+                      minHeight={45}
+                      borderRadius={10}
+                      onClick={goToCart}
+                    />
+                  </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <Button_funding
+                      text={"로그인 하러 가기"}
+                      fontSize={16}
+                      maxWidth={240}
+                      minWidth={240}
+                      minHeight={45}
+                      borderRadius={10}
+                      onClick={goToCart}
+                    />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -335,13 +338,15 @@ const Funding = () => {
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
               리워드 선택
               <div>
-                {LoginState ?  
-                <button className="cartshow-btn" onClick={setOpen}>
-                장바구니 보기
-                </button> : 
-                <Link to="/login">
-                  <button className="cartshow-btn">로그인 하기</button>
-                  </Link>}
+                {LoginState ? (
+                  <button className="cartshow-btn" onClick={setOpen}>
+                    장바구니 보기
+                  </button>
+                ) : (
+                  <Link to="/login">
+                    <button className="cartshow-btn">로그인 하기</button>
+                  </Link>
+                )}
                 <Drawer
                   title="Basic Drawer"
                   placement="right"
@@ -353,7 +358,7 @@ const Funding = () => {
               </div>
             </div>
 
-            <MainReward prodNo={prod_no}/>
+            <MainReward prodNo={prod_no} />
           </div>
         </div>
         {/* <div className="bottom">

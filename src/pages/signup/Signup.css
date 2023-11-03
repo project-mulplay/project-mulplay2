@@ -101,7 +101,9 @@
   background-color: #ee833e;
   color: #fff;
 }
-
+.detail_addr {
+  margin-top: 15px;
+}
 .column {
   width: 107%;
 }
@@ -142,8 +144,8 @@
 .agreement__each {
   margin-top: 10px;
 }
-.agreement__each .more_btn {
-}
+/* .agreement__each .more_btn {
+} */
 .agreement__each li {
   display: flex;
   justify-content: space-between;

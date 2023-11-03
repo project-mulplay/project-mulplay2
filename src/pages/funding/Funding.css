@@ -10,7 +10,7 @@
     vertical-align: middle;
   }
   .top{
-    margin: 20px 0px 100px 0px;
+    margin: 20px 0px 30px 0px;
     width: 1100px;
     height: 80px;
     display: table;
@@ -154,18 +154,20 @@
   }
 
   .stack {
-    margin: 10px 20px 40px 20px;
+    margin: 10px 20px 34px 20px;
   }
 
   .mr1-title {
-    color: #888888;
-    font-size: 12px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 400; 
   }
 
   .mr1-title2 {
     color: #333333;
-    font-weight: bold;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    
   }
 
   .fund_icon {
@@ -174,22 +176,22 @@
 
   .mr1-textwrap {
     margin-left: 10px;
-    margin-top: 4px;
+    /* margin-top: 4px; */
   }
 
   .mr1-text {
     float: left;
-    padding: 2px 10px;
+    padding: 2px 6px;
     margin-left: 0;
-    font-weight: bold; 
-    font-size: 11px;
+    font-weight: 500; 
+    font-size: 14px;
     color: #333333;
   }
 
   .mr1-text2 {
     padding: 2px 10px;
     margin: 0;
-    font-size: 12px;
+    font-size: 15px;
     color: #333333;
   }
 
