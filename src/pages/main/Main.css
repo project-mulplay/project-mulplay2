@@ -63,13 +63,15 @@
 
 /* 펀딩 카드  */
 .main_AppCard {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap; /* 화면을 벗어나는 경우 자동으로 아래 줄로 이동 */
+  gap: 10px; /* 요소 사이의 간격 설정 */
   /* grid-template-columns: auto 1fr auto; */
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   align-content: stretch;
-
+  height: auto;
 }
 
 .main_mainCard {
@@ -83,7 +85,6 @@
   margin-right: 20px;
   display: inline-block;
   position: relative;
-
 }
 
 
@@ -338,6 +339,11 @@
   float: right;
 }
 
+@media all and (min-width:1025px) and (max-width:1700px) { 
+  .main_AppCard {
+    max-width: calc(100% - 20px); /* 2개의 요소가 한 줄에 배치되도록 크기 조정 */
+  }
+}
 
 /* 화면 너비가 1204px~768px 일 때 */
 @media all and (min-width:768px) and (max-width:1024px) { 

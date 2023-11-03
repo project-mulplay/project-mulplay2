@@ -8,22 +8,27 @@ import SkillCheckbox from "./SkillCheckbox";
 import StaffCheckbox from "./StaffCheckbox";
 import TagCheckbox from "./TagCheckbox";
 import ImageUploader from "./InputFile";
+import { useCookies } from 'react-cookie';
 
 function BasicInfo({number}) {
 
   const savebtnstyle1 = {
-    margin: "50px 0",
+    margin: "50px 60px",
     float: "left",
-    backgroundColor: "#EE833E",
-    color: "#fff",
+    border: "1px solid #EE833E",
+    backgroundColor: "#fff",
+    color: "#EE833E",
     fontSize: "18px",
     fontWeight: "500",
     width: "184px",
     height: "50px",
     borderRadius: "15px",
-    border: "none",
     cursor: "pointer",
   };
+
+  const [cookies, setCookie] = useCookies();
+
+  const LoginState = cookies.token;
 
 
   // 현재 날짜 '2023-10-30'
@@ -38,7 +43,7 @@ function BasicInfo({number}) {
   };
 
   // 유저 번호
-  const userno = 1;
+  const userno = LoginState;
 
   // 데이터 DB 초기값
   const [formData, setFormData] = useState({
@@ -48,9 +53,9 @@ function BasicInfo({number}) {
     prod_regdate: formattedDate,
     prod_mainimg: "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg",
     prod_content: "",
-    prod_goal: 0,
+    prod_goal: "",
     prod_class: 0,
-    prod_time: 0,
+    prod_time: "",
     user_no: userno,
     img_no: 1,
   });
@@ -67,10 +72,36 @@ function BasicInfo({number}) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: (name === "prod_genre" || name === "prod_time" || name === "prod_goal") ? parseInt(value, 10) : value,
-    });
+    // 예시: 'prod_goal'을 숫자 값만 입력할 수 있도록 제한
+    if (name === 'prod_goal' || name === "prod_genre" || name === "prod_time") {
+      // 빈 문자열 또는 비숫자 문자를 제거하고 숫자로 변환
+      const numericValue = value.replace(/\D/g, ''); // 숫자 외의 문자 제거
+  
+      if (numericValue) { // 빈 문자열이 아닌 경우에만 처리
+        const numericIntValue = parseInt(numericValue, 10);
+        // 예시: 50,000부터 100,000,000 사이의 값만 허용
+        if (numericIntValue >= 0 && numericIntValue <= 100000000) {
+          setFormData({
+            ...formData,
+            [name]: numericIntValue
+          });
+        }
+        // 범위를 벗어난 경우 오류 메시지 표시 또는 사용자 알림
+      } else {
+        // 빈 문자열인 경우, 0 또는 다른 기본값으로 설정하거나 오류 처리
+        setFormData({
+          ...formData,
+          [name]: '' // 혹은 다른 기본값 설정 가능
+        });
+      }
+    } else {
+      // 다른 필드의 경우 기존과 같이 처리
+      setFormData({
+        ...formData,
+        [name]: value
+        // [name]: (name === "prod_genre" || name === "prod_time") ? parseInt(value, 10) : value
+      });
+    }
   };
 
   const handleSubmit = async (e) => {

@@ -11,8 +11,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+
 
 const Guidepage = () => {
+
+  const [cookies, setCookie] = useCookies();
+
+  const LoginState = cookies.token;
+
   return (
     <div className="Guidepage_wrap">
       <div className="Guidepage_contain">
@@ -25,10 +32,15 @@ const Guidepage = () => {
         </div>
         {/* 가이드 이동 버튼 */}
         <div className="Guide_btn">
-          <button className="Guide_btn1">창작자 가이드</button>
+          {LoginState ?
           <Link to="/project">
             <button className="Guide_btn2">지금 시작하기</button>
-          </Link>
+          </Link> :
+          <Link to="/project">
+          <button className="Guide_btn2">로그인 하기</button>
+            <p style={{fontSize: '12px', marginTop: '10px'}}>아직 로그인 안하셨나요?</p>
+        </Link>
+          }
         </div>
         {/* 타이틀 2 */}
         <div className="Guide_subtitle">

@@ -109,11 +109,12 @@ const FundingList = () => {
         </div>
 
         <div className="">
-          <Link to="/funding">
-            {order.map((project) => (
+
+        {order.map((project) => (
+          <Link to={`/funding/${project.prod_no}`}>
               <Card key={project.prod_no} project={project} />
-            ))}
           </Link>
+            ))}
         </div>
       </div>
     </div>

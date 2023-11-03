@@ -18,7 +18,7 @@ export const TotalPriceSelector = selector({
   get: ({ get }) => {
     const CurrentItem = get(CartAtom);
     return CurrentItem.reduce(
-      (acc, cur) => acc + cur.price,
+      (acc, cur) => acc + cur.reward_price,
       0
     ).toLocaleString();
   },

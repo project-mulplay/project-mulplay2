@@ -7,17 +7,17 @@ import "./ProjectInfo.css";
 const ProjectInfo = ({number}) => {
 
   const savebtnstyle3 = {
-    margin: "50px 0",
+    margin: "50px 60px",
     right: "260px",
     float: 'left',
-    backgroundColor: "#EE833E",
-    color: "#fff",
+    backgroundColor: "#fff",
+    border: "1px solid #EE833E",
+    color: "#EE833E",
     fontSize: "18px",
     fontWeight: "500",
     width: "184px",
     height: "50px",
     borderRadius: "15px",
-    border: "none",
     cursor: "pointer",
   };
 
