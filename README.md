@@ -44,7 +44,7 @@ git 충돌 해결 참고
 ```
 [참고1](https://wonyong-jang.github.io/git/2021/02/05/Github-Rebase.html)
 [참고2](https://velog.io/@x_sunyoung/rebase)
-
+```
 
 ### 추가할 정책은 밑에 추가해주세요
 
