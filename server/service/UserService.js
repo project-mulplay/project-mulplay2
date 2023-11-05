@@ -71,10 +71,21 @@ export const patchUserPw = (req, res) => {
 
 export const getUserMyProd = (req, res) => {
   const user_no = req.headers.authorization;
+  const type = req.query.type;
   try {
-    userRepository.findByUserMyProd(user_no).then((result) => {
-      res.status(200).json(result);
-    });
+    switch (type) {
+      case "created":
+        queryDatabase(userRepository.findByUserMyProd(user_no), res);
+        break;
+      case "funded":
+        queryDatabase(userRepository.findByUserMyFundProd(user_no), res);
+        break;
+      case "liked":
+        queryDatabase(userRepository.findByUserMyLikeProd(user_no), res);
+        break;
+      default:
+        return res.status(400).json({ error: "Invalid type" });
+    }
   } catch (error) {
     throw error;
   }
@@ -103,26 +114,12 @@ export const getUserMyProceed = (req, res) => {
   }
 };
 
-export const getUserMyFundProd = (req, res) => {
-  const user_no = req.headers.authorization;
-
-  try {
-    userRepository.findByUserMyFundProd(user_no).then((result) => {
+function queryDatabase(queryPromise, res) {
+  queryPromise
+    .then((result) => {
       res.status(200).json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Database query failed" });
     });
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getUserMyLikeProd = (req, res) => {
-  const user_no = req.headers.authorization;
-
-  try {
-    userRepository.findByUserMyLikeProd(user_no).then((result) => {
-      res.status(200).json(result);
-    });
-  } catch (error) {
-    throw error;
-  }
-};
+}

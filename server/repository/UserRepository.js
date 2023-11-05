@@ -117,8 +117,8 @@ export const findByUserMyFundProd = async (user_no) => {
   const [data, fields] = await conn.query(
     `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price, p.prod_mainimg
     from user u
-    inner join project p on u.user_no = p.user_no
-    inner join payment m on p.prod_no = m.prod_no 
+    inner join payment m on u.user_no = m.user_no
+    inner join project p on m.prod_no = p.prod_no
     where u.user_no = ? `,
     [user_no]
   );
@@ -132,11 +132,10 @@ export const findByUserMyLikeProd = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price, p.prod_mainimg
+    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, p.prod_mainimg
     from user u 
-    inner join project p on u.user_no = p.user_no 
-    inner join payment m on p.prod_no = m.prod_no 
     inner join likeproject l on l.user_no = u.user_no
+    inner join project p on l.prod_no = p.prod_no 
     where u.user_no = ?`,
     [user_no]
   );

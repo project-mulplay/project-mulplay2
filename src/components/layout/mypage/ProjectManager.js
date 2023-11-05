@@ -28,9 +28,12 @@ const ProjectManager = ({ type }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("/user/myproject").then((response) => {
-      setData(response.data);
-    });
+    axios
+      .get("/user/myproject", { params: { type: type } })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      });
   }, []);
 
   let filterOptions;
@@ -43,7 +46,7 @@ const ProjectManager = ({ type }) => {
       filterOptions = filterOptionListLiked;
       break;
     case "funded":
-      filterOptions = filterOptionListLiked; // Funded and Liked share the same options
+      filterOptions = filterOptionListLiked;
       break;
     default:
       return null;
