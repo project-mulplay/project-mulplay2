@@ -26,8 +26,8 @@ router.patch("/myproject", userService.patchUserMyProd);
 
 router.get("/myproceeds", userService.getUserMyProceed);
 
-router.get("/funding-project", userService.getUserMyFundProd);
+// router.get("/funding-project", userService.getUserMyFundProd);
 
-router.get("/like-project", userService.getUserMyLikeProd);
+// router.get("/like-project", userService.getUserMyLikeProd);
 
 export default router;

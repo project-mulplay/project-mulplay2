@@ -17,7 +17,11 @@ const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
   // project.prod_mainimg
   return (
     <div className="myCard" key={project.prod_no}>
-      <img src={project.prod_mainimg} alt={project.prod_title} />
+      <img
+        className="myCardImg"
+        src={project.prod_mainimg}
+        alt={project.prod_title}
+      />
 
       <div className="cardContent">
         <div className="TopSection">
