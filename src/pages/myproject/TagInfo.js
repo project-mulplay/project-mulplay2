@@ -60,14 +60,14 @@ function TagInfo({ number }) {
     <form onSubmit={handleSubmit} className="basicForm">
       <div className="pro_hashTag">
         <label htmlFor="prohashTag">주제 해시태그</label>
-        <p>주제와 관련된 해시태그를 최대 2개까지 선택해 주세요. </p>
+        <p>주제와 관련된 해시태그를 최대 2개까지 선택해주세요. </p>
         <TagCheckbox name="tdata_name" onChange={handleCheckboxChange} />
       </div>
 
       <div>
         <label htmlFor="staff">참여 인력</label>
         <p>
-          프로젝트에 참여하는 포지션을 작성해 주세요.(예: Front-end개발자,
+          프로젝트에 참여하는 포지션을 선택해주세요.(예: Front-end개발자,
           디자이너)
         </p>
         <StaffCheckbox name="tdata_name" onChange={handleCheckboxChange} />
@@ -75,7 +75,7 @@ function TagInfo({ number }) {
 
       <div className="proskill">
         <label htmlFor="skill">관련 기술</label>
-        <p>프로젝트에 사용되는 기술을 선택해 주세요. </p>
+        <p>프로젝트에 사용되는 기술을 선택해주세요. </p>
         <SkillCheckbox name="tdata_name" onChange={handleCheckboxChange} />
       </div>
 
