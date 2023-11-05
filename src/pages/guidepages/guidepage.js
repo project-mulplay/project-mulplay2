@@ -35,7 +35,7 @@ const Guidepage = () => {
               <button className="Guide_btn2">지금 시작하기</button>
             </Link>
           ) : (
-            <Link to="/project">
+            <Link to="/login">
               <button className="Guide_btn2">로그인 하기</button>
               <p style={{ fontSize: "12px", marginTop: "10px" }}>
                 아직 로그인 안하셨나요?
@@ -227,17 +227,23 @@ function BasicAccordion() {
             <span style={{ fontWeight: "600" }}>수수료는 어떻게 되나요?</span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography
-            style={{ borderTop: "3px solid #EE833E", marginTop: "10px" }}
-          >
-            <div style={{ marginTop: "20px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
+          <Typography>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",
                   fontSize: "20px",
                   fontWeight: "600",
                   marginRight: "20px",
+                  marginTop: "10px",
                 }}
               >
                 A
@@ -248,7 +254,7 @@ function BasicAccordion() {
                 프로젝트 성공 이후, 결제성공 금액 중 수수료를 텀블벅에서 공제한
                 뒤 나머지 금액을 입금해 드립니다.
               </span>
-            </div>
+            </span>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -274,11 +280,16 @@ function BasicAccordion() {
             </span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography
-            style={{ borderTop: "3px solid #EE833E", marginTop: "10px" }}
-          >
-            <div style={{ marginTop: "20px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
+          <Typography>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",
@@ -302,7 +313,7 @@ function BasicAccordion() {
                 자세한 심사 기준이 궁금하시다면{" "}
                 <a style={{ color: "#EE833E" }}>여기</a>를 눌러주세요.
               </span>
-            </div>
+            </span>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -326,11 +337,16 @@ function BasicAccordion() {
             <span style={{ fontWeight: "600" }}>정산금은 어떻게 받나요?</span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography
-            style={{ borderTop: "3px solid #EE833E", marginTop: "10px" }}
-          >
-            <div style={{ marginTop: "20px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
+          <Typography>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",
@@ -346,7 +362,7 @@ function BasicAccordion() {
                 있습니다. 정산금은 수수료를 제외한 나머지 금액을 창작자님 계좌로
                 보내드립니다.
               </span>
-            </div>
+            </span>
           </Typography>
         </AccordionDetails>
       </Accordion>
