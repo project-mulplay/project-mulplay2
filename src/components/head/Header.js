@@ -161,9 +161,14 @@ const LoggedInHeader = ({ onLogoutClick }) => {
             </div>
           </ul>
         </nav>
-        <Link to="/guide">
+        {cookies.token === 1 ? (
+          null
+        )
+          :
+        (<Link to="/guide">
           <button className="btn">프로젝트 만들기</button>
-        </Link>
+        </Link> 
+        )}
       </div>
 
       {/* 배경을 어둡게 처리하기 위한 .menu_shadow */}

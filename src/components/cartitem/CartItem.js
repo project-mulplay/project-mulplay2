@@ -18,7 +18,7 @@ const CartItem = ({ data }) => {
         {/* <ImageWrapper src={dummyImage} alt={title}></ImageWrapper> */}
         <ColumnWrapper className="cartitemcolumn">
           <Title className="cartitemtitle">{rewardname}</Title>
-          <span>{Array.isArray(rewardinfo) ? (
+          <div>{Array.isArray(rewardinfo) ? (
           <ul style={{listStyle: 'none'}}>
             {rewardinfo.map((item, index) => (
               <li key={index}>ㆍ{item}</li>
@@ -26,7 +26,7 @@ const CartItem = ({ data }) => {
           </ul>
         ) : (
           <div>{rewardinfo}</div>
-        )}</span>
+        )}</div>
         </ColumnWrapper>
       </div>
       <RightWrapper className="cartitemright">
@@ -43,7 +43,6 @@ const Wrapper = styled.li`
 &.cartitemwrapper {
   width: 100%;
   padding: 16px;
-  border: 1px solid var(--line-gray);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,7 +60,7 @@ const Wrapper = styled.li`
 const ColumnWrapper = styled.div`
 &.cartitemcolumn {
   display: flex;
-  height: 60px;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
 }

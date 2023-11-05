@@ -2,47 +2,8 @@ import "./Signup.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import DaumPostcode from "react-daum-postcode";
-import Swal from "sweetalert2";
-
-// Daum 우편번호 조회 서비스
-const AddressModal = ({
-  showModal,
-  closeModal,
-  setInputAddressValue,
-  setInputZipCodeValue,
-}) => {
-  const onCompletePost = (data) => {
-    closeModal();
-    setInputAddressValue(data.address);
-    setInputZipCodeValue(data.zonecode);
-  };
-
-  const postCodeStyle = {
-    display: showModal ? "block" : "none",
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: 9999,
-    backgroundColor: "#fff",
-    width: "400px",
-    height: "400px",
-    border: "1px solid #ccc",
-  };
-
-  return (
-    <div style={postCodeStyle}>
-      <DaumPostcode
-        onComplete={onCompletePost}
-        width={"100%"}
-        height={"100%"}
-        autoClose={true}
-        animation={true}
-      />
-    </div>
-  );
-};
+import AddressInput from "../../components/elements/AddressInput";
+import AddressModal from "../../components/elements/AddressModal";
 
 const Signup = () => {
   const currentDate = new Date();
@@ -59,7 +20,6 @@ const Signup = () => {
     user_address: "",
     user_regdate: formattedDate,
     user_sns: 0,
-    user_role: 1,
     img_no: 1,
   });
 
@@ -75,20 +35,19 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const isEmpty = Object.values(data).some(value => value === '');
+    if (isEmpty) {
+      alert('모든 필드를 입력해주세요.');
+      return; // 빈 필드가 있을 경우 함수 종료
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:3300/register/signup",
         data
       );
       console.log("요청 성공:", response);
-      Swal.fire({
-        icon: "success",
-        title: "회원가입이 완료되었습니다.",
-        text: "로그인페이지로 이동합니다.",
-        showCancelButton: false,
-        confirmButtonColor: "#EE833E",
-        confirmButtonText: "OK",
-      });
+      alert("회원가입이 완료되었습니다. 로그인페이지로 이동합니다.");
       navigate("/login");
     } catch (error) {
       console.log(data);
@@ -115,6 +74,7 @@ const Signup = () => {
       ...prevData,
       user_address: inputAddressValue,
     }));
+    console.log(inputAddressValue);
   }, [inputAddressValue]);
   const openModal = () => {
     setModalState(true);
@@ -170,43 +130,26 @@ const Signup = () => {
           <input
             className="input_text"
             type="text"
-            placeholder="전화번호를 입력해 주세요"
+            placeholder="010-xxxx-xxxx 형식으로 입력해 주세요"
             required
             name="user_phone"
             onChange={handleChange}
           />
         </div>
-        <div className="input_box adr">
-          <label>주소</label>
-          <div className="column">
-            <input
-              className="input_text"
-              onChange={handleZipCode}
-              value={inputZipCodeValue}
-              placeholder="우편번호"
-              type={"text"}
-            />
-            <button className="btn_search" type="button" onClick={openModal}>
-              주소 검색
-            </button>
-            {/* <button className="btn_search" id="yourButtonId" onclick={openDaumPostcode}>검색</button> */}
-          </div>
-          <input
-            className="input_text detail_addr"
-            value={inputAddressValue}
-            name="user_address"
-            onChange={handleAddressChange}
-            placeholder="주소"
-            type={"text"}
-          />
+        <AddressInput
+          handleZipCode={handleZipCode}
+          inputZipCodeValue={inputZipCodeValue}
+          handleAddressChange={handleAddressChange}
+          inputAddressValue={inputAddressValue}
+          openModal={openModal}
+        />
 
-          <AddressModal
-            showModal={modalState}
-            closeModal={closeModal}
-            setInputAddressValue={setInputAddressValue}
-            setInputZipCodeValue={setInputZipCodeValue}
-          />
-        </div>
+        <AddressModal
+          showModal={modalState}
+          closeModal={closeModal}
+          setInputAddressValue={setInputAddressValue}
+          setInputZipCodeValue={setInputZipCodeValue}
+        />
 
         <button type="submit" className="btn_signup" onClick={handleSubmit}>
           완료

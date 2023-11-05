@@ -243,12 +243,13 @@ function BasicAccordion() {
                   fontSize: "20px",
                   fontWeight: "600",
                   marginRight: "20px",
-                  marginTop: "10px",
+                  height: "100px", // span에 글자가 많아질때 값을 늘려주세요
+                  float: "left",
                 }}
               >
                 A
               </span>
-              <span style={{ fontWeight: "500", fontSize: "14px" }}>
+              <span style={{ fontWeight: "500", fontSize: "14px", marginLeft: "10px"  }}>
                 수수료(플랫폼 이용 수수료, 결제 등 대행수수료)는 펀딩에 성공한
                 프로젝트에만 부과되며 무산된 프로젝트는 수수료가 면제됩니다.
                 프로젝트 성공 이후, 결제성공 금액 중 수수료를 텀블벅에서 공제한
@@ -296,13 +297,13 @@ function BasicAccordion() {
                   fontSize: "20px",
                   fontWeight: "600",
                   marginRight: "20px",
-                  height: "180px",
+                  height: "140px",
                   float: "left",
                 }}
               >
                 A
               </span>
-              <span style={{ fontWeight: "500", fontSize: "14px" }}>
+              <span style={{ fontWeight: "500", fontSize: "14px", marginLeft: "10px"  }}>
                 멀플레이는 IT 계열 모든 분야에서 활동하는 개발자들이 자유롭게
                 프로젝트를 올리고 모금을 시작할 수 있는 열린 공간이지만,
                 커뮤니티의 신뢰와 안전을 위해 모든 프로젝트는 심사 기준에 따라
@@ -353,11 +354,13 @@ function BasicAccordion() {
                   fontSize: "20px",
                   fontWeight: "600",
                   marginRight: "20px",
+                  height: "80px",
+                  float: "left",
                 }}
               >
                 A
               </span>
-              <span style={{ fontWeight: "500", fontSize: "14px" }}>
+              <span style={{ fontWeight: "500", fontSize: "14px", marginLeft: "10px"  }}>
                 정산금은 마이페이지-수입관리에서 완료된 프로젝트로 확인하실 수
                 있습니다. 정산금은 수수료를 제외한 나머지 금액을 창작자님 계좌로
                 보내드립니다.
