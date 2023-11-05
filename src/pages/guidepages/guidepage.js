@@ -11,11 +11,9 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
-import { useCookies } from 'react-cookie';
-
+import { useCookies } from "react-cookie";
 
 const Guidepage = () => {
-
   const [cookies, setCookie] = useCookies();
 
   const LoginState = cookies.token;
@@ -32,15 +30,18 @@ const Guidepage = () => {
         </div>
         {/* 가이드 이동 버튼 */}
         <div className="Guide_btn">
-          {LoginState ?
-          <Link to="/project">
-            <button className="Guide_btn2">지금 시작하기</button>
-          </Link> :
-          <Link to="/login">
-          <button className="Guide_btn2">로그인 하기</button>
-            <p style={{fontSize: '12px', marginTop: '10px'}}>아직 로그인 안하셨나요?</p>
-        </Link>
-          }
+          {LoginState ? (
+            <Link to="/project">
+              <button className="Guide_btn2">지금 시작하기</button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="Guide_btn2">로그인 하기</button>
+              <p style={{ fontSize: "12px", marginTop: "10px" }}>
+                아직 로그인 안하셨나요?
+              </p>
+            </Link>
+          )}
         </div>
         {/* 타이틀 2 */}
         <div className="Guide_subtitle">
@@ -226,9 +227,16 @@ function BasicAccordion() {
             <span style={{ fontWeight: "600" }}>수수료는 어떻게 되나요?</span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails  style={{ borderTop: "5px solid #EE833E", marginBottom: "10px", width: "95%", marginLeft: "10px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
           <Typography>
-            <span style={{ marginTop: "20px", marginLeft: "-10px"}}>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",
@@ -241,7 +249,10 @@ function BasicAccordion() {
                 A
               </span>
               <span style={{ fontWeight: "500", fontSize: "14px" }}>
-                수수료는 어떻게 되나요?
+                수수료(플랫폼 이용 수수료, 결제 등 대행수수료)는 펀딩에 성공한
+                프로젝트에만 부과되며 무산된 프로젝트는 수수료가 면제됩니다.
+                프로젝트 성공 이후, 결제성공 금액 중 수수료를 텀블벅에서 공제한
+                뒤 나머지 금액을 입금해 드립니다.
               </span>
             </span>
           </Typography>
@@ -269,9 +280,16 @@ function BasicAccordion() {
             </span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails  style={{ borderTop: "5px solid #EE833E", marginBottom: "10px", width: "95%", marginLeft: "10px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
           <Typography>
-            <span style={{ marginTop: "20px", marginLeft: "-10px"}}>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",
@@ -319,9 +337,16 @@ function BasicAccordion() {
             <span style={{ fontWeight: "600" }}>정산금은 어떻게 받나요?</span>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails  style={{ borderTop: "5px solid #EE833E", marginBottom: "10px", width: "95%", marginLeft: "10px" }}>
+        <AccordionDetails
+          style={{
+            borderTop: "3px solid #EE833E",
+            marginBottom: "10px",
+            width: "95%",
+            marginLeft: "10px",
+          }}
+        >
           <Typography>
-            <span style={{ marginTop: "20px", marginLeft: "-10px"}}>
+            <span style={{ marginTop: "20px", marginLeft: "-10px" }}>
               <span
                 style={{
                   color: "#000",

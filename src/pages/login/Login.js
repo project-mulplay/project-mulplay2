@@ -28,7 +28,7 @@ const Login = () => {
 
       setData(response.data);
       setCookie("token", ""); // 쿠키에 토큰 저장
-      setCookie("token", response.data.user_no); // 쿠키에 토큰 저장
+      setCookie("token", response.data.user_no, { sameSite: "strict" }); // 쿠키에 토큰 저장
 
       console.log(response.data.user_id, response.data.user_pw);
       console.log("요청 성공:", response);
@@ -49,7 +49,6 @@ const Login = () => {
         });
 
         navigate("/");
-
       } else if (response.data.user_stat === 2) {
         Swal.fire({
           icon: "info",
@@ -58,7 +57,6 @@ const Login = () => {
           confirmButtonColor: "#EE833E",
           confirmButtonText: "OK",
         });
-
       } else {
         Swal.fire({
           icon: "error",
@@ -76,8 +74,8 @@ const Login = () => {
 
   // 미완성된 기능 알람
   const onClick = () => {
-    alert("아직 미구현된 기능입니다.")
-  }
+    alert("아직 미구현된 기능입니다.");
+  };
 
   return (
     <section id="container_login">
@@ -123,11 +121,11 @@ const Login = () => {
         </button>
 
         <div className="signup_btn">
-          <span>아직 계정이 없으신가요?{" "}</span>
-          <Link to='/signup'>
-          <span className="atag" href="#">
-            회원가입
-          </span>
+          <span>아직 계정이 없으신가요? </span>
+          <Link to="/signup">
+            <span className="atag" href="#">
+              회원가입
+            </span>
           </Link>
         </div>
       </form>

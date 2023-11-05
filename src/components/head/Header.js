@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import "./Header.css";
 import logo from "../../assets/image/logo.png";
 import menu from "../../assets/image/menu.png";
@@ -83,9 +84,11 @@ const LoggedOutHeader = ({ onLoginClick }) => {
 
 // 로그인 상태 헤더
 const LoggedInHeader = ({ onLogoutClick }) => {
+  const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const handleLogout = () => {
+    navigate("/");
     removeCookie("token"); // 토큰 쿠키를 삭제하여 로그아웃 상태로 변경
     Swal.fire({
       icon: "info",
@@ -95,7 +98,6 @@ const LoggedInHeader = ({ onLogoutClick }) => {
       confirmButtonText: "OK",
     });
   };
-  console.log(cookies.token);
 
   const [isOpen, setMenu] = useState(false);
   const toggleMenu = () => {

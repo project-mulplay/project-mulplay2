@@ -14,10 +14,10 @@ const MyCard = ({ project, stateText, stateType, fundPrice, type }) => {
   const openDate = useFormatDate(project.prod_opendate);
   const closeDate = useFormatDate(project.prod_enddate);
   const regDate = useFormatDate(project.prod_regdate);
-
+  // project.prod_mainimg
   return (
     <div className="myCard" key={project.prod_no}>
-      <img src={thumbnail} alt={project.prod_title} />
+      <img src={project.prod_mainimg} alt={project.prod_title} />
 
       <div className="cardContent">
         <div className="TopSection">
