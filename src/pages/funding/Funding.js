@@ -227,7 +227,7 @@ const Funding = () => {
             {/* 버튼 */}
             <div className="middle-right-3">
               {/* <div className="fbtn1"><img className="sidebtn" src={OffHeart} alt="" onClick={onClick}/></div> */}
-              {/* 찜하기 */}
+              {/* 찜하기
               {heartResults ? (
                 <div className="fbtn1">
                   <img
@@ -247,19 +247,18 @@ const Funding = () => {
                   />
                 </div>
               )}
-              {/* 공유하기 */}
               <div className="fbtn2">
                 <img className="sidebtn2" src={Share} alt="" />
-              </div>
-              {/* 펀딩하기 */}
+              </div> 
+              펀딩하기 */}
               <div className="fbtn3">
                 {LoginState ? (
                   <Link to={`/cart/${prod_no}`}>
                     <Button_funding
                       text={"펀딩하기"}
                       fontSize={16}
-                      maxWidth={240}
-                      minWidth={240}
+                      maxWidth={380}
+                      minWidth={380}
                       minHeight={45}
                       borderRadius={10}
                       onClick={goToCart}
@@ -270,12 +269,13 @@ const Funding = () => {
                     <Button_funding
                       text={"로그인 하러 가기"}
                       fontSize={16}
-                      maxWidth={240}
-                      minWidth={240}
+                      maxWidth={380}
+                      minWidth={380}
                       minHeight={45}
                       borderRadius={10}
                       onClick={goToCart}
                     />
+                    <p style={{textAlign: "center", color:"#aaa", fontSize: "12px", marginTop: "10px"}}>펀딩을 하시려면 로그인이 필요합니다.</p>
                   </Link>
                 )}
               </div>

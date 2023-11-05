@@ -30,16 +30,16 @@ function TagInfo({ number }) {
 
   const handleCheckboxChange = (name, value) => {
     if (value === null) {
-      console.log(`체크박스 ${name}의 값이 삭제되었습니다.`);
-      console.log({ value });
+      // console.log(`체크박스 ${name}의 값이 삭제되었습니다.`);
+      // console.log({ value });
       setData(data.filter((item) => item.name !== name));
     } else {
-      console.log(`체크박스 ${name}의 값: ${value}`);
-      console.log({ value });
+      // console.log(`체크박스 ${name}의 값: ${value}`);
+      // console.log({ value });
       setData([...data, { name: name, value: value }]);
     }
   };
-  console.log(data.map((item) => item.value));
+  // console.log(data.map((item) => item.value));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
