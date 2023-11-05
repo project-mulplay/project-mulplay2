@@ -17,12 +17,10 @@ const Prodadmin = () => {
   //ref 를 사용하여 변수 담기
   //const nextId = useRef(11);
 
-  // 수락하기
-  //const accept = (data) => {};
   // 거절하기
-  const handleRemove = (prod_no) => {
-    setInfo((info) => info.filter((item) => item.prod_no !== prod_no));
-  };
+  // const handleRemove = (prod_no) => {
+  //   setInfo((info) => info.filter((item) => item.prod_no !== prod_no));
+  // };
 
   return (
     <div className="admin_container">
@@ -39,7 +37,7 @@ const Prodadmin = () => {
             <th colspan="2">관리</th>
           </tr>
         </thead>
-        <ProdTr info={info} handleRemove={handleRemove} />
+        <ProdTr info={info} setInfo={setInfo} />
       </table>
     </div>
   );

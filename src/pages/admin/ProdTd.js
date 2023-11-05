@@ -7,7 +7,7 @@ const trstyle = {
 };
 
 const tdstyle = {
-  padding: "8px",
+  padding: "10px",
   border: "1px solid #888",
   textAlign: "left",
 };
@@ -25,20 +25,17 @@ const accstyle = {
 
 const rejstyle = {
   width: "60px",
-  height: "20px",
+  height: "30px",
   backgroundColor: "#fff",
-  border: "1px solid #555",
+  boxShadow: "none",
   color: "#333",
-  fontSize: "12px",
+  fontSize: "14px",
   cursor: "pointer",
 };
 
-const ProdTd = ({ item, handleRemove }) => {
-  // const accept = () => {
-  //   handleAccept(item);
-  // };
-  const reject = () => {
-    handleRemove(item.prod_no);
+const ProdTd = ({ item, setInfo }) => {
+  const handleRemove = (prod_no) => {
+    setInfo((info) => info.filter((infoItem) => infoItem.prod_no !== prod_no));
   };
 
   return (
@@ -51,25 +48,29 @@ const ProdTd = ({ item, handleRemove }) => {
         <td style={tdstyle}>{item.prod_enddate}</td>
         <td style={tdstyle}>{item.prod_goal}</td>
         <td style={accstyle}>
-          <AcceptModal />
+          <AcceptModal item={item} handleRemove={handleRemove} />
         </td>
-        <td onClick={reject} style={rejstyle}>
-          거절
+        <td style={rejstyle}>
+          <RejectModal item={item} handleRemove={handleRemove} />
         </td>
       </tr>
     </>
   );
 };
 
-const AcceptModal = () => {
+const AcceptModal = ({ item, handleRemove }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+  const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleCancel = () => {
+  const handleAccept = () => {
+    handleRemove(item.prod_no);
     setIsModalOpen(false);
   };
   return (
@@ -80,10 +81,42 @@ const AcceptModal = () => {
       <Modal
         title="승인 완료"
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={handleAccept}
         onCancel={handleCancel}
       >
         <p>프로젝트가 승인되었습니다.</p>
+      </Modal>
+    </>
+  );
+};
+
+const RejectModal = ({ item, handleRemove }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleReject = () => {
+    handleRemove(item.prod_no);
+    setIsModalOpen(false);
+  };
+  return (
+    <>
+      <Button type="primary" onClick={showModal} style={rejstyle}>
+        거절
+      </Button>
+      <Modal
+        title="거절 확인"
+        open={isModalOpen}
+        onOk={handleReject}
+        onCancel={handleCancel}
+      >
+        <p>프로젝트를 거절하시겠습니까?</p>
       </Modal>
     </>
   );
