@@ -3,7 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/logo.svg";
 import menu from "../../assets/image/menu.png";
 import close from "../../assets/image/close.png";
 import search from "../../assets/image/search.png";

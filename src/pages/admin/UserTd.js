@@ -8,7 +8,7 @@ const trstyle = {
 };
 
 const tdstyle = {
-  padding: "8px",
+  padding: "10px",
   border: "1px solid #888",
   textAlign: "left",
 };

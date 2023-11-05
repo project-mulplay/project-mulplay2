@@ -35,9 +35,9 @@
   background-color: #f2f2f2;
 }
 
-.admin_table td {
+/* .admin_table td {
   padding: 10px;
-}
+} */
 
 /* 관리 열 스타일 (버튼 또는 아이콘을 추가할 수 있음) */
 /* table td:last-child { */

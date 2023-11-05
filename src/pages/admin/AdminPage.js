@@ -36,7 +36,14 @@ const AdminPage = () => (
       },
     }}
   >
-    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+    <Tabs
+      defaultActiveKey="1"
+      items={items}
+      onChange={onChange}
+      style={{ display: "flex", justifyContent: "center" }}
+      tabPosition="top"
+      centered
+    />
   </ConfigProvider>
 );
 export default AdminPage;
