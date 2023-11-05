@@ -66,16 +66,13 @@ function TagInfo({ number }) {
 
       <div>
         <label htmlFor="staff">참여 인력</label>
-        <p>
-          프로젝트에 참여하는 포지션을 선택해주세요.(예: Front-end개발자,
-          디자이너)
-        </p>
+        <p>프로젝트에 참여하는 포지션을 최대 3개까지 선택해주세요.</p>
         <StaffCheckbox name="tdata_name" onChange={handleCheckboxChange} />
       </div>
 
       <div className="proskill">
         <label htmlFor="skill">관련 기술</label>
-        <p>프로젝트에 사용되는 기술을 선택해주세요. </p>
+        <p>프로젝트에 사용되는 기술을 최대 3개까지 선택해주세요. </p>
         <SkillCheckbox name="tdata_name" onChange={handleCheckboxChange} />
       </div>
 
