@@ -46,15 +46,12 @@ export const deleteByUserInfo = async (user_no) => {
 };
 
 export const findByUserPw = async (user_no) => {
-  // db.js에서 export default connection;로 export한 connection을 가져온다.
   const conn = await db;
 
-  // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
     "select user_pw from `user` where user_no = ? ",
     [user_no]
   );
-  // 쿼리 실행 결과를 반환한다.
   return data[0];
 };
 
@@ -72,14 +69,13 @@ export const updateByUserPw = async (user_no, user_pw) => {
 };
 
 export const findByUserMyProd = async (user_no) => {
-  // db.js에서 export default connection;로 export한 connection을 가져온다.
   const conn = await db;
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    `SELECT p.prod_no, p.prod_stat, p.prod_title, p.prod_intro, p.prod_regdate, p.prod_opendate, p.prod_enddate, p.img_no, m.pay_price, prod_goal, prod_current
+    `SELECT p.prod_no, p.prod_stat, p.prod_title, p.prod_intro, p.prod_regdate, p.prod_opendate, p.prod_enddate, p.img_no, m.pay_price, p.prod_goal, p.prod_current, p.prod_mainimg
     FROM project p
-    INNER JOIN payment m ON p.prod_no = m.prod_no
+    left JOIN payment m ON p.prod_no = m.prod_no
     WHERE p.user_no = ?`,
     [user_no]
   );
@@ -119,7 +115,7 @@ export const findByUserMyFundProd = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price
+    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price, p.prod_mainimg
     from user u
     inner join project p on u.user_no = p.user_no
     inner join payment m on p.prod_no = m.prod_no 
@@ -136,7 +132,7 @@ export const findByUserMyLikeProd = async (user_no) => {
 
   // 쿼리를 실행한다.
   const [data, fields] = await conn.query(
-    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price
+    `select p.prod_stat, p.prod_title, p.prod_intro, p.prod_goal, p.prod_current, p.img_no, m.pay_price, p.prod_mainimg
     from user u 
     inner join project p on u.user_no = p.user_no 
     inner join payment m on p.prod_no = m.prod_no 

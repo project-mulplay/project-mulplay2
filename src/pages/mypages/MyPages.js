@@ -8,6 +8,7 @@ const MyPages = () => {
   const [cookies, setCookie] = useCookies();
 
   const loggedInUser = cookies.token;
+  console.log(cookies.token);
 
   return (
     <div className="MyPages">
