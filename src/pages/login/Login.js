@@ -123,11 +123,11 @@ const Login = () => {
         </button>
 
         <div className="signup_btn">
-          아직 계정이 없으신가요?{" "}
+          <span>아직 계정이 없으신가요?{" "}</span>
           <Link to='/signup'>
-          <a className="atag" href="#">
+          <span className="atag" href="#">
             회원가입
-          </a>
+          </span>
           </Link>
         </div>
       </form>
