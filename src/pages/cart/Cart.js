@@ -22,15 +22,20 @@ import axios from "../../util/api";
 
 const Cart = () => {
   const { prod_no } = useParams();
-  console.log(prod_no);
+  // console.log(prod_no);
 
   // 후원자 정보
   const [userData, setUserData] = useState({}); // 데이터를 저장할 상태
+
+  const onClick = () => {
+    alert("결제 완료!");
+  }
 
   const authCheck = () => {
     axios.get("user/info")
       .then((response) => {
         setUserData(response.data); // 데이터를 상태에 저장
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("요청 실패:", error);
@@ -47,10 +52,10 @@ const Cart = () => {
   // 라디오 박스
   const [x, setX] = useState(0);
 
-  const HandleClickRadioButton2 = (e) => {
-    console.log(e.target.value);
-    setX(e.target.value);
-  };
+  // const HandleClickRadioButton2 = (e) => {
+  //   console.log(e.target.value);
+  //   setX(e.target.value);
+  // };
 
   // 장바구니
   const cartItem = useRecoilValue(CartAtom);
@@ -171,11 +176,11 @@ const Cart = () => {
           <div className="clist2-text">최종 펀딩 금액</div>
           <div className="clist2-price">{`${TotalPrice}원`}</div>
         </div>
+          <div className="clist3" onClick={onClick}>
         <Link to="/">
-          <div className="clist3">
-            <Button_funding text={"결제하기"} minWidth={320} minHeight={50} />
-          </div>
+            <Button_funding text={"결제하기"} minWidth={320} minHeight={50}/>
         </Link>
+          </div>
       </div>
       {/* <div>
                 <Footer />

@@ -80,6 +80,7 @@ export function CenteredTabs() {
     }
     if (value === 3) {
       // 페이지를 홈페이지 메인으로 이동
+      alert("프로젝트 작성이 완료되었습니다.");
       window.location.href = "/"; // 또는 원하는 경로로 설정
     }
   };
