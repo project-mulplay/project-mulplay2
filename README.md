@@ -93,13 +93,16 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
     <summary>:mag: 자세히 보기</summary>
 
 <!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+- axios post로 입력받은 data값을 전달
 
+- 주소 API 컴포넌트를 가져와 Modal창을 띄우고 주소를 입력받음
+
+- 회원가입 요청 성공, 실패 여부에 따라 Swal 알람창이 뜸
 
 :computer: Code
     <details>
         <summary>Signup.js</summary>
 
-       __데이터 입력 코드__
        
        ```
        const currentDate = new Date();
@@ -165,11 +168,6 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
       console.error("요청 실패:", error);
     }
   };
-       ```
-
-       __주소 API__
-       
-       ```
        
   // 주소 입력 값이 변경될 때 user_address에 해당 값을 설정합니다.
   const handleAddressChange = (e) => {
@@ -229,7 +227,6 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 #### :heavy_check_mark: 로그인
 - DB값 검증
 - 로그인 Cookie 생성
-
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
 
 <details>
@@ -239,6 +236,7 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
 - 로그인 시 axios를 사용하여 비동기 방식으로 DB에 저장된 ID와 PW를 가져와
   사용자가 입력한 값과 비교해서 값이 일치할 때 로그인 허용
+  
 - 로그인 성공 시 Cookies.token 생성 및 메인 페이지로 이동
   
 
