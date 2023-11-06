@@ -89,8 +89,9 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 - 주소 API 연동
 - ID 중복 체크
 
+#### :mag: 자세히 보기
 <details>
-    <summary>:mag: 자세히 보기</summary>
+  <summary>더보기</summary>
 
 <!-- summary 아래 한칸 공백 두고 내용 삽입 -->
 - axios post로 입력받은 data값을 전달
@@ -99,109 +100,9 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
 - 회원가입 요청 성공, 실패 여부에 따라 Swal 알람창이 뜸
 
-:computer: Code
+#### :computer: Code
     <details>
         <summary>Signup.js</summary>
-
-       
-       ```
-       const currentDate = new Date();
-  const formattedDate = `${currentDate.getFullYear()}-${String(
-    currentDate.getMonth() + 1
-  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
-  const navigate = useNavigate();
-
-  const [data, setData] = useState({
-    user_id: "",
-    user_pw: "",
-    user_name: "",
-    user_phone: "",
-    user_address: "",
-    user_regdate: formattedDate,
-    user_sns: 0,
-    img_no: 1,
-  });
-
-  // 주소 변경을 포함하여 모든 입력 변경을 다루는 handleChange 함수
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const isEmpty = Object.values(data).some((value) => value === "");
-    if (isEmpty) {
-      Swal.fire({
-        icon: "warning",
-        title: "모든 필드를 입력해주세요.",
-        text: "다시 확인해주세요.",
-        showCancelButton: false,
-        confirmButtonColor: "#EE833E",
-        confirmButtonText: "OK",
-      });
-
-      return; // 빈 필드가 있을 경우 함수 종료
-    }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3300/register/signup",
-        data
-      );
-      console.log("요청 성공:", response);
-      Swal.fire({
-        icon: "success",
-        title: "회원가입이 완료되었습니다.",
-        text: "로그인페이지로 이동합니다.",
-        showCancelButton: false,
-        confirmButtonColor: "#EE833E",
-        confirmButtonText: "OK",
-      });
-      navigate("/login");
-    } catch (error) {
-      console.log(data);
-      console.error("요청 실패:", error);
-    }
-  };
-       
-  // 주소 입력 값이 변경될 때 user_address에 해당 값을 설정합니다.
-  const handleAddressChange = (e) => {
-    setInputAddressValue(e.target.value);
-    setData({
-      ...data,
-      user_address: e.target.value,
-    });
-  };
-
-  // 주소 api
-  const [modalState, setModalState] = useState(false);
-  const [inputAddressValue, setInputAddressValue] = useState("");
-  const [inputZipCodeValue, setInputZipCodeValue] = useState("");
-
-  useEffect(() => {
-    setData((prevData) => ({
-      ...prevData,
-      user_address: inputAddressValue,
-    }));
-    console.log(inputAddressValue);
-  }, [inputAddressValue]);
-  const openModal = () => {
-    setModalState(true);
-  };
-
-  const closeModal = () => {
-    setModalState(false);
-  };
-
-  const handleZipCode = (event) => {
-    setInputZipCodeValue(event.target.value);
-  };
-       ```
    </details>
 
 #### :camera: View
