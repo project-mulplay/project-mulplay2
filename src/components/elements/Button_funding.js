@@ -17,7 +17,7 @@ theme = createTheme(theme, {
       color: {
         main: "#EE833E", // 메인 색상
         contrastText: "#fff", // 텍스트 색상
-        dark: "#DE8D42", // 호버 색상
+        dark: "#FF8E3F", // 호버 색상
       },
       name: "btnColor",
     }),
