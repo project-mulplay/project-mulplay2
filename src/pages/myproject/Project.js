@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 //import { Routes, Route, useParams } from "react-router-dom";
 
@@ -80,7 +81,14 @@ export function CenteredTabs() {
     }
     if (value === 3) {
       // 페이지를 홈페이지 메인으로 이동
-      alert("프로젝트 작성이 완료되었습니다.");
+      Swal.fire({
+        icon: "success",
+        title: "프로젝트 작성이 완료되었습니다.",
+        text: "메인페이지로 이동합니다.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
       window.location.href = "/"; // 또는 원하는 경로로 설정
     }
   };

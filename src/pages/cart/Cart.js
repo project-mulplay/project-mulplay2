@@ -5,7 +5,7 @@ import "./Cart.css";
 import Button_funding from "../../components/elements/Button_funding";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "antd";
-import { Cookies } from 'react-cookie';
+import { Cookies } from "react-cookie";
 import OutlinedCard from "../funding/RewardCard";
 import dummyData from "../../model/dummyData";
 import rewardData from "../../data/rewardData.json";
@@ -19,6 +19,7 @@ import {
 import CartItem from "../../components/cartitem/CartItem";
 import MainReward from "../store/MainReward";
 import axios from "../../util/api";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const { prod_no } = useParams();
@@ -28,11 +29,18 @@ const Cart = () => {
   const [userData, setUserData] = useState({}); // 데이터를 저장할 상태
 
   const onClick = () => {
-    alert("결제 완료!");
-  }
+    Swal.fire({
+      icon: "success",
+      title: "결제완료 되었습니다.",
+      showCancelButton: false,
+      confirmButtonColor: "#EE833E",
+      confirmButtonText: "OK",
+    });
+  };
 
   const authCheck = () => {
-    axios.get("user/info")
+    axios
+      .get("user/info")
       .then((response) => {
         setUserData(response.data); // 데이터를 상태에 저장
         console.log(response.data);
@@ -99,22 +107,22 @@ const Cart = () => {
               width={600}
             >
               <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10 }}>
-              리워드 선택
-            </div>
-            <div className="cart_MainReward">
-              <MainReward prodNo={prod_no} />
-            </div>
+                리워드 선택
+              </div>
+              <div className="cart_MainReward">
+                <MainReward prodNo={prod_no} />
+              </div>
             </Modal>
           </div>
         </div>
         <div className="clist">
           <ul className="rewarditem">
-          {cartItem.length ? (
-            cartItem.map((e) => <CartItem data={e} key={e.reward_no} />)
-          ) : (
-            <div className="rewardnoitem">상품이 없습니다</div>
-          )}
-        </ul>
+            {cartItem.length ? (
+              cartItem.map((e) => <CartItem data={e} key={e.reward_no} />)
+            ) : (
+              <div className="rewardnoitem">상품이 없습니다</div>
+            )}
+          </ul>
         </div>
 
         <span>후원자 정보</span>
@@ -176,11 +184,11 @@ const Cart = () => {
           <div className="clist2-text">최종 펀딩 금액</div>
           <div className="clist2-price">{`${TotalPrice}원`}</div>
         </div>
-          <div className="clist3" onClick={onClick}>
-        <Link to="/">
-            <Button_funding text={"결제하기"} minWidth={320} minHeight={50}/>
-        </Link>
-          </div>
+        <div className="clist3" onClick={onClick}>
+          <Link to="/">
+            <Button_funding text={"결제하기"} minWidth={320} minHeight={50} />
+          </Link>
+        </div>
       </div>
       {/* <div>
                 <Footer />
