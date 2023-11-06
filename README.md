@@ -83,21 +83,64 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 [Mulplay](https://mulplay.vercel.app/)
 
 ## 📌 주요 기능
-#### 로그인
+
+#### :heavy_check_mark: 회원가입
+
+- 주소 API 연동
+- ID 중복 체크
+
+<details>
+    <summary>:mag: 자세히 보기</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+
+
+---
+
+:computer: Code
+    <details>
+        <summary>Signup.js</summary>
+       
+       ```js
+       
+       ```
+   </details>
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+   
+    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/296bb910-c5d7-47ea-a8e1-0c7930120e17)
+   
+   주소 입력 모달창
+   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/69264808-5113-416f-b129-0f70a2834f64)
+   </details>
+</details>
+
+#### :heavy_check_mark: 로그인
 - DB값 검증
 - 로그인 Cookie 생성
 
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
+
 <details>
-    <summary>자세히</summary>
+    <summary>:mag: 자세히 보기</summary>
 
 <!-- summary 아래 한칸 공백 두고 내용 삽입 -->
-로그인
+
+- 로그인 시 axios를 사용하여 비동기 방식으로 DB에 저장된 ID와 PW를 가져와
+  사용자가 입력한 값과 비교해서 값이 일치할 때 로그인 허용
+- 로그인 성공 시 Cookies.token 생성 및 메인 페이지로 이동
+  
+  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/736c65ec-78ca-4d23-a1db-ab36b032c3a7)
+
+  로그인 실패
+  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/9be36ab3-fa71-4020-8b0b-813368553420)
+
+  로그인 성공
+  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/974dad00-0861-4aef-84b2-2f8f65c78224)
 
 </details>
-#### 회원가입
-- 주소 API 연동
-- ID 중복 체크
 
 #### 마이 페이지
 - 주소 API 연동
