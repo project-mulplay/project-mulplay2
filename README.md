@@ -95,8 +95,6 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 <!-- summary 아래 한칸 공백 두고 내용 삽입 -->
 
 
----
-
 :computer: Code
     <details>
         <summary>Signup.js</summary>
@@ -243,14 +241,20 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
   사용자가 입력한 값과 비교해서 값이 일치할 때 로그인 허용
 - 로그인 성공 시 Cookies.token 생성 및 메인 페이지로 이동
   
-  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/736c65ec-78ca-4d23-a1db-ab36b032c3a7)
+
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+
+   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/736c65ec-78ca-4d23-a1db-ab36b032c3a7)
 
   로그인 실패
   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/9be36ab3-fa71-4020-8b0b-813368553420)
 
   로그인 성공
   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/974dad00-0861-4aef-84b2-2f8f65c78224)
-
+   </details>
 </details>
 
 ---
