@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AddressInput from "../../components/elements/AddressInput";
 import AddressModal from "../../components/elements/AddressModal";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const currentDate = new Date();
@@ -35,9 +36,17 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isEmpty = Object.values(data).some(value => value === '');
+    const isEmpty = Object.values(data).some((value) => value === "");
     if (isEmpty) {
-      alert('모든 필드를 입력해주세요.');
+      Swal.fire({
+        icon: "warning",
+        title: "모든 필드를 입력해주세요.",
+        text: "다시 확인해주세요.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
+
       return; // 빈 필드가 있을 경우 함수 종료
     }
 
@@ -47,7 +56,14 @@ const Signup = () => {
         data
       );
       console.log("요청 성공:", response);
-      alert("회원가입이 완료되었습니다. 로그인페이지로 이동합니다.");
+      Swal.fire({
+        icon: "success",
+        title: "회원가입이 완료되었습니다.",
+        text: "로그인페이지로 이동합니다.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
       navigate("/login");
     } catch (error) {
       console.log(data);
