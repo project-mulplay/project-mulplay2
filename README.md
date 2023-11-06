@@ -88,6 +88,13 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 - 로그인 Cookie 생성
 
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
+<details>
+    <summary>자세히</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+로그인
+
+</details>
 #### 회원가입
 - 주소 API 연동
 - ID 중복 체크
