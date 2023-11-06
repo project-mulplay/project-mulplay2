@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "../../util/api";
-import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { ProfileImgAtom } from "../../recoil/ProfileImgAtom";
@@ -23,6 +23,7 @@ const images = [profile0, profile1, profile2, profile3, profile4];
 
 export default function MyInfoEdit() {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const [userId, setUserId] = React.useState("");
   const [userName, setUserName] = React.useState("");
@@ -100,8 +101,8 @@ export default function MyInfoEdit() {
             confirmButtonColor: "#EE833E",
             confirmButtonText: "OK",
           });
-          Cookies.remove("token");
           navigate("/");
+          removeCookie("token");
         });
       }
     });

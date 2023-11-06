@@ -10,9 +10,10 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const [data, setData] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -39,24 +40,30 @@ const Login = () => {
         response.data.user_id === username &&
         response.data.user_pw === password
       ) {
-        Swal.fire({
-          icon: "success",
-          title: "로그인 되었습니다.",
-          text: "MULPLAY에 오신걸 환영합니다.",
-          showCancelButton: false,
-          confirmButtonColor: "#EE833E",
-          confirmButtonText: "OK",
-        });
+        if (response.data.user_stat === 0) {
+          console.log("유저상태" + response.data.user_stat);
+
+          Swal.fire({
+            icon: "info",
+            title: "탈퇴한 회원입니다.",
+            showCancelButton: false,
+            confirmButtonColor: "#EE833E",
+            confirmButtonText: "OK",
+          });
+          window.location.href = "/";
+          removeCookie("token");
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "로그인 되었습니다.",
+            text: "MULPLAY에 오신걸 환영합니다.",
+            showCancelButton: false,
+            confirmButtonColor: "#EE833E",
+            confirmButtonText: "OK",
+          });
+        }
 
         navigate("/");
-      } else if (response.data.user_stat === 2) {
-        Swal.fire({
-          icon: "info",
-          title: "탈퇴한 회원입니다.",
-          showCancelButton: false,
-          confirmButtonColor: "#EE833E",
-          confirmButtonText: "OK",
-        });
       } else {
         Swal.fire({
           icon: "error",
