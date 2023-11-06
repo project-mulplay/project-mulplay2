@@ -102,7 +102,8 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
         <summary>Signup.js</summary>
 
        __데이터 입력 코드__
-       ```js
+       
+       ```
        const currentDate = new Date();
   const formattedDate = `${currentDate.getFullYear()}-${String(
     currentDate.getMonth() + 1
@@ -169,7 +170,8 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
        ```
 
        __주소 API__
-       ```js
+       
+       ```
        
   // 주소 입력 값이 변경될 때 user_address에 해당 값을 설정합니다.
   const handleAddressChange = (e) => {
