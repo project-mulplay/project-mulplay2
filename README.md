@@ -100,22 +100,131 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 :computer: Code
     <details>
         <summary>Signup.js</summary>
-       
+
+       __데이터 입력 코드__
+       ```js
+       const currentDate = new Date();
+  const formattedDate = `${currentDate.getFullYear()}-${String(
+    currentDate.getMonth() + 1
+  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
+  const navigate = useNavigate();
+
+  const [data, setData] = useState({
+    user_id: "",
+    user_pw: "",
+    user_name: "",
+    user_phone: "",
+    user_address: "",
+    user_regdate: formattedDate,
+    user_sns: 0,
+    img_no: 1,
+  });
+
+  // 주소 변경을 포함하여 모든 입력 변경을 다루는 handleChange 함수
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const isEmpty = Object.values(data).some((value) => value === "");
+    if (isEmpty) {
+      Swal.fire({
+        icon: "warning",
+        title: "모든 필드를 입력해주세요.",
+        text: "다시 확인해주세요.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
+
+      return; // 빈 필드가 있을 경우 함수 종료
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3300/register/signup",
+        data
+      );
+      console.log("요청 성공:", response);
+      Swal.fire({
+        icon: "success",
+        title: "회원가입이 완료되었습니다.",
+        text: "로그인페이지로 이동합니다.",
+        showCancelButton: false,
+        confirmButtonColor: "#EE833E",
+        confirmButtonText: "OK",
+      });
+      navigate("/login");
+    } catch (error) {
+      console.log(data);
+      console.error("요청 실패:", error);
+    }
+  };
+       ```
+
+       __주소 API__
        ```js
        
+  // 주소 입력 값이 변경될 때 user_address에 해당 값을 설정합니다.
+  const handleAddressChange = (e) => {
+    setInputAddressValue(e.target.value);
+    setData({
+      ...data,
+      user_address: e.target.value,
+    });
+  };
+
+  // 주소 api
+  const [modalState, setModalState] = useState(false);
+  const [inputAddressValue, setInputAddressValue] = useState("");
+  const [inputZipCodeValue, setInputZipCodeValue] = useState("");
+
+  useEffect(() => {
+    setData((prevData) => ({
+      ...prevData,
+      user_address: inputAddressValue,
+    }));
+    console.log(inputAddressValue);
+  }, [inputAddressValue]);
+  const openModal = () => {
+    setModalState(true);
+  };
+
+  const closeModal = () => {
+    setModalState(false);
+  };
+
+  const handleZipCode = (event) => {
+    setInputZipCodeValue(event.target.value);
+  };
        ```
    </details>
 
 #### :camera: View
    <details>
     <summary>Image</summary>
-   
+
+   회원가입창
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/296bb910-c5d7-47ea-a8e1-0c7930120e17)
+
+   알람
+   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/99557994-3eb4-4207-8d28-d7df21a45e87)
+   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/db5c777c-fdaf-4928-973b-202260cd04d9)
+
+
    
    주소 입력 모달창
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/69264808-5113-416f-b129-0f70a2834f64)
    </details>
 </details>
+
+---
 
 #### :heavy_check_mark: 로그인
 - DB값 검증
@@ -142,18 +251,26 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
 </details>
 
+---
+
 #### 마이 페이지
 - 주소 API 연동
 - 회원정보 변경
 - 프로젝트 관리
 
+---
+
 #### 메인 페이지
 - Cookie 여부 확인
 - 메인 게시글(카드) 이미지 슬라이드(CSS)
 
+---
+
 #### 프로젝트 제작 페이지
 - 가이드 페이지에서 로그인 확인 후 이동
 - 프로젝트 작성, (~~읽기, 수정~~), 삭제(CRUD)
+
+---
 
 #### 관리자 페이지 
 - 프로젝트 승인
