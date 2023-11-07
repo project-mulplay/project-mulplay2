@@ -1,11 +1,10 @@
 import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import fs from "fs";
 import yaml from "js-yaml";
 
-// const dotenv = require("dotenv");
 const config = yaml.load(fs.readFileSync("mulplay.yaml", "utf8"));
-dotenv.config();
+// dotenv.config();
 
 const connection = mysql.createConnection({
   host: config.url,
