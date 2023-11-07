@@ -8,6 +8,7 @@ const router = express.Router();
  */
 
 //요청 url 확인
+
 router.get("/profile", userService.getUserProfile);
 
 router.get("/info", userService.getUserInfo);
