@@ -39,7 +39,6 @@ const FundingList = () => {
         return a.prod_title.toLowerCase() < b.prod_title.toLowerCase() ? -1 : 1;
       }
     });
-
     setOrder(sortedBestList);
   };
 

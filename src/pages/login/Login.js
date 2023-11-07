@@ -42,7 +42,6 @@ const Login = () => {
       ) {
         if (response.data.user_stat === 0) {
           console.log("유저상태" + response.data.user_stat);
-
           Swal.fire({
             icon: "info",
             title: "탈퇴한 회원입니다.",
@@ -50,6 +49,7 @@ const Login = () => {
             confirmButtonColor: "#EE833E",
             confirmButtonText: "OK",
           });
+
           window.location.href = "/";
           removeCookie("token");
         } else {
