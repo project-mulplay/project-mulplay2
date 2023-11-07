@@ -109,6 +109,8 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
    알람
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/99557994-3eb4-4207-8d28-d7df21a45e87)
+
+   
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/db5c777c-fdaf-4928-973b-202260cd04d9)
 
 
@@ -210,14 +212,20 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
     <summary>Image</summary>
 
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/8d613727-3ff0-42ed-9554-dfcc40e2aedf)
+
+   
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/a74ebdd8-162e-4cde-a9d5-842cd83de33f)
 
    비밀번호 변경 페이지
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/57e534c8-3444-4c3f-9860-b7b84880e5fd)
+
+   
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/92f0db6e-6856-4604-b0c0-a27ff241689a)
    
    프로젝트 관리 페이지
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/fa9e4273-54bc-44b0-b344-974ded06fd52)
+
+   
    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/ff1ffd31-3623-4b6d-8fec-b76791dc4bc9)
 
    후원, 관심 프로젝트 페이지
@@ -229,6 +237,7 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
    </details>
 </details>
+
 ---
 
 #### 메인 페이지
@@ -268,15 +277,22 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
    <details>
     <summary>Image</summary>
 
-   화면
+   화면1 로그인 x
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/c44886bc-4e8c-4dbb-957d-2f9aa3150520)
+
+   화면2 로그인 o
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/408c14c6-c715-4a14-a950-223cbc0e9758)
+
+   화면3
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/8e2ce430-6fef-4d01-b99d-a1072eeb7461)
+
+   화면4
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/b05dd37f-549d-4715-a6bc-1413708cb58b)
 
    
    </details>
 </details>
+
 ---
 
 #### 프로젝트 제작 페이지
@@ -317,6 +333,8 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 기본정보
  
   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/3e9f7792-242e-4e93-b9fd-5adf8d20046b)
+
+  
   ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/033fcd75-8994-4ebb-9550-f194bd302c47)
 
 해시태그 정보
@@ -332,7 +350,8 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
     
 
    </details>
-</details>
+</details
+ 
 ---
 
 #### 관리자 페이지 
