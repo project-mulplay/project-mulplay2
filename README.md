@@ -239,11 +239,14 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
   <summary>:mag: 자세히 보기</summary>
 
 <!-- summary 아래 한칸 공백 두고 내용 삽입 -->
-- 
 
 #### :camera: View
    <details>
-    <summary>Image</summary>
+    <summary>Image</summary
+
+   메인화면
+    ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/b59409ba-2a7e-4a4d-a624-07d50661e85f)
+
    </details>
 </details>
 
@@ -265,10 +268,13 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
    <details>
     <summary>Image</summary>
 
+   화면
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/c44886bc-4e8c-4dbb-957d-2f9aa3150520)
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/408c14c6-c715-4a14-a950-223cbc0e9758)
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/8e2ce430-6fef-4d01-b99d-a1072eeb7461)
     ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/b05dd37f-549d-4715-a6bc-1413708cb58b)
+
+   
    </details>
 </details>
 ---
@@ -308,9 +314,10 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 #### :camera: View
    <details>
     <summary>Image</summary>
-기본 정보
-![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/3e9f7792-242e-4e93-b9fd-5adf8d20046b)
-![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/033fcd75-8994-4ebb-9550-f194bd302c47)
+기본정보
+ 
+  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/3e9f7792-242e-4e93-b9fd-5adf8d20046b)
+  ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/033fcd75-8994-4ebb-9550-f194bd302c47)
 
 해시태그 정보
 ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/b3361d47-b150-4349-bfdf-301184801e52)
