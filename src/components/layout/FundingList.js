@@ -18,6 +18,7 @@ import Card from "../layout/MainCard";
 
 const FundingList = () => {
   const [selectedTab, setSelectedTab] = useState("all");
+  const [selectName, setSelectName] = useState("전체");
   const [order, setOrder] = useState(projectData);
 
   useEffect(() => {
@@ -75,7 +76,10 @@ const FundingList = () => {
           <button
             key={option.value}
             className={selectedTab === option.value ? "active" : ""}
-            onClick={() => setSelectedTab(option.value)}
+            onClick={() => {
+              setSelectedTab(option.value);
+              setSelectName(option.name);
+            }}
           >
             <div>
               <img src={option.image} alt="" width={50} />
@@ -86,7 +90,7 @@ const FundingList = () => {
       </div>
       <div className="fundinglist_contents">
         <div className="fundinglist_title">
-          <h1>전체</h1>
+          <h1>{selectName}</h1>
           <div className="fundinglist_title_tab">
             <label
               onClick={() => {
