@@ -1,59 +1,3 @@
-# Project-Mulplay2
-
-mulplay -> mulplay2로 변경되었습니다.
-
-
-## 이슈
-내가 진행할 기능별로 이슈 생성
-```
-ex)프로젝트수정기능 구현 
-label issue종류에 맞춰 달기 
-```
-## 브랜치
-
-이슈별로 브랜치 하나 생성(develop에서 생성)
-브랜치는 기능 완성 후 삭제  
-```
-브랜치명
-feat/#이슈번호-기능이름
-ex) feat/#3-projectEdit
-```
-## 커밋명
-
-feat     새로운기능추가 <br/>
-refactor 코드 리팩토링<br/>
-fix      버그수정<br/>
-design   기능에 지장가지않는 스타일변경<br/>
-init     빌드수행, 패키지설치, 환경설정수정등 <br/>
-etc      주석추가삭제, readme 작성
-```
-ex) [etc]readme수정
-```
-
-### 푸쉬 전에는 항상 pull & request 해주세요
-
-pull & request에 올리고 머지하지마세요
-
-```
-git PR 네이밍
-ex) feat/#3 프로젝트수정기능구현
-```
-
-
-git 충돌 해결 참고
-```
-[참고1](https://wonyong-jang.github.io/git/2021/02/05/Github-Rebase.html)
-[참고2](https://velog.io/@x_sunyoung/rebase)
-```
-
-### 추가할 정책은 밑에 추가해주세요
-
-* 지켜야 할 규칙
-* 협업 시에 요구사항
-* 기타
-
-
-
 # Mulplay 크라우드 펀딩 기반 웹 서비스
 React + Nodejs 개발자를 위한 크라우드 펀딩 사이트
 
@@ -79,7 +23,7 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 - **Database** : MySQL DB(8.0)
 - **Tools** : Git, MySQL Workbench
 
-### <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Vercel</title><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg> 사이트 배포
+### <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">Vercel<path d="M24 22.525H0l12-21.05 12 21.05z"/></svg> 사이트 배포
 [Mulplay](https://mulplay.vercel.app/)
 
 ## 📌 주요 기능
@@ -351,6 +295,206 @@ React 기반으로 와디즈, 텀블벅 등을 참고하여 만든 크라우드 
 
    </details>
 </details
+
+---
+
+#### 프로젝트 리스트 페이지
+- 장르 데이터별 필터링
+- 프로젝트 정렬 기능 (추천순, 최신순)
+
+<details>
+  <summary>:mag: 자세히 보기</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+
+-useState와 sort를 통해 데이터 정렬
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+
+ ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/0dc696ae-7d5f-4bc7-a51f-1bc531ae27cc)
+
+   </details>
+</details
+
+
+#### 프로젝트 상세 페이지
+- useParams 파라미터 값 사용
+- 페이지에 데이터 불러오기
+- 텍스트와 이미지를 분리하여 렌더링 작업
+- 리워드 전역상태관리
+
+<details>
+  <summary>:mag: 자세히 보기</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+
+
+- 프로젝트 넘버를 메인에서 URL을 통해 파라미터 값으로 넘겨받아 사용할 수 있게 해주었습니다.
+- content에서 데이터를 불러올 때 텍스트와 이미지를 분리시키는 작업을 진행한 뒤 렌더링하여 화면에 출력했습니다.
+- 쿠키 토큰 값의 여부를 통해 버튼 내용이 변경됩니다.
+- 리워드는 props로 파라미터 값을 주어 해당 값을 가진 리워드를 순차적으로 출력합니다. 해당 리워드들은 로그인 후 토큰 여부를 확인이 되면 장바구니에 저장할 수 있습니다.
+- 저장된 리워드들은 사이드에서 확인할 수 있고 recoil로 상태를 유지한체 결제 게시판으로 넘깁니다.
+
+
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+
+프로젝트 정보
+ ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/92b80cb1-47cb-40b1-b5a4-a7796500fa13)
+
+상세 정보 & 리워드
+![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/3c13316c-fe0a-4188-8d55-4e3893a8c72e)
+
+리워드 장바구니
+![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/c4922a87-4d8f-442f-b4e7-073e042551fc)
+
+
+   </details>
+</details
+
+---
+
+#### 결제 페이지
+- 리워드 상태 확인
+- 토큰을 가진 유저 정보 불러오기
+
+<details>
+  <summary>:mag: 자세히 보기</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+
+- Atom에 추가된 리워드를 확인해 불러옵니다. 이후 변경하기 버튼에서 ProductCard 컴포넌트를 가져와 리워드를 더 추가할 수 있습니다.
+- 로그인 된 유저의 넘버를 통해 서버와 통신하고 정보를 가져와 화면에 출력합니다.
+- 결제하기를 누르면 결제 완료 알람과 함께 메인화면으로 이동합니다.
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+
+ ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/9ec9a5b1-a26f-4ae7-b28b-3ef864c81c44)
+
+
+   </details>
+</details
+ 
+---
+
+#### 관리자 페이지
+- Tab과 Modal을 이용한 관리
+- project와 user의 데이터를 가져와서 정렬
+
+<details>
+  <summary>:mag: 자세히 보기</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+
+
+**-프로젝트 관리**
+
+프로젝트 관리는 사용자가 작성한 프로젝트 data를 관리자에서 확인하고 승인하거나 거절하는 페이지 입니다.
+
+승인버튼 클릭시 승인완료 모달창이 뜨며 ok 버튼 클릭시 승인이 되며 프로젝트가 삭제됩니다.
+
+거절버튼 클릭시 거절확인 모달창이 뜨며 ok 버튼 클릭시 승인이 되며 프로젝트가 삭제됩니다.
+
+*item과* setinfo를 가져와서 handleRemove함수로 item을 제거합니다.
+
+**-사용자 관리**
+
+selectedData가 있을때 setModalOn이 true가 되어서 모달창이 열립니다.
+
+회원가입한 사용자의 정보 열람용이며 보기 버튼 클릭시 사용자NO, 아이디, 비밀번호, 이름, 전화번호, 자택주소, 등록일 정보가 적힌 모달창 열립니다.
+
+
+#### :camera: View
+   <details>
+    <summary>Image</summary>
+
+관리자 페이지
+
+프로젝트 탭
+ ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/999cc5b6-f286-4fb0-81c9-217c29375a43)
+
+ 승인 (거절도 같은 방식)
+ ![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/30e1771c-bdc1-4724-9bee-1d5248dddccb)
+
+유저 탭
+![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/8eeebc7b-0578-4d43-aa83-b7e57c5961cb)
+
+유저 정보
+![image](https://github.com/project-mulplay/project-mulplay2/assets/98729958/3288818b-ebc3-492c-9764-a29eec4b17c1)
+
+
+   </details>
+</details
+
+
+
+
+
+
+---
+
+# Project-Mulplay2 변경사항
+
+mulplay -> mulplay2로 변경되었습니다.
+
+
+## 이슈
+내가 진행할 기능별로 이슈 생성
+```
+ex)프로젝트수정기능 구현 
+label issue종류에 맞춰 달기 
+```
+## 브랜치
+
+이슈별로 브랜치 하나 생성(develop에서 생성)
+브랜치는 기능 완성 후 삭제  
+```
+브랜치명
+feat/#이슈번호-기능이름
+ex) feat/#3-projectEdit
+```
+## 커밋명
+
+feat     새로운기능추가 <br/>
+refactor 코드 리팩토링<br/>
+fix      버그수정<br/>
+design   기능에 지장가지않는 스타일변경<br/>
+init     빌드수행, 패키지설치, 환경설정수정등 <br/>
+etc      주석추가삭제, readme 작성
+```
+ex) [etc]readme수정
+```
+
+### 푸쉬 전에는 항상 pull & request 해주세요
+
+pull & request에 올리고 머지하지마세요
+
+```
+git PR 네이밍
+ex) feat/#3 프로젝트수정기능구현
+```
+
+
+git 충돌 해결 참고
+```
+[참고1](https://wonyong-jang.github.io/git/2021/02/05/Github-Rebase.html)
+[참고2](https://velog.io/@x_sunyoung/rebase)
+```
+
+### 추가할 정책은 밑에 추가해주세요
+
+* 지켜야 할 규칙
+* 협업 시에 요구사항
+* 기타
+
+
+
  
 ---
 
