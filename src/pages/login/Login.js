@@ -48,10 +48,10 @@ const Login = () => {
             showCancelButton: false,
             confirmButtonColor: "#EE833E",
             confirmButtonText: "OK",
+          }).then(() => {
+            window.location.href = "/";
+            removeCookie("token");
           });
-
-          window.location.href = "/";
-          removeCookie("token");
         } else {
           Swal.fire({
             icon: "success",
@@ -65,14 +65,25 @@ const Login = () => {
 
         navigate("/");
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "아이디 또는 비밀번호가 일치하지 않습니다.",
-          text: "다시 확인해주세요.",
-          showCancelButton: false,
-          confirmButtonColor: "#EE833E",
-          confirmButtonText: "OK",
-        });
+        if (response.data.user_stat === 0) {
+          Swal.fire({
+            icon: "info",
+            title: "탈퇴한 회원입니다.",
+            showCancelButton: false,
+            confirmButtonColor: "#EE833E",
+            confirmButtonText: "OK",
+          });
+          navigate("/");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+            text: "다시 확인해주세요.",
+            showCancelButton: false,
+            confirmButtonColor: "#EE833E",
+            confirmButtonText: "OK",
+          });
+        }
       }
     } catch (error) {
       console.error("요청 실패:", error);

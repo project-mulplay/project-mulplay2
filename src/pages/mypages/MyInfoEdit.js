@@ -100,9 +100,10 @@ export default function MyInfoEdit() {
             showCancelButton: false,
             confirmButtonColor: "#EE833E",
             confirmButtonText: "OK",
+          }).then(() => {
+            navigate("/");
+            removeCookie("token");
           });
-          navigate("/");
-          removeCookie("token");
         });
       }
     });
